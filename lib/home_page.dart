@@ -38,8 +38,15 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
+                            /*
                             Navigator.of(context).pushNamed(
                               "/a101BannerPage",
+                              arguments:
+                                  "https://www.a101.com.tr${banners[index].catagoryUrl}",
+                            );
+                            */
+                            Navigator.of(context).pushNamed(
+                              "/a101GridView",
                               arguments:
                                   "https://www.a101.com.tr${banners[index].catagoryUrl}",
                             );

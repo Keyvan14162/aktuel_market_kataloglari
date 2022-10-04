@@ -1,14 +1,13 @@
 import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:photo_view/photo_view.dart';
 
 class A101BannerPage extends StatefulWidget {
-  const A101BannerPage({required this.categoryUrl, super.key});
+  const A101BannerPage(
+      {required this.categoryUrl, required this.clickedIndex, super.key});
   final String categoryUrl;
+  final int clickedIndex;
 
   @override
   State<A101BannerPage> createState() => _A101BannerPageState();
@@ -17,6 +16,13 @@ class A101BannerPage extends StatefulWidget {
 class _A101BannerPageState extends State<A101BannerPage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
+
+  @override
+  void initState() {
+    _current = widget.clickedIndex;
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,6 +49,7 @@ class _A101BannerPageState extends State<A101BannerPage> {
                         return CarouselSlider(
                           carouselController: _controller,
                           options: CarouselOptions(
+                            initialPage: _current,
                             height: height,
                             viewportFraction: 1.0,
                             enlargeCenterPage: false,
