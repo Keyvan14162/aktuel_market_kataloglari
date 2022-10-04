@@ -4,7 +4,7 @@ import 'package:http/http.dart' as http;
 
 class A101 {
   List<A101_Banner_Model> bannerElements = [];
-  Future<List<A101_Banner_Model>> getA101BannerImageUrls() async {
+  getA101BannerImageUrls() async {
     var response = await http.Client().get(
       Uri.parse("https://www.a101.com.tr/afisler"),
     );
@@ -24,7 +24,7 @@ class A101 {
             // banner img url
             li.children[0].children[2].attributes["src"],
             // date text
-            li.children[0].children[1].text.replaceAll(" ", "").trim(),
+            li.children[0].children[1].text.trim(),
           ),
         );
       });
