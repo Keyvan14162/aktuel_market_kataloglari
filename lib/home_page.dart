@@ -14,7 +14,6 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    A101().getA101BannerImageUrls();
     return Scaffold(
         appBar: AppBar(
           title: const Text("Popüler Mağazalar"),
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
                             Navigator.of(context).pushNamed(
                               "/a101BannerPage",
                               arguments:
-                                  "a101.com.tr${banners[index].catagoryUrl}",
+                                  "https://www.a101.com.tr${banners[index].catagoryUrl}",
                             );
                           },
                           child: Container(
@@ -83,12 +82,7 @@ class _HomePageState extends State<HomePage> {
                                         .trim(),
                                   ),
                                 ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(8, 2, 8, 8),
-                                  child: Text(
-                                      banners[index].catagoryUrl.toString()),
-                                ),
+
                                 // banner image
                                 Expanded(
                                   child: Image.network(

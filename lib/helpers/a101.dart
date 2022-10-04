@@ -11,7 +11,6 @@ class A101 {
     //If the http request is successful the statusCode will be 200
     if (response.statusCode == 200) {
       var document = parse(response.body);
-      document.getElementsByClassName("image0").length;
       document
           .getElementsByClassName("brochures-list")[0]
           .children[0]
@@ -32,7 +31,28 @@ class A101 {
       });
       return bannerElements;
     } else {
-      print("200 dışı");
+      print("getA101BannerImageUrls 200 değil");
+      return [];
+    }
+  }
+
+  getBrochurePageImageUrls(String url) async {
+    List<String> brochurePages = [];
+    var response = await http.Client().get(
+      Uri.parse(url),
+    );
+    //If the http request is successful the statusCode will be 200
+    if (response.statusCode == 200) {
+      var document = parse(response.body);
+
+      document.getElementsByClassName("view-area").forEach((element) {
+        // print(element.children[0].attributes["src"]);
+        brochurePages.add(element.children[0].attributes["src"].toString());
+      });
+
+      return brochurePages;
+    } else {
+      print("getBrochurePageImageUrls 200 değil");
       return [];
     }
   }
