@@ -3,8 +3,8 @@ import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 class A101 {
-  List<A101_Banner_Model> bannerElements = [];
   getA101BannerImageUrls() async {
+    List<A101BannerModel> bannerElements = [];
     var response = await http.Client().get(
       Uri.parse("https://www.a101.com.tr/afisler"),
     );
@@ -18,7 +18,9 @@ class A101 {
           .children
           .forEach((li) {
         bannerElements.add(
-          A101_Banner_Model(
+          A101BannerModel(
+            // category url
+            li.children[0].attributes["href"],
             // afis img usteundeki badge img
             li.children[0].children[0].children[0].attributes["src"],
             // banner img url

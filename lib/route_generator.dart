@@ -1,3 +1,4 @@
+import 'package:aktuel_urunler_bim_a101_sok/a101_banner_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -20,17 +21,11 @@ class RouteGenerator {
       case "/":
         return _generateRoute(HomePage(), settings);
 
-      /*
-      case Constants.LOGIN_SCREEN_PATH:
-        return _generateRoute(LoginScreen(), settings);
-
-      case Constants.PASSWORD_CHANGE_PATH:
+      case "/a101BannerPage":
         return _generateRoute(
-            PasswordChange(
-              auth: settings.arguments as FirebaseAuth,
-            ),
-            settings);
-      */
+          A101BannerPage(categoryUrl: settings.arguments as String),
+          settings,
+        );
 
       // unknown page
       default:

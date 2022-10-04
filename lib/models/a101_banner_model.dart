@@ -1,7 +1,13 @@
-class A101_Banner_Model {
+class A101BannerModel {
+  final String? catagoryUrl;
   final String? badgeImgUrl;
   final String? bannerImgUrl;
   final String? date;
 
-  A101_Banner_Model(this.badgeImgUrl, this.bannerImgUrl, this.date);
+  A101BannerModel(
+    this.catagoryUrl,
+    this.badgeImgUrl,
+    this.bannerImgUrl,
+    this.date,
+  );
 }

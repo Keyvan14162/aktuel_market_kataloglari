@@ -21,13 +21,14 @@ class _HomePageState extends State<HomePage> {
         ),
         body: Column(
           children: [
-            Text("A 101"),
+            // A 101
+            const Text("A 101"),
             FutureBuilder(
               future: A101().getA101BannerImageUrls(),
               builder: (context, snapshot) {
                 if (snapshot.hasData) {
-                  List<A101_Banner_Model> banners =
-                      snapshot.data as List<A101_Banner_Model>;
+                  List<A101BannerModel> banners =
+                      snapshot.data as List<A101BannerModel>;
 
                   return Container(
                     height: 300,
@@ -36,57 +37,78 @@ class _HomePageState extends State<HomePage> {
                       shrinkWrap: true,
                       itemCount: banners.length,
                       itemBuilder: (context, index) {
-                        return Container(
-                          color: Colors.grey.shade200,
-                          child: Column(
-                            children: [
-                              // badge image
-                              Image.network(
-                                banners[index].badgeImgUrl.toString(),
-                                width: 100,
-                                height: 40,
-                              ),
-                              const SizedBox(
-                                height: 8,
-                              ),
-                              // date text
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 8, 8, 2),
-                                child: Text(
-                                  banners[index]
-                                      .date
-                                      .toString()
-                                      .split("\n")[0]
-                                      .trim(),
-                                  style: const TextStyle(
-                                      fontWeight: FontWeight.bold),
+                        return GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              "/a101BannerPage",
+                              arguments:
+                                  "a101.com.tr${banners[index].catagoryUrl}",
+                            );
+                          },
+                          child: Container(
+                            color: Colors.grey.shade200,
+                            child: Column(
+                              children: [
+                                // badge image
+                                Image.network(
+                                  banners[index].badgeImgUrl.toString(),
+                                  width: 100,
+                                  height: 40,
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 2, 8, 8),
-                                child: Text(
-                                  banners[index]
-                                      .date
-                                      .toString()
-                                      .split("\n")[2]
-                                      .trim(),
+                                const SizedBox(
+                                  height: 8,
                                 ),
-                              ),
-                              // banner image
-                              Expanded(
-                                child: Image.network(
-                                  banners[index].bannerImgUrl.toString(),
-                                  fit: BoxFit.cover,
+                                // date text
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8, 8, 8, 2),
+                                  child: Text(
+                                    banners[index]
+                                        .date
+                                        .toString()
+                                        .split("\n")[0]
+                                        .trim(),
+                                    style: const TextStyle(
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
-                              ),
-                            ],
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8, 2, 8, 8),
+                                  child: Text(
+                                    banners[index]
+                                        .date
+                                        .toString()
+                                        .split("\n")[2]
+                                        .trim(),
+                                  ),
+                                ),
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8, 2, 8, 8),
+                                  child: Text(
+                                      banners[index].catagoryUrl.toString()),
+                                ),
+                                // banner image
+                                Expanded(
+                                  child: Image.network(
+                                    banners[index].bannerImgUrl.toString(),
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         );
                       },
                     ),
                   );
                 } else {
-                  return Text("no data moruq");
+                  return const Center(
+                    child: LinearProgressIndicator(
+                        // color
+                        ),
+                  );
                 }
               },
             ),
