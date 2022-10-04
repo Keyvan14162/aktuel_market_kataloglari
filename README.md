@@ -1,6 +1,5 @@
 # aktuel_urunler_bim_a101_sok
-
-A new Flutter project.
+Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği bir uygulama.
 
 ## Getting Started
 
