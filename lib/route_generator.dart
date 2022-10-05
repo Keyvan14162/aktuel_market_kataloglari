@@ -1,5 +1,5 @@
-import 'package:aktuel_urunler_bim_a101_sok/a101_banner_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/a101_grid_view.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_banner_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_grid_view.dart';
 import 'package:aktuel_urunler_bim_a101_sok/home_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
