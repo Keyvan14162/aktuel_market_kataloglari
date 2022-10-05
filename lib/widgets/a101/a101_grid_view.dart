@@ -1,7 +1,7 @@
 import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-
+import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
 import 'package:hexcolor/hexcolor.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -18,8 +18,13 @@ class _A101GridViewState extends State<A101GridView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Constants.A101_COLOR,
         title: Text(
-          widget.categoryUrl.split("/")[3].replaceAll("-", " ").toUpperCase(),
+          widget.categoryUrl
+              .split("/")[3]
+              .replaceAll("-", " ")
+              .toUpperCase()
+              .replaceAll("AFISLER", ""),
         ),
       ),
       body: FutureBuilder(
@@ -27,6 +32,7 @@ class _A101GridViewState extends State<A101GridView> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<String> brochurePages = snapshot.data as List<String>;
+
             // grid view
             return GridView.builder(
               itemCount: brochurePages.length,
@@ -38,35 +44,38 @@ class _A101GridViewState extends State<A101GridView> {
               ),
               itemBuilder: (BuildContext ctx, index) {
                 // gridview items
-                return GestureDetector(
-                  onTap: () {
-                    Navigator.of(context).pushNamed("/a101BannerPage",
-                        arguments: [widget.categoryUrl, index]);
-                  },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.white,
-                        width: 1,
-                      ),
-                    ),
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.all(1.0),
-                      // IMAGE
-                      child: CachedNetworkImage(
-                        fit: BoxFit.contain,
-                        imageUrl: brochurePages[index],
-                        placeholder: (context, url) => Shimmer.fromColors(
-                          baseColor: HexColor("#fcfcfc"),
-                          highlightColor: HexColor("#edebe6"),
-                          child: Image.network(
-                            brochurePages[0],
-                            fit: BoxFit.contain,
+                return Hero(
+                  tag: brochurePages[index],
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed("/a101BannerPage",
+                          arguments: [brochurePages, index]);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(1, 2, 1, 0),
+                        // IMAGE
+                        child: CachedNetworkImage(
+                          fit: BoxFit.contain,
+                          imageUrl: brochurePages[index],
+                          placeholder: (context, url) =>
+                              //  CircularProgressIndicator(),
+
+                              Shimmer.fromColors(
+                            baseColor: HexColor("#fcfcfc"),
+                            highlightColor: HexColor("#edebe6"),
+                            child:
+                                // pageImageList[index],
+
+                                Image.network(
+                              brochurePages[0],
+                              fit: BoxFit.contain,
+                            ),
                           ),
+                          errorWidget: (context, url, error) =>
+                              const Icon(Icons.error),
                         ),
-                        errorWidget: (context, url, error) =>
-                            const Icon(Icons.error),
                       ),
                     ),
                   ),

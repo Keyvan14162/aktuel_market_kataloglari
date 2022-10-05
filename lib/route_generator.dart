@@ -1,3 +1,4 @@
+import 'package:aktuel_urunler_bim_a101_sok/detail_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_banner_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_grid_view.dart';
 import 'package:aktuel_urunler_bim_a101_sok/home_page.dart';
@@ -25,7 +26,7 @@ class RouteGenerator {
       case "/a101BannerPage":
         return _generateRoute(
           A101BannerPage(
-            categoryUrl: (settings.arguments as List)[0],
+            brochurePageUrls: (settings.arguments as List)[0] as List<String>,
             clickedIndex: (settings.arguments as List)[1] as int,
           ),
           settings,
@@ -33,6 +34,11 @@ class RouteGenerator {
       case "/a101GridView":
         return _generateRoute(
           A101GridView(categoryUrl: settings.arguments as String),
+          settings,
+        );
+      case "/detailPage":
+        return _generateRoute(
+          DetailPage(imageUrl: settings.arguments as String),
           settings,
         );
 
