@@ -1,4 +1,5 @@
 import 'package:aktuel_urunler_bim_a101_sok/models/a101_banner_model.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
@@ -29,6 +30,7 @@ class A101 {
           ),
         );
       });
+
       return bannerElements;
     } else {
       print("getA101BannerImageUrls 200 değil");
@@ -38,6 +40,8 @@ class A101 {
 
   getBrochurePageImageUrls(String url) async {
     List<String> brochurePages = [];
+    List<NetworkImage> brochureImages = [];
+
     var response = await http.Client().get(
       Uri.parse(url),
     );

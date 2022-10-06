@@ -60,19 +60,7 @@ class _A101GridViewState extends State<A101GridView> {
                           fit: BoxFit.contain,
                           imageUrl: brochurePages[index],
                           placeholder: (context, url) =>
-                              //  CircularProgressIndicator(),
-
-                              Shimmer.fromColors(
-                            baseColor: HexColor("#fcfcfc"),
-                            highlightColor: HexColor("#edebe6"),
-                            child:
-                                // pageImageList[index],
-
-                                Image.network(
-                              brochurePages[0],
-                              fit: BoxFit.contain,
-                            ),
-                          ),
+                              const CircularProgressIndicator(),
                           errorWidget: (context, url, error) =>
                               const Icon(Icons.error),
                         ),

@@ -1,4 +1,5 @@
 import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
@@ -17,25 +18,22 @@ class A101BannerPage extends StatefulWidget {
 class _A101BannerPageState extends State<A101BannerPage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
+  List<CachedNetworkImage> imageList = [];
 
   @override
   void initState() {
     _current = widget.clickedIndex;
+
+    widget.brochurePageUrls.forEach((url) {
+      imageList.add(
+        CachedNetworkImage(imageUrl: url),
+      );
+    });
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    List<Image> imageList = [];
-    widget.brochurePageUrls.forEach((url) {
-      imageList.add(
-        Image.network(
-          url,
-          fit: BoxFit.contain,
-          width: 1000.0,
-        ),
-      );
-    });
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
