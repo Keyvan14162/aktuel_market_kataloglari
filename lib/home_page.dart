@@ -77,6 +77,8 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
+                            print(
+                                "https://www.a101.com.tr${banners[index].catagoryUrl}");
                             Navigator.of(context).pushNamed(
                               "/a101GridView",
                               arguments:
@@ -91,7 +93,7 @@ class _HomePageState extends State<HomePage> {
                                 CachedNetworkImage(
                                   imageUrl:
                                       banners[index].badgeImgUrl.toString(),
-                                  width: 100,
+                                  width: 210,
                                   height: 40,
                                 ),
 
@@ -195,13 +197,15 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            /*
+                            // first 2 pages are same so removing first one
+                            List<String> removedImgUrls =
+                                banners[index].imgUrls;
+                            removedImgUrls.removeAt(0);
+
                             Navigator.of(context).pushNamed(
-                              "/a101GridView",
-                              arguments:
-                                  "https://www.a101.com.tr${banners[index].catagoryUrl}",
+                              "/bimGridView",
+                              arguments: removedImgUrls,
                             );
-                            */
                           },
                           child: Container(
                             color: Colors.grey.shade200,

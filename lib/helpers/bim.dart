@@ -18,27 +18,68 @@ class Bim {
           .forEach((element) {
         // gecen hafta
         if (element.className.contains("grup1")) {
+          List<String> imgUrls = [];
+
+          element.getElementsByTagName("img").forEach((img) {
+            String url = img.attributes["src"]!;
+            // download icon'u almayalim
+            if (!url.contains("templates")) {
+              imgUrls.add(
+                "https://www.bim.com.tr$url".replaceAll("k_", ""),
+              );
+            }
+          });
+
           banners.add(
             BimBannerModel(
               "GEÇEN HAFTA",
               element.getElementsByClassName("subTabArea")[0].text.trim(),
               "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
+              imgUrls,
             ),
           );
-        } else if (element.className.contains("grup2")) {
+        } // bu hafta
+        else if (element.className.contains("grup2")) {
+          List<String> imgUrls = [];
+
+          element.getElementsByTagName("img").forEach((img) {
+            String url = img.attributes["src"]!;
+            // download icon'u almayalim
+            if (!url.contains("templates")) {
+              imgUrls.add(
+                "https://www.bim.com.tr$url".replaceAll("k_", ""),
+              );
+            }
+          });
+
           banners.add(
             BimBannerModel(
               "BU HAFTA",
               element.getElementsByClassName("subTabArea")[0].text.trim(),
               "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
+              imgUrls,
             ),
           );
-        } else if (element.className.contains("grup3")) {
+        }
+        // sonraki hafta
+        else if (element.className.contains("grup3")) {
+          List<String> imgUrls = [];
+
+          element.getElementsByTagName("img").forEach((img) {
+            String url = img.attributes["src"]!;
+            // download icon'u almayalim
+            if (!url.contains("templates")) {
+              imgUrls.add(
+                "https://www.bim.com.tr$url".replaceAll("k_", ""),
+              );
+            }
+          });
           banners.add(
             BimBannerModel(
               "GELECEK HAFTA",
               element.getElementsByClassName("subTabArea")[0].text.trim(),
               "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
+              imgUrls,
             ),
           );
         }

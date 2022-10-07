@@ -1,7 +1,8 @@
+import 'package:aktuel_urunler_bim_a101_sok/banner_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/detail_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_banner_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_grid_view.dart';
 import 'package:aktuel_urunler_bim_a101_sok/home_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/bim/bim_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -23,17 +24,23 @@ class RouteGenerator {
       case "/":
         return _generateRoute(HomePage(), settings);
 
-      case "/a101BannerPage":
+      case "/bannerPage":
         return _generateRoute(
-          A101BannerPage(
+          BannerPage(
             brochurePageUrls: (settings.arguments as List)[0] as List<String>,
             clickedIndex: (settings.arguments as List)[1] as int,
+            color: (settings.arguments as List)[2] as Color,
           ),
           settings,
         );
       case "/a101GridView":
         return _generateRoute(
           A101GridView(categoryUrl: settings.arguments as String),
+          settings,
+        );
+      case "/bimGridView":
+        return _generateRoute(
+          BimGridView(brochurePages: settings.arguments as List<String>),
           settings,
         );
       case "/detailPage":

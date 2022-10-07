@@ -40,20 +40,18 @@ class A101 {
 
   getBrochurePageImageUrls(String url) async {
     List<String> brochurePages = [];
-    List<NetworkImage> brochureImages = [];
 
     var response = await http.Client().get(
-      Uri.parse(url),
+      Uri.parse(url.trim()),
     );
     //If the http request is successful the statusCode will be 200
     if (response.statusCode == 200) {
       var document = parse(response.body);
 
       document.getElementsByClassName("view-area").forEach((element) {
-        // print(element.children[0].attributes["src"]);
+        // print(element.children[0].attributes["src"].toString());
         brochurePages.add(element.children[0].attributes["src"].toString());
       });
-
       return brochurePages;
     } else {
       print("getBrochurePageImageUrls 200 değil");

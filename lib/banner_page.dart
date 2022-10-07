@@ -5,17 +5,21 @@ import 'package:flutter/material.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
 import 'package:photo_view/photo_view.dart';
 
-class A101BannerPage extends StatefulWidget {
-  const A101BannerPage(
-      {required this.brochurePageUrls, required this.clickedIndex, super.key});
+class BannerPage extends StatefulWidget {
+  const BannerPage(
+      {required this.brochurePageUrls,
+      required this.clickedIndex,
+      required this.color,
+      super.key});
   final List<String> brochurePageUrls;
   final int clickedIndex;
+  final Color color;
 
   @override
-  State<A101BannerPage> createState() => _A101BannerPageState();
+  State<BannerPage> createState() => _BannerPageState();
 }
 
-class _A101BannerPageState extends State<A101BannerPage> {
+class _BannerPageState extends State<BannerPage> {
   int _current = 0;
   final CarouselController _controller = CarouselController();
   List<CachedNetworkImage> imageList = [];
@@ -38,7 +42,7 @@ class _A101BannerPageState extends State<A101BannerPage> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.white,
-        foregroundColor: Constants.A101_COLOR,
+        foregroundColor: widget.color,
         /*
         title: Text(
           widget.categoryUrl.split("/")[3].replaceAll("-", " ").toUpperCase(),
@@ -87,13 +91,6 @@ class _A101BannerPageState extends State<A101BannerPage> {
                               ),
                               child: imageList[
                                   widget.brochurePageUrls.indexOf(url)],
-                              /*
-                              Image.network(
-                                url,
-                                fit: BoxFit.contain,
-                                width: 1000.0,
-                              ),
-                              */
                             ),
                           ),
                         ),
@@ -125,7 +122,7 @@ class _A101BannerPageState extends State<A101BannerPage> {
                       shape: BoxShape.circle,
                       color: (Theme.of(context).brightness == Brightness.dark
                               ? Colors.white
-                              : Constants.A101_COLOR)
+                              : widget.color)
                           .withOpacity(_current == entry.key ? 0.9 : 0.4),
                     ),
                   ),

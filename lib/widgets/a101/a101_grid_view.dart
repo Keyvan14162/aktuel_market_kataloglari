@@ -32,7 +32,6 @@ class _A101GridViewState extends State<A101GridView> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<String> brochurePages = snapshot.data as List<String>;
-
             // grid view
             return GridView.builder(
               itemCount: brochurePages.length,
@@ -48,8 +47,12 @@ class _A101GridViewState extends State<A101GridView> {
                   tag: brochurePages[index],
                   child: GestureDetector(
                     onTap: () {
-                      Navigator.of(context).pushNamed("/a101BannerPage",
-                          arguments: [brochurePages, index]);
+                      Navigator.of(context)
+                          .pushNamed("/bannerPage", arguments: [
+                        brochurePages,
+                        index,
+                        Constants.A101_COLOR,
+                      ]);
                     },
                     child: Container(
                       alignment: Alignment.center,
@@ -72,9 +75,7 @@ class _A101GridViewState extends State<A101GridView> {
             );
           } else {
             return const Center(
-              child: CircularProgressIndicator(
-                  // color
-                  ),
+              child: CircularProgressIndicator(),
             );
           }
         },
