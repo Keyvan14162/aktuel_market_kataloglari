@@ -4,7 +4,7 @@ import 'package:aktuel_urunler_bim_a101_sok/models/a101_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/bim_banner_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'constants.dart' as Constants;
+import '../constants.dart' as Constants;
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
@@ -77,8 +77,6 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            print(
-                                "https://www.a101.com.tr${banners[index].catagoryUrl}");
                             Navigator.of(context).pushNamed(
                               "/a101GridView",
                               arguments:

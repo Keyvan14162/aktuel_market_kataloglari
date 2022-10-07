@@ -17,141 +17,78 @@ class Bim {
           .children
           .forEach((element) {
         // gecen hafta
-        if (element.className.contains("grup1")) {
-          List<String> imgUrls = [];
+        try {
+          if (element.className.contains("grup1")) {
+            List<String> imgUrls = [];
 
-          element.getElementsByTagName("img").forEach((img) {
-            String url = img.attributes["src"]!;
-            // download icon'u almayalim
-            if (!url.contains("templates")) {
-              imgUrls.add(
-                "https://www.bim.com.tr$url".replaceAll("k_", ""),
-              );
-            }
-          });
+            element.getElementsByTagName("img").forEach((img) {
+              String url = img.attributes["src"]!;
+              // download icon'u almayalim
+              if (!url.contains("templates")) {
+                imgUrls.add(
+                  "https://www.bim.com.tr$url".replaceAll("k_", ""),
+                );
+              }
+            });
 
-          banners.add(
-            BimBannerModel(
-              "GEÇEN HAFTA",
-              element.getElementsByClassName("subTabArea")[0].text.trim(),
-              "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
-              imgUrls,
-            ),
-          );
-        } // bu hafta
-        else if (element.className.contains("grup2")) {
-          List<String> imgUrls = [];
+            banners.add(
+              BimBannerModel(
+                "GEÇEN HAFTA",
+                element.getElementsByClassName("subTabArea")[0].text.trim(),
+                "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
+                imgUrls,
+              ),
+            );
+          } // bu hafta
+          else if (element.className.contains("grup2")) {
+            List<String> imgUrls = [];
 
-          element.getElementsByTagName("img").forEach((img) {
-            String url = img.attributes["src"]!;
-            // download icon'u almayalim
-            if (!url.contains("templates")) {
-              imgUrls.add(
-                "https://www.bim.com.tr$url".replaceAll("k_", ""),
-              );
-            }
-          });
+            element.getElementsByTagName("img").forEach((img) {
+              String url = img.attributes["src"]!;
+              // download icon'u almayalim
+              if (!url.contains("templates")) {
+                imgUrls.add(
+                  "https://www.bim.com.tr$url".replaceAll("k_", ""),
+                );
+              }
+            });
 
-          banners.add(
-            BimBannerModel(
-              "BU HAFTA",
-              element.getElementsByClassName("subTabArea")[0].text.trim(),
-              "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
-              imgUrls,
-            ),
-          );
-        }
-        // sonraki hafta
-        else if (element.className.contains("grup3")) {
-          List<String> imgUrls = [];
+            banners.add(
+              BimBannerModel(
+                "BU HAFTA",
+                element.getElementsByClassName("subTabArea")[0].text.trim(),
+                "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
+                imgUrls,
+              ),
+            );
+          }
+          // sonraki hafta
+          else if (element.className.contains("grup3")) {
+            List<String> imgUrls = [];
 
-          element.getElementsByTagName("img").forEach((img) {
-            String url = img.attributes["src"]!;
-            // download icon'u almayalim
-            if (!url.contains("templates")) {
-              imgUrls.add(
-                "https://www.bim.com.tr$url".replaceAll("k_", ""),
-              );
-            }
-          });
-          banners.add(
-            BimBannerModel(
-              "GELECEK HAFTA",
-              element.getElementsByClassName("subTabArea")[0].text.trim(),
-              "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
-              imgUrls,
-            ),
-          );
+            element.getElementsByTagName("img").forEach((img) {
+              String url = img.attributes["src"]!;
+              // download icon'u almayalim
+              if (!url.contains("templates")) {
+                imgUrls.add(
+                  "https://www.bim.com.tr$url".replaceAll("k_", ""),
+                );
+              }
+            });
+            banners.add(
+              BimBannerModel(
+                "GELECEK HAFTA",
+                element.getElementsByClassName("subTabArea")[0].text.trim(),
+                "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
+                imgUrls,
+              ),
+            );
+          }
+        } catch (e) {
+          print("Bim sayfalar cekilirken hata");
         }
       });
       return banners;
     }
   }
 }
-
-/*
-
-  getBimBannerData() async {
-    var response = await http.Client().get(
-      Uri.parse("https://www.bim.com.tr/Categories/680/afisler.aspx"),
-    );
-
-    if (response.statusCode == 200) {
-      List<BimBannerModel> banners = [];
-      var document = parse(response.body);
-
-      /*
-      document.getElementsByClassName("tabButtonArea")[0].children.forEach((a) {
-        // print(a.text); // tabbar textleri
-      });
-      */
-
-      // displayler hep none
-      document
-          .getElementsByClassName("no-gutters")[1]
-          .children
-          .forEach((element) {
-        // gecen hafta
-        if (element.className.contains("grup1")) {
-          print("gecen hafta");
-          // print("tarih : ${element.children[0].text.trim()}");
-          // tarih
-
-          /*
-          banners.add(BimBannerModel(
-              "GEÇEN HAFTA",
-              element.getElementsByClassName("subTabArea")[0].text.trim(),
-              bannerImgUrl));
-
-          */
-
-          print(element.getElementsByClassName("subTabArea")[0].text.trim());
-          element.getElementsByTagName("img").forEach((img) {
-            // normal urlin basindaki k_ kaldırınca ana resimi veriyo
-            // img.attributes["src"] null olabilirmis
-            String url = img.attributes["src"]!;
-
-            // download icon'u almayalim
-            if (!url.contains("templates")) {
-              String smallImageUrl = "https://www.bim.com.tr$url";
-
-              String mainImgUrl = smallImageUrl.replaceAll("k_", "");
-              print(mainImgUrl);
-            }
-          });
-        } else if (element.className.contains("grup2")) {
-          print("bu hafta");
-        } else if (element.className.contains("grup3")) {
-          print("gelecek hafta");
-        }
-      });
-
-      /*
-      print(document
-          .getElementsByClassName("fancyboxImage")[0]
-          .children[0]
-          .attributes["src"]);
-      */
-    }
-  }
-*/

@@ -17,7 +17,7 @@ class _BimGridViewState extends State<BimGridView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Constants.BIM_COLOR,
-        title: Text("d"),
+        title: Text("HAHAHAAHAHAHAHAHAHAHAHAHAHH"),
       ),
       body: GridView.builder(
         itemCount: widget.brochurePages.length,

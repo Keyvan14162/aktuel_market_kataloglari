@@ -62,7 +62,7 @@ class _BannerPageState extends State<BannerPage> {
                   initialPage: _current,
                   height: MediaQuery.of(context).size.height,
                   scrollDirection: Axis.horizontal,
-                  viewportFraction: 1,
+                  viewportFraction: 0.8,
                   autoPlay: false,
                   enableInfiniteScroll: false,
                   enlargeCenterPage: true,

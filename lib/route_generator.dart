@@ -1,7 +1,7 @@
-import 'package:aktuel_urunler_bim_a101_sok/banner_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/detail_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/banner_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/detail_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_grid_view.dart';
-import 'package:aktuel_urunler_bim_a101_sok/home_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/home_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/bim/bim_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';

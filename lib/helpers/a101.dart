@@ -47,10 +47,15 @@ class A101 {
     //If the http request is successful the statusCode will be 200
     if (response.statusCode == 200) {
       var document = parse(response.body);
-
+      var i = 0;
       document.getElementsByClassName("view-area").forEach((element) {
-        // print(element.children[0].attributes["src"].toString());
-        brochurePages.add(element.children[0].attributes["src"].toString());
+        //   print("${element.children[0].hasChildNodes()} - $i");
+        // i++;
+        try {
+          brochurePages.add(element.children[0].attributes["src"].toString());
+        } catch (e) {
+          print("Sayfa cekilemedi");
+        }
       });
       return brochurePages;
     } else {
