@@ -1,5 +1,7 @@
 import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
+import 'package:aktuel_urunler_bim_a101_sok/helpers/bim.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/a101_banner_model.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart' as Constants;
 import 'package:html/parser.dart';
@@ -14,9 +16,12 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   final double headerHeight = 72;
-  final EdgeInsetsGeometry headerPadding = EdgeInsets.fromLTRB(10, 10, 0, 10);
+  final EdgeInsetsGeometry headerPadding =
+      const EdgeInsets.fromLTRB(10, 10, 0, 10);
+
   @override
   Widget build(BuildContext context) {
+    Bim().getBimData();
     return Scaffold(
       appBar: AppBar(
         title: const Text("Popüler Mağazalar"),
@@ -80,11 +85,13 @@ class _HomePageState extends State<HomePage> {
                           child: Column(
                             children: [
                               // badge image
-                              Image.network(
-                                banners[index].badgeImgUrl.toString(),
+
+                              CachedNetworkImage(
+                                imageUrl: banners[index].badgeImgUrl.toString(),
                                 width: 100,
                                 height: 40,
                               ),
+
                               const SizedBox(
                                 height: 8,
                               ),
@@ -114,9 +121,14 @@ class _HomePageState extends State<HomePage> {
 
                               // banner image
                               Expanded(
-                                child: Image.network(
-                                  banners[index].bannerImgUrl.toString(),
-                                  fit: BoxFit.cover,
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                      banners[index].bannerImgUrl.toString(),
+                                  /*
+                                  placeholder: (context, url) =>
+                                      const CircularProgressIndicator(),
+                                      */
+                                  // cover
                                 ),
                               ),
                             ],
