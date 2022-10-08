@@ -85,6 +85,9 @@ class _BannerPageState extends State<BannerPage> {
                                 arguments: url,
                               );
                             },
+                            onVerticalDragEnd: (details) {
+                              Navigator.of(context).pop();
+                            },
                             child: ClipRRect(
                               borderRadius: const BorderRadius.all(
                                 Radius.circular(5.0),

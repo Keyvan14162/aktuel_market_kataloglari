@@ -28,9 +28,14 @@ class _DetailPageState extends State<DetailPage> {
       ),
       body: Hero(
         tag: widget.imageUrl,
-        child: Center(
-          child: PhotoView(
-            imageProvider: CachedNetworkImageProvider(widget.imageUrl),
+        child: GestureDetector(
+          onVerticalDragEnd: (details) {
+            Navigator.of(context).pop();
+          },
+          child: Center(
+            child: PhotoView(
+              imageProvider: CachedNetworkImageProvider(widget.imageUrl),
+            ),
           ),
         ),
       ),

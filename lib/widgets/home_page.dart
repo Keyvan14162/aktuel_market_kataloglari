@@ -22,16 +22,18 @@ class _HomePageState extends State<HomePage> {
   final double headerHeight = 72;
   final EdgeInsetsGeometry headerPadding =
       const EdgeInsets.fromLTRB(10, 10, 0, 10);
-  var x = true;
+  var x = false;
 
   @override
   Widget build(BuildContext context) {
-    Sok().getBannerUrls();
-
     return Scaffold(
       // Kaldirilabilir
       appBar: AppBar(
-        title: const Text("Popüler Mağazalar"),
+        title: const Text(
+          "Popüler Mağazalar",
+          style: TextStyle(color: Colors.blue),
+        ),
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -85,7 +87,6 @@ class _HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            /*          
             FutureBuilder(
               future: Sok().getBannerUrls(),
               builder: (context, snapshot) {
@@ -223,161 +224,7 @@ class _HomePageState extends State<HomePage> {
                 }
               },
             ),
-            */
-            AnimatedSwitcher(
-              duration: const Duration(milliseconds: 500),
-              switchInCurve: Curves.bounceInOut,
-              switchOutCurve: Curves.easeOutCirc,
-              transitionBuilder: (Widget child, Animation<double> animation) {
-                return ScaleTransition(child: child, scale: animation);
-              },
-              child: x
-                  ? FutureBuilder(
-                      future: Sok().getBannerUrls(),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          List<SokBannerModel> banners =
-                              snapshot.data as List<SokBannerModel>;
 
-                          return Container(
-                            height: 300,
-                            child: ListView.builder(
-                              scrollDirection: Axis.horizontal,
-                              shrinkWrap: true,
-                              itemCount: banners.length,
-                              itemBuilder: (context, index) {
-                                String date = Functions().convertDateToText(
-                                    banners[index]
-                                        .title!
-                                        .substring(0,
-                                            banners[index].title!.indexOf("-"))
-                                        .trim());
-
-                                return GestureDetector(
-                                  onTap: () {
-                                    Navigator.of(context)
-                                        .pushNamed("/sokGridView", arguments: [
-                                      banners[index].brochurePageUrl,
-                                      date
-                                    ]);
-                                  },
-                                  child: Container(
-                                    width:
-                                        MediaQuery.of(context).size.width / 2,
-                                    color: Colors.grey.shade200,
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        // title
-                                        Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              1, 0, 1, 0),
-                                          child: Container(
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width /
-                                                3,
-                                            height: 40,
-                                            decoration: const BoxDecoration(
-                                              color: Constants.SOK_COLOR,
-                                              borderRadius: BorderRadius.only(
-                                                bottomLeft: Radius.circular(12),
-                                                bottomRight:
-                                                    Radius.circular(12),
-                                              ),
-                                            ),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.all(2.0),
-                                              child: Center(
-                                                child: Text(
-                                                  "${banners[index].title!.substring(
-                                                        banners[index]
-                                                            .title!
-                                                            .indexOf("Hafta"),
-                                                        banners[index]
-                                                            .title!
-                                                            .indexOf("bro"),
-                                                      )}Broşürü",
-                                                  style: const TextStyle(
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.bold,
-                                                  ),
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-
-                                        // date
-                                        Center(
-                                          child: Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                8, 16, 8, 4),
-                                            child: Text(
-                                              date,
-                                              style: const TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                        // tarihleri arasinda
-                                        const Center(
-                                          child: Padding(
-                                            padding:
-                                                EdgeInsets.fromLTRB(8, 2, 8, 8),
-                                            child: Text("Tarihinden İtibaren"),
-                                          ),
-                                        ),
-
-                                        // banner image
-                                        Expanded(
-                                          child: Container(
-                                            decoration: const BoxDecoration(
-                                              color: Colors.white,
-                                              border: Border(
-                                                left: BorderSide(
-                                                  width: 32.0,
-                                                  color: Colors.white,
-                                                ),
-                                                right: BorderSide(
-                                                  width: 32.0,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                            child: CachedNetworkImage(
-                                              imageUrl: banners[index]
-                                                  .bannerImgUrl
-                                                  .toString(),
-                                            ),
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            ),
-                          );
-                        } else {
-                          return const Center(
-                            child: LinearProgressIndicator(
-                                // color
-                                ),
-                          );
-                        }
-                      },
-                    )
-                  : SizedBox(),
-            ),
             // A 101
             Container(
               height: headerHeight,
