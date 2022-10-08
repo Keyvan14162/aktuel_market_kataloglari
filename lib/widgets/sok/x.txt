@@ -1,0 +1,191 @@
+  GestureDetector(
+              onTap: () {
+                setState(() {
+                  x = !x;
+                  padding = padding == 0 ? 100 : 0.0;
+                  bottomPadding = bottomPadding == 0 ? 100 : 0.0;
+                });
+              },
+              child: Container(
+                height: headerHeight,
+                child: Padding(
+                  padding: headerPadding,
+                  child: Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width / 4,
+                        padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+                        decoration: const BoxDecoration(
+                          color: Constants.SOK_COLOR,
+                          borderRadius: BorderRadius.all(
+                            Radius.circular(12),
+                          ),
+                        ),
+                        child: Image.asset(
+                          "assets/images/sok_logo.png",
+                        ),
+                      ),
+                      const Flexible(
+                        child: Padding(
+                          padding: EdgeInsets.all(8.0),
+                          child: FittedBox(
+                            fit: BoxFit.scaleDown,
+                            child: Text(
+                              "ŞOK Güncel Katalogları",
+                              style: TextStyle(
+                                fontSize: 32,
+                                fontWeight: FontWeight.w900,
+                                color: Constants.SOK_COLOR,
+                              ),
+                              maxLines: 1,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            AnimatedPadding(
+              padding: EdgeInsets.only(top: padding, bottom: bottomPadding),
+              duration: const Duration(milliseconds: 1000),
+              curve: Curves.elasticOut,
+              child: FutureBuilder(
+                future: Sok().getBannerUrls(),
+                builder: (context, snapshot) {
+                  if (snapshot.hasData) {
+                    List<SokBannerModel> banners =
+                        snapshot.data as List<SokBannerModel>;
+
+                    return Container(
+                      height: 300,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        shrinkWrap: true,
+                        itemCount: banners.length,
+                        itemBuilder: (context, index) {
+                          String date = Functions().convertDateToText(
+                              banners[index]
+                                  .title!
+                                  .substring(
+                                      0, banners[index].title!.indexOf("-"))
+                                  .trim());
+
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).pushNamed("/sokGridView",
+                                  arguments: [
+                                    banners[index].brochurePageUrl,
+                                    date
+                                  ]);
+                            },
+                            child: Container(
+                              width: MediaQuery.of(context).size.width / 2,
+                              color: Colors.grey.shade200,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  // title
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(1, 0, 1, 0),
+                                    child: Container(
+                                      width:
+                                          MediaQuery.of(context).size.width / 3,
+                                      height: 40,
+                                      decoration: const BoxDecoration(
+                                        color: Constants.SOK_COLOR,
+                                        borderRadius: BorderRadius.only(
+                                          bottomLeft: Radius.circular(12),
+                                          bottomRight: Radius.circular(12),
+                                        ),
+                                      ),
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(2.0),
+                                        child: Center(
+                                          child: Text(
+                                            "${banners[index].title!.substring(
+                                                  banners[index]
+                                                      .title!
+                                                      .indexOf("Hafta"),
+                                                  banners[index]
+                                                      .title!
+                                                      .indexOf("bro"),
+                                                )}Broşürü",
+                                            style: const TextStyle(
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold,
+                                            ),
+                                            textAlign: TextAlign.center,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+
+                                  const SizedBox(
+                                    height: 8,
+                                  ),
+
+                                  // date
+                                  Center(
+                                    child: Padding(
+                                      padding: const EdgeInsets.fromLTRB(
+                                          8, 16, 8, 4),
+                                      child: Text(
+                                        date,
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  // tarihleri arasinda
+                                  const Center(
+                                    child: Padding(
+                                      padding: EdgeInsets.fromLTRB(8, 2, 8, 8),
+                                      child: Text("Tarihinden İtibaren"),
+                                    ),
+                                  ),
+
+                                  // banner image
+                                  Expanded(
+                                    child: Container(
+                                      decoration: const BoxDecoration(
+                                        color: Colors.white,
+                                        border: Border(
+                                          left: BorderSide(
+                                            width: 32.0,
+                                            color: Colors.white,
+                                          ),
+                                          right: BorderSide(
+                                            width: 32.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      child: CachedNetworkImage(
+                                        imageUrl: banners[index]
+                                            .bannerImgUrl
+                                            .toString(),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  } else {
+                    return const Center(
+                      child: LinearProgressIndicator(
+                          // color
+                          ),
+                    );
+                  }
+                },
+              ),
+            ),
