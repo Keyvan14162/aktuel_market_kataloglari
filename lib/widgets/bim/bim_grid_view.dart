@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
 
 class BimGridView extends StatefulWidget {
-  const BimGridView({required this.brochurePages, super.key});
+  const BimGridView(
+      {required this.brochurePages, required this.categoryText, super.key});
   final List<String> brochurePages;
+  final String categoryText;
 
   @override
   State<BimGridView> createState() => _BimGridViewState();
@@ -17,7 +19,7 @@ class _BimGridViewState extends State<BimGridView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Constants.BIM_COLOR,
-        title: Text("HAHAHAAHAHAHAHAHAHAHAHAHAHH"),
+        title: Text(widget.categoryText),
       ),
       body: GridView.builder(
         itemCount: widget.brochurePages.length,

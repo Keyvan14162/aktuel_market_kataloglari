@@ -88,6 +88,7 @@ class Bim {
           print("Bim sayfalar cekilirken hata");
         }
       });
+
       return banners;
     }
   }

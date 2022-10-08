@@ -195,21 +195,22 @@ class _HomePageState extends State<HomePage> {
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
-                            // first 2 pages are same so removing first one
-                            List<String> removedImgUrls =
-                                banners[index].imgUrls;
-                            removedImgUrls.removeAt(0);
+                            // first 2 pages are same sometimes, bcs of website html
+                            // so remove duplicates with to set and then to list
 
                             Navigator.of(context).pushNamed(
                               "/bimGridView",
-                              arguments: removedImgUrls,
+                              arguments: [
+                                banners[index].imgUrls.toSet().toList(),
+                                banners[index].category,
+                              ],
                             );
                           },
                           child: Container(
                             color: Colors.grey.shade200,
                             child: Column(
                               children: [
-                                // week text
+                                // category text
                                 Padding(
                                   padding:
                                       const EdgeInsets.fromLTRB(0, 0, 0, 0),
@@ -293,6 +294,38 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
               },
+            ),
+
+            // Sok
+            Container(
+              height: headerHeight,
+              child: Padding(
+                padding: headerPadding,
+                child: Row(
+                  children: [
+                    Image.asset(
+                      "assets/images/sok_logo.png",
+                    ),
+                    const Flexible(
+                      child: Padding(
+                        padding: EdgeInsets.all(8.0),
+                        child: FittedBox(
+                          fit: BoxFit.scaleDown,
+                          child: Text(
+                            "BİM Güncel Katalogları",
+                            style: TextStyle(
+                              fontSize: 32,
+                              fontWeight: FontWeight.w900,
+                              color: Constants.BIM_COLOR,
+                            ),
+                            maxLines: 1,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
             ),
           ],
         ),

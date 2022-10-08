@@ -40,7 +40,10 @@ class RouteGenerator {
         );
       case "/bimGridView":
         return _generateRoute(
-          BimGridView(brochurePages: settings.arguments as List<String>),
+          BimGridView(
+            brochurePages: (settings.arguments as List)[0] as List<String>,
+            categoryText: (settings.arguments as List)[1] as String,
+          ),
           settings,
         );
       case "/detailPage":
