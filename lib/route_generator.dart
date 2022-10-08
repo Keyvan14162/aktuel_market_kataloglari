@@ -3,6 +3,7 @@ import 'package:aktuel_urunler_bim_a101_sok/widgets/detail_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_grid_view.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/home_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/bim/bim_grid_view.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/sok/sok_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,14 +36,25 @@ class RouteGenerator {
         );
       case "/a101GridView":
         return _generateRoute(
-          A101GridView(categoryUrl: settings.arguments as String),
+          A101GridView(
+            categoryUrl: (settings.arguments as List)[0] as String,
+            date: (settings.arguments as List)[1] as String,
+          ),
           settings,
         );
       case "/bimGridView":
         return _generateRoute(
           BimGridView(
             brochurePages: (settings.arguments as List)[0] as List<String>,
-            categoryText: (settings.arguments as List)[1] as String,
+            date: (settings.arguments as List)[1] as String,
+          ),
+          settings,
+        );
+      case "/sokGridView":
+        return _generateRoute(
+          SokGridView(
+            pageUrl: (settings.arguments as List)[0] as String,
+            title: (settings.arguments as List)[1] as String,
           ),
           settings,
         );

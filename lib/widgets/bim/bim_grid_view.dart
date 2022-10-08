@@ -5,9 +5,9 @@ import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
 
 class BimGridView extends StatefulWidget {
   const BimGridView(
-      {required this.brochurePages, required this.categoryText, super.key});
+      {required this.brochurePages, required this.date, super.key});
   final List<String> brochurePages;
-  final String categoryText;
+  final String date;
 
   @override
   State<BimGridView> createState() => _BimGridViewState();
@@ -19,7 +19,7 @@ class _BimGridViewState extends State<BimGridView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Constants.BIM_COLOR,
-        title: Text(widget.categoryText),
+        title: Text(widget.date),
       ),
       body: GridView.builder(
         itemCount: widget.brochurePages.length,

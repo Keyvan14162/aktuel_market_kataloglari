@@ -1,32 +1,28 @@
 import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
+import 'package:aktuel_urunler_bim_a101_sok/helpers/sok.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
-import 'package:hexcolor/hexcolor.dart';
-import 'package:shimmer/shimmer.dart';
 
-class A101GridView extends StatefulWidget {
-  const A101GridView(
-      {required this.categoryUrl, required this.date, super.key});
-  final String categoryUrl;
-  final String date;
+class SokGridView extends StatefulWidget {
+  const SokGridView({required this.pageUrl, required this.title, super.key});
+  final String pageUrl;
+  final String title;
 
   @override
-  State<A101GridView> createState() => _A101GridViewState();
+  State<SokGridView> createState() => _SokGridViewState();
 }
 
-class _A101GridViewState extends State<A101GridView> {
+class _SokGridViewState extends State<SokGridView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Constants.A101_COLOR,
-        title: Text(
-          widget.date,
-        ),
+        backgroundColor: Constants.SOK_COLOR,
+        title: Text(widget.title),
       ),
       body: FutureBuilder(
-        future: A101().getBrochurePageImageUrls(widget.categoryUrl),
+        future: Sok().getSokBrochurePageImgUrls(widget.pageUrl),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             List<String> brochurePages = snapshot.data as List<String>;
@@ -49,7 +45,7 @@ class _A101GridViewState extends State<A101GridView> {
                           .pushNamed("/bannerPage", arguments: [
                         brochurePages,
                         index,
-                        Constants.A101_COLOR,
+                        Constants.SOK_COLOR,
                       ]);
                     },
                     child: Container(
