@@ -38,7 +38,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   late AnimationController a101IconController;
   late AnimationController bimIconController;
   late AnimationController sokIconController;
-  bool isAnimated = false;
+  bool a101IsAnimated = false;
+  bool bimIsAnimated = false;
+  bool sokIsAnimated = false;
 
   @override
   void initState() {
@@ -223,9 +225,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 GestureDetector(
                   onTap: () {
                     setState(() {
-                      MyAnimatedIcon()
-                          .animateIcon("a101", a101IconController, isAnimated);
-                      isAnimated = !isAnimated;
+                      MyAnimatedIcon().animateIcon(
+                          "a101", a101IconController, a101IsAnimated);
+                      a101IsAnimated = !a101IsAnimated;
                       a101Show = !a101Show;
                       a101TopPadding = a101TopPadding == 0 ? headerHeight : 0.0;
                       a101BottomPadding = a101BottomPadding == 0 ? 10 : 0.0;
@@ -440,8 +442,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   onTap: () {
                     setState(() {
                       MyAnimatedIcon()
-                          .animateIcon("bim", bimIconController, isAnimated);
-                      isAnimated = !isAnimated;
+                          .animateIcon("bim", bimIconController, bimIsAnimated);
+                      bimIsAnimated = !bimIsAnimated;
                       bimShow = !bimShow;
                       bimTopPadding = bimTopPadding == 0 ? headerHeight : 0.0;
                       bimBottomPadding = bimBottomPadding == 0 ? 10 : 0.0;
@@ -659,8 +661,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   onTap: () {
                     setState(() {
                       MyAnimatedIcon()
-                          .animateIcon("sok", sokIconController, isAnimated);
-                      isAnimated = !isAnimated;
+                          .animateIcon("sok", sokIconController, sokIsAnimated);
+                      sokIsAnimated = !sokIsAnimated;
                       sokShow = !sokShow;
                       sokTopPadding = sokTopPadding == 0 ? headerHeight : 0.0;
                       sokBottomPadding = sokBottomPadding == 0 ? 10 : 0.0;
