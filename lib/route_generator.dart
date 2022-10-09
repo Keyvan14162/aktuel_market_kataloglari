@@ -12,7 +12,8 @@ class RouteGenerator {
   static Route<dynamic>? _generateRoute(
       Widget togoPage, RouteSettings settings) {
     if (defaultTargetPlatform == TargetPlatform.android) {
-      return MaterialPageRoute(
+      // we change to material page route
+      return CupertinoPageRoute(
           builder: (context) => togoPage, settings: settings);
     } else {
       return CupertinoPageRoute(

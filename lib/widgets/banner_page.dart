@@ -43,13 +43,9 @@ class _BannerPageState extends State<BannerPage> {
         elevation: 0,
         backgroundColor: Colors.white,
         foregroundColor: widget.color,
-        /*
-        title: Text(
-          widget.categoryUrl.split("/")[3].replaceAll("-", " ").toUpperCase(),
-        ),
-        */
       ),
       body: Container(
+        color: Colors.white,
         child: Column(
           children: [
             // img
@@ -94,7 +90,32 @@ class _BannerPageState extends State<BannerPage> {
                               );
                             },
                             onVerticalDragEnd: (details) {
-                              Navigator.of(context).pop();
+                              if (details.primaryVelocity == null) {
+                                return;
+                              }
+                              if (details.primaryVelocity! < 0) {
+                                // up
+                                Navigator.of(context).pop();
+                              }
+                              if (details.primaryVelocity! > 0) {
+                                // down
+                                Navigator.of(context).pushNamed(
+                                  "/detailPage",
+                                  arguments: [
+                                    widget.brochurePageUrls,
+                                    _current
+                                  ],
+                                ).then(
+                                  (value) {
+                                    if (_current != value as int) {
+                                      setState(() {
+                                        _current = value;
+                                        _controller.jumpToPage(_current);
+                                      });
+                                    }
+                                  },
+                                );
+                              }
                             },
                             child: ClipRRect(
                               borderRadius: const BorderRadius.all(

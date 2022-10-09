@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
+import 'package:photo_view/photo_view_gallery.dart';
 
 class DetailPage extends StatefulWidget {
   const DetailPage(
@@ -14,16 +15,20 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPageState extends State<DetailPage> {
   final CarouselController _controller = CarouselController();
+  late PageController _pageController;
   int _current = 0;
+
   @override
   void initState() {
     _current = widget.clickedIndex;
+    _pageController = PageController(initialPage: _current);
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    // _current = widget.clickedIndex;
+    var height = MediaQuery.of(context).size.height;
+
     return WillPopScope(
       onWillPop: () {
         Navigator.of(context).pop(_current);
@@ -43,46 +48,40 @@ class _DetailPageState extends State<DetailPage> {
           ),
           elevation: 0,
         ),
-        body: CarouselSlider(
-          carouselController: _controller,
-          options: CarouselOptions(
-            initialPage: widget.clickedIndex,
-            height: MediaQuery.of(context).size.height,
-            viewportFraction: 1.0,
-            enlargeCenterPage: false,
-            enableInfiniteScroll: false,
-            onPageChanged: (index, reason) {
-              _current = index;
+        body: GestureDetector(
+          onVerticalDragEnd: (details) {
+            if (details.primaryVelocity == null) {
+              return;
+            }
+            if (details.primaryVelocity! < 0) {
+              // up
+              Navigator.of(context).pop(_current);
+            }
+            if (details.primaryVelocity! > 0) {
+              // down
+              Navigator.of(context).pop(_current);
+            }
+          },
+          child: PhotoViewGallery.builder(
+            scrollPhysics: const BouncingScrollPhysics(),
+            builder: (BuildContext context, int index) {
+              return PhotoViewGalleryPageOptions(
+                imageProvider:
+                    CachedNetworkImageProvider(widget.imageUrls[index]),
+                heroAttributes:
+                    PhotoViewHeroAttributes(tag: widget.imageUrls[index]),
+              );
+            },
+            itemCount: widget.imageUrls.length,
+            backgroundDecoration: const BoxDecoration(color: Colors.black),
+            pageController: _pageController,
+            onPageChanged: (index) {
+              setState(() {
+                _current = index;
+              });
             },
           ),
-          items: widget.imageUrls
-              .map(
-                (imageUrl) => Hero(
-                  tag: imageUrl,
-                  child: GestureDetector(
-                    child: Center(
-                      child: PhotoView(
-                        imageProvider: CachedNetworkImageProvider(imageUrl),
-                      ),
-                    ),
-                  ),
-                ),
-              )
-              .toList(),
         ),
-        /* 
-        Hero(
-          tag: widget.imageUrl,
-          child: GestureDetector(
-            onHorizontalDragStart: (details) {},
-            child: Center(
-              child: PhotoView(
-                imageProvider: CachedNetworkImageProvider(widget.imageUrl),
-              ),
-            ),
-          ),
-        ),
-        */
       ),
     );
   }
