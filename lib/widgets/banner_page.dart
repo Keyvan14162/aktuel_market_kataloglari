@@ -51,7 +51,6 @@ class _BannerPageState extends State<BannerPage> {
       ),
       body: Container(
         child: Column(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             // img
             Expanded(
@@ -82,7 +81,16 @@ class _BannerPageState extends State<BannerPage> {
                             onTap: () {
                               Navigator.of(context).pushNamed(
                                 "/detailPage",
-                                arguments: url,
+                                arguments: [widget.brochurePageUrls, _current],
+                              ).then(
+                                (value) {
+                                  if (_current != value as int) {
+                                    setState(() {
+                                      _current = value;
+                                      _controller.jumpToPage(_current);
+                                    });
+                                  }
+                                },
                               );
                             },
                             onVerticalDragEnd: (details) {

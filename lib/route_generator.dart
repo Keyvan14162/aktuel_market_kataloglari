@@ -60,7 +60,10 @@ class RouteGenerator {
         );
       case "/detailPage":
         return _generateRoute(
-          DetailPage(imageUrl: settings.arguments as String),
+          DetailPage(
+            imageUrls: (settings.arguments as List)[0] as List<String>,
+            clickedIndex: (settings.arguments as List)[1] as int,
+          ),
           settings,
         );
 
