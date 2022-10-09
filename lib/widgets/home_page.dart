@@ -5,6 +5,7 @@ import 'package:aktuel_urunler_bim_a101_sok/helpers/sok.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/a101_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/bim_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/my_animated_icon.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../constants.dart' as Constants;
@@ -18,8 +19,7 @@ class HomePage extends StatefulWidget {
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
-  late AnimationController _controller;
+class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   final double headerHeight = 72;
   final EdgeInsetsGeometry headerPadding =
       const EdgeInsets.fromLTRB(10, 10, 0, 10);
@@ -34,6 +34,44 @@ class _HomePageState extends State<HomePage> {
   var bimBottomPadding = 0.0;
 
   var animationDuration = 500;
+
+  late AnimationController a101IconController;
+  late AnimationController bimIconController;
+  late AnimationController sokIconController;
+  bool isAnimated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    a101IconController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500));
+    a101IconController.forward().then((value) async {
+      await Future.delayed(const Duration(milliseconds: 500));
+      a101IconController.reverse();
+    });
+
+    bimIconController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500));
+    bimIconController.forward().then((value) async {
+      await Future.delayed(const Duration(milliseconds: 500));
+      bimIconController.reverse();
+    });
+
+    sokIconController = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 500));
+    sokIconController.forward().then((value) async {
+      await Future.delayed(const Duration(milliseconds: 500));
+      sokIconController.reverse();
+    });
+  }
+
+  @override
+  void dispose() {
+    a101IconController.dispose();
+    bimIconController.dispose();
+    sokIconController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +95,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.only(
                       top: a101TopPadding, bottom: a101BottomPadding),
                   duration: Duration(milliseconds: animationDuration),
-                  curve: Curves.elasticOut,
+                  curve: Curves.fastLinearToSlowEaseIn,
                   child: FutureBuilder(
                     future: A101().getA101BannerImageUrls(),
                     builder: (context, snapshot) {
@@ -185,6 +223,9 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      MyAnimatedIcon()
+                          .animateIcon("a101", a101IconController, isAnimated);
+                      isAnimated = !isAnimated;
                       a101Show = !a101Show;
                       a101TopPadding = a101TopPadding == 0 ? headerHeight : 0.0;
                       a101BottomPadding = a101BottomPadding == 0 ? 10 : 0.0;
@@ -215,9 +256,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          a101Show
-                              ? const Icon(Icons.arrow_drop_up)
-                              : const Icon(Icons.arrow_drop_down),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: MyAnimatedIcon()
+                                .animatedIconButton("a101", a101IconController),
+                          ),
                         ],
                       ),
                     ),
@@ -225,18 +268,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            a101Show
-                ? Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 20,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: Constants.A101_COLOR,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
+            showBottomLine(a101Show, Constants.A101_COLOR),
 
             // BİM
             Stack(
@@ -245,7 +277,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.only(
                       top: bimTopPadding, bottom: bimBottomPadding),
                   duration: Duration(milliseconds: animationDuration),
-                  curve: Curves.elasticOut,
+                  curve: Curves.fastLinearToSlowEaseIn,
                   child: FutureBuilder(
                     future: Bim().getBimBannerData(),
                     builder: (context, snapshot) {
@@ -407,6 +439,9 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      MyAnimatedIcon()
+                          .animateIcon("bim", bimIconController, isAnimated);
+                      isAnimated = !isAnimated;
                       bimShow = !bimShow;
                       bimTopPadding = bimTopPadding == 0 ? headerHeight : 0.0;
                       bimBottomPadding = bimBottomPadding == 0 ? 10 : 0.0;
@@ -439,9 +474,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          bimShow
-                              ? const Icon(Icons.arrow_drop_up)
-                              : const Icon(Icons.arrow_drop_down),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: MyAnimatedIcon()
+                                .animatedIconButton("bim", bimIconController),
+                          ),
                         ],
                       ),
                     ),
@@ -449,18 +486,7 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            bimShow
-                ? Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 20,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: Constants.BIM_COLOR,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
+            showBottomLine(bimShow, Constants.BIM_COLOR),
 
             // Sok
             Stack(
@@ -469,7 +495,7 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.only(
                       top: sokTopPadding, bottom: sokBottomPadding),
                   duration: Duration(milliseconds: animationDuration),
-                  curve: Curves.elasticOut,
+                  curve: Curves.fastLinearToSlowEaseIn,
                   child: FutureBuilder(
                     future: Sok().getBannerUrls(),
                     builder: (context, snapshot) {
@@ -632,6 +658,9 @@ class _HomePageState extends State<HomePage> {
                 GestureDetector(
                   onTap: () {
                     setState(() {
+                      MyAnimatedIcon()
+                          .animateIcon("sok", sokIconController, isAnimated);
+                      isAnimated = !isAnimated;
                       sokShow = !sokShow;
                       sokTopPadding = sokTopPadding == 0 ? headerHeight : 0.0;
                       sokBottomPadding = sokBottomPadding == 0 ? 10 : 0.0;
@@ -674,9 +703,11 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          sokShow
-                              ? const Icon(Icons.arrow_drop_up)
-                              : const Icon(Icons.arrow_drop_down),
+                          Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: MyAnimatedIcon()
+                                .animatedIconButton("sok", sokIconController),
+                          ),
                         ],
                       ),
                     ),
@@ -684,21 +715,25 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
-            sokShow
-                ? Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 20,
-                      height: 8,
-                      decoration: BoxDecoration(
-                        color: Constants.SOK_COLOR,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  )
-                : const SizedBox(),
+            showBottomLine(sokShow, Constants.SOK_COLOR),
           ],
         ),
       ),
     );
+  }
+
+  Widget showBottomLine(bool show, Color color) {
+    return show
+        ? Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width - 20,
+              height: 8,
+              decoration: BoxDecoration(
+                color: color,
+                borderRadius: BorderRadius.circular(10),
+              ),
+            ),
+          )
+        : const SizedBox();
   }
 }
