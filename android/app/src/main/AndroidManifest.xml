@@ -3,7 +3,7 @@
      <uses-permission android:name="android.permission.INTERNET" />
 
    <application
-        android:label="aktuel_urunler_bim_a101_sok"
+        android:label="Aktüel Market Katalogları"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity

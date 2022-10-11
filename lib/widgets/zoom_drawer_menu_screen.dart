@@ -65,7 +65,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
-                              "assets/images/shopping-cart.png",
+                              "assets/images/icon.png",
                               width: 1000,
                             ),
                           ),

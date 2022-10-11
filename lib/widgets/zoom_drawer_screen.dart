@@ -20,6 +20,7 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: ZoomDrawer(
+        isRtl: false,
         androidCloseOnBackTap: true,
         mainScreenTapClose: true,
         controller: _drawerController,
@@ -29,9 +30,9 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen> {
         borderRadius: 24.0,
         showShadow: true,
         angle: 0.0,
-        openCurve: Curves.easeIn,
-        closeCurve: Curves.easeIn,
-        duration: const Duration(milliseconds: 200),
+        // openCurve: Curves.easeIn,
+        // closeCurve: Curves.easeOut,
+        duration: const Duration(milliseconds: 300),
       ),
     );
   }
