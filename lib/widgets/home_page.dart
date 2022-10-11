@@ -8,11 +8,13 @@ import 'package:aktuel_urunler_bim_a101_sok/models/bim_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/my_animated_icon.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import '../constants.dart' as Constants;
+import 'package:internet_connection_checker/internet_connection_checker.dart';
+import '../constants.dart' as constants;
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
@@ -82,6 +84,17 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    var isDeviceConnected = false;
+
+    var subscription = Connectivity()
+        .onConnectivityChanged
+        .listen((ConnectivityResult result) async {
+      if (result != ConnectivityResult.none) {
+        isDeviceConnected = await InternetConnectionChecker().hasConnection;
+        print(result);
+        print("--------");
+      }
+    });
     return Scaffold(
       // Kaldirilabilir
       appBar: AppBar(
@@ -149,19 +162,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // icon
-              /*
-                Container(
-                  color: Colors.white,
-                  child: const Center(
-                    child: Icon(
-                      Icons.shopping_cart_checkout_outlined,
-                      size: 300,
-                    ),
-                  ),
-                ),
-                */
-
               const SizedBox(
                 height: 20,
               ),
@@ -188,7 +188,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: a101HomePageItem(),
                 ),
               ),
-              showBottomLine(a101Show, Constants.A101_COLOR),
+              showBottomLine(a101Show, constants.A101_COLOR),
 
               // BİM
               Padding(
@@ -212,7 +212,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: bimHomePageItem(),
                 ),
               ),
-              showBottomLine(bimShow, Constants.BIM_COLOR),
+              showBottomLine(bimShow, constants.BIM_COLOR),
 
               // Sok
               Padding(
@@ -236,7 +236,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: sokHomePageItem(context),
                 ),
               ),
-              showBottomLine(sokShow, Constants.SOK_COLOR),
+              showBottomLine(sokShow, constants.SOK_COLOR),
             ],
           ),
         ),
@@ -299,7 +299,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 3,
                                         height: 40,
                                         decoration: const BoxDecoration(
-                                          color: Constants.SOK_COLOR,
+                                          color: constants.SOK_COLOR,
                                           borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(12),
                                             bottomRight: Radius.circular(12),
@@ -376,7 +376,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             width: MediaQuery.of(context).size.width - 20,
                             height: 8,
                             decoration: BoxDecoration(
-                              color: Constants.SOK_COLOR,
+                              color: constants.SOK_COLOR,
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -414,7 +414,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     width: MediaQuery.of(context).size.width / 4,
                     padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
                     decoration: const BoxDecoration(
-                      color: Constants.SOK_COLOR,
+                      color: constants.SOK_COLOR,
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
                       ),
@@ -433,7 +433,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w900,
-                            color: Constants.SOK_COLOR,
+                            color: constants.SOK_COLOR,
                           ),
                           maxLines: 1,
                         ),
@@ -507,7 +507,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 2,
                                         height: 40,
                                         decoration: const BoxDecoration(
-                                          color: Constants.BIM_COLOR,
+                                          color: constants.BIM_COLOR,
                                           borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(12),
                                             bottomRight: Radius.circular(12),
@@ -585,7 +585,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               width: MediaQuery.of(context).size.width - 20,
                               height: 8,
                               decoration: BoxDecoration(
-                                color: Constants.BIM_COLOR,
+                                color: constants.BIM_COLOR,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
@@ -633,7 +633,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w900,
-                            color: Constants.BIM_COLOR,
+                            color: constants.BIM_COLOR,
                           ),
                           maxLines: 1,
                         ),
@@ -762,7 +762,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             width: MediaQuery.of(context).size.width - 20,
                             height: 8,
                             decoration: BoxDecoration(
-                              color: Constants.A101_COLOR,
+                              color: constants.A101_COLOR,
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -807,7 +807,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w900,
-                            color: Constants.A101_COLOR,
+                            color: constants.A101_COLOR,
                           ),
                           maxLines: 1,
                         ),

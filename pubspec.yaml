@@ -44,6 +44,8 @@ dependencies:
   flutter_zoom_drawer: ^3.0.3
   url_launcher: ^6.1.6
   flutter_launcher_icons: ^0.10.0
+  internet_connection_checker: ^1.0.0+1
+  connectivity_plus: ^2.3.9
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +65,16 @@ flutter_icons:
   image_path: "assets/images/logo.png"
   adaptive_icon_foreground: "assets/images/logo_foreground.png"
   adaptive_icon_background: "#ffffff"
+  remove_alpha_ios: true
+  web:
+    generate: true
+    image_path: "assets/images/logo.png"
+    background_color: "#ffffff"
+    theme_color: "#ffffff"
+  windows:
+    generate: true
+    image_path: "assets/images/logo.png"
+    icon_size: 48 
 
 
 # For information on the generic Dart part of this file, see the
