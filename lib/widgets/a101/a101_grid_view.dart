@@ -1,7 +1,7 @@
 import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
+import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as constants;
 
 class A101GridView extends StatefulWidget {
   const A101GridView(
@@ -24,7 +24,7 @@ class _A101GridViewState extends State<A101GridView> {
         ),
       ),
       body: Container(
-        color: Constants.A101_COLOR.withOpacity(0.1),
+        color: constants.A101_COLOR.withOpacity(0.1),
         child: FutureBuilder(
           future: A101().getBrochurePageImageUrls(widget.categoryUrl),
           builder: (context, snapshot) {
@@ -49,7 +49,7 @@ class _A101GridViewState extends State<A101GridView> {
                             .pushNamed("/bannerPage", arguments: [
                           brochurePages,
                           index,
-                          Constants.A101_COLOR,
+                          constants.A101_COLOR,
                         ]);
                       },
                       child: Container(

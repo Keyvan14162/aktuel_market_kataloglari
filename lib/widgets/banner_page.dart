@@ -1,9 +1,6 @@
-import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
-import 'package:photo_view/photo_view.dart';
 
 class BannerPage extends StatefulWidget {
   const BannerPage(
@@ -70,11 +67,34 @@ class _BannerPageState extends State<BannerPage> {
                 ),
                 items: widget.brochurePageUrls
                     .map(
-                      (url) => Container(
-                        child: Hero(
-                          tag: url,
-                          child: GestureDetector(
-                            onTap: () {
+                      (url) => Hero(
+                        tag: url,
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.of(context).pushNamed(
+                              "/detailPage",
+                              arguments: [widget.brochurePageUrls, _current],
+                            ).then(
+                              (value) {
+                                if (_current != value as int) {
+                                  setState(() {
+                                    _current = value;
+                                    _controller.jumpToPage(_current);
+                                  });
+                                }
+                              },
+                            );
+                          },
+                          onVerticalDragEnd: (details) {
+                            if (details.primaryVelocity == null) {
+                              return;
+                            }
+                            if (details.primaryVelocity! < 0) {
+                              // up
+                              Navigator.of(context).pop();
+                            }
+                            if (details.primaryVelocity! > 0) {
+                              // down
                               Navigator.of(context).pushNamed(
                                 "/detailPage",
                                 arguments: [widget.brochurePageUrls, _current],
@@ -88,42 +108,14 @@ class _BannerPageState extends State<BannerPage> {
                                   }
                                 },
                               );
-                            },
-                            onVerticalDragEnd: (details) {
-                              if (details.primaryVelocity == null) {
-                                return;
-                              }
-                              if (details.primaryVelocity! < 0) {
-                                // up
-                                Navigator.of(context).pop();
-                              }
-                              if (details.primaryVelocity! > 0) {
-                                // down
-                                Navigator.of(context).pushNamed(
-                                  "/detailPage",
-                                  arguments: [
-                                    widget.brochurePageUrls,
-                                    _current
-                                  ],
-                                ).then(
-                                  (value) {
-                                    if (_current != value as int) {
-                                      setState(() {
-                                        _current = value;
-                                        _controller.jumpToPage(_current);
-                                      });
-                                    }
-                                  },
-                                );
-                              }
-                            },
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.all(
-                                Radius.circular(5.0),
-                              ),
-                              child: imageList[
-                                  widget.brochurePageUrls.indexOf(url)],
+                            }
+                          },
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.all(
+                              Radius.circular(5.0),
                             ),
+                            child:
+                                imageList[widget.brochurePageUrls.indexOf(url)],
                           ),
                         ),
                       ),

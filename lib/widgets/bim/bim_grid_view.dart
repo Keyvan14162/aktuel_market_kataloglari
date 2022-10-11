@@ -1,7 +1,6 @@
-import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
+import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as constants;
 
 class BimGridView extends StatefulWidget {
   const BimGridView(
@@ -22,7 +21,7 @@ class _BimGridViewState extends State<BimGridView> {
         title: Text(widget.date),
       ),
       body: Container(
-        color: Constants.BIM_COLOR.withOpacity(0.1),
+        color: constants.BIM_COLOR.withOpacity(0.1),
         child: GridView.builder(
           itemCount: widget.brochurePages.length,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -40,7 +39,7 @@ class _BimGridViewState extends State<BimGridView> {
                   Navigator.of(context).pushNamed("/bannerPage", arguments: [
                     widget.brochurePages,
                     index,
-                    Constants.BIM_COLOR,
+                    constants.BIM_COLOR,
                   ]);
                 },
                 child: Container(

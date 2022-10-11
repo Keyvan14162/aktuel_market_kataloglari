@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -66,7 +64,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                             padding: const EdgeInsets.all(8.0),
                             child: Image.asset(
                               "assets/images/icon.png",
-                              width: 1000,
+                              height: 140,
                             ),
                           ),
                         ),

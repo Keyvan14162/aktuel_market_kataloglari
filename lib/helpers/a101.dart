@@ -1,5 +1,4 @@
 import 'package:aktuel_urunler_bim_a101_sok/models/a101_banner_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
@@ -47,7 +46,6 @@ class A101 {
     //If the http request is successful the statusCode will be 200
     if (response.statusCode == 200) {
       var document = parse(response.body);
-      var i = 0;
       document.getElementsByClassName("view-area").forEach((element) {
         //   print("${element.children[0].hasChildNodes()} - $i");
         // i++;

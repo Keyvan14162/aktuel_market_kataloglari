@@ -1,4 +1,3 @@
-import 'package:aktuel_urunler_bim_a101_sok/models/bim_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;

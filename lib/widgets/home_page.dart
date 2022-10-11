@@ -7,15 +7,12 @@ import 'package:aktuel_urunler_bim_a101_sok/models/a101_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/bim_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/my_animated_icon.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_menu_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../constants.dart' as Constants;
-import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
