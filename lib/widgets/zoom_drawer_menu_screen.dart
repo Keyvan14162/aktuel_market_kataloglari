@@ -194,9 +194,8 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
     return Flexible(
       child: GestureDetector(
         onTap: () async {
-          if (!await launchUrl(
-            Uri.parse(url),
-          )) {
+          if (!await launchUrl(Uri.parse(url),
+              mode: LaunchMode.externalApplication)) {
             throw "Could not launch ";
           }
         },
