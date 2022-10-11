@@ -24,7 +24,7 @@ class RouteGenerator {
   static Route<dynamic>? routeGenrator(RouteSettings settings) {
     switch (settings.name) {
       case "/":
-        return _generateRoute(HomePage(), settings);
+        return _generateRoute(const HomePage(), settings);
 
       case "/bannerPage":
         return _generateRoute(
