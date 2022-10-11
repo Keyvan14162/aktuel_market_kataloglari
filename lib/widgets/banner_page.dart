@@ -28,11 +28,11 @@ class _BannerPageState extends State<BannerPage> {
   void initState() {
     _current = widget.clickedIndex;
 
-    widget.brochurePageUrls.forEach((url) {
+    for (var url in widget.brochurePageUrls) {
       imageList.add(
         CachedNetworkImage(imageUrl: url),
       );
-    });
+    }
     super.initState();
   }
 
@@ -154,7 +154,7 @@ class _BannerPageState extends State<BannerPage> {
                       shape: BoxShape.circle,
                       color: (Theme.of(context).brightness == Brightness.dark
                               ? Colors.white
-                              : widget.color)
+                              : Theme.of(context).primaryColor)
                           .withOpacity(_current == entry.key ? 0.9 : 0.4),
                     ),
                   ),

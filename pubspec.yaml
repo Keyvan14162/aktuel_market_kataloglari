@@ -1,5 +1,5 @@
 name: aktuel_urunler_bim_a101_sok
-description: A new Flutter project.
+description: A new Flutter project for looking product brochures of supermarkets.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -41,6 +41,8 @@ dependencies:
   carousel_slider: ^4.1.1
   photo_view: ^0.14.0
   cached_network_image: ^3.2.2
+  flutter_zoom_drawer: ^3.0.3
+  url_launcher: ^6.1.6
 
 dev_dependencies:
   flutter_test:

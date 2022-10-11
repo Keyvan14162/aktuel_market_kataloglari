@@ -7,10 +7,13 @@ import 'package:aktuel_urunler_bim_a101_sok/models/a101_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/bim_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/my_animated_icon.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_menu_screen.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_zoom_drawer/config.dart';
+import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import '../constants.dart' as Constants;
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
@@ -86,22 +89,26 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       // Kaldirilabilir
       appBar: AppBar(
         title: Row(
-          children: const [
-            Icon(
-              Icons.shopping_cart,
-              color: Colors.blue,
+          children: [
+            IconButton(
+              onPressed: () {
+                ZoomDrawer.of(context)!.toggle();
+              },
+              icon: const Icon(Icons.menu),
             ),
-            SizedBox(
+            const SizedBox(
               width: 40,
             ),
-            Text(
+            const Text(
               "Aktüel Market Katalogları",
-              style: TextStyle(color: Colors.blue),
+              style: TextStyle(
+                color: Colors.white,
+              ),
             ),
           ],
         ),
-        backgroundColor: Colors.white,
-        elevation: 0,
+        backgroundColor: Theme.of(context).primaryColor,
+        // elevation: 0,
       ),
       body: WillPopScope(
         onWillPop: () {
@@ -147,16 +154,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             children: [
               // icon
               /*
-              Container(
-                color: Colors.white,
-                child: const Center(
-                  child: Icon(
-                    Icons.shopping_cart_checkout_outlined,
-                    size: 300,
+                Container(
+                  color: Colors.white,
+                  child: const Center(
+                    child: Icon(
+                      Icons.shopping_cart_checkout_outlined,
+                      size: 300,
+                    ),
                   ),
                 ),
+                */
+
+              const SizedBox(
+                height: 20,
               ),
-              */
 
               // A 101
               Padding(

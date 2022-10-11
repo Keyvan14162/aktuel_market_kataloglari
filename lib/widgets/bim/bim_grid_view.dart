@@ -18,7 +18,7 @@ class _BimGridViewState extends State<BimGridView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Constants.BIM_COLOR,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(widget.date),
       ),
       body: Container(

@@ -4,6 +4,7 @@ import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_grid_view.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/home_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/bim/bim_grid_view.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/sok/sok_grid_view.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -24,7 +25,7 @@ class RouteGenerator {
   static Route<dynamic>? routeGenrator(RouteSettings settings) {
     switch (settings.name) {
       case "/":
-        return _generateRoute(const HomePage(), settings);
+        return _generateRoute(const ZoomDrawerScreen(), settings);
 
       case "/bannerPage":
         return _generateRoute(

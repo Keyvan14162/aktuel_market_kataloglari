@@ -18,7 +18,7 @@ class _SokGridViewState extends State<SokGridView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Constants.SOK_COLOR,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(widget.title),
       ),
       body: Container(

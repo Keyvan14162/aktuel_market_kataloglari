@@ -1,8 +1,6 @@
 import 'package:aktuel_urunler_bim_a101_sok/route_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:html/parser.dart';
-import 'package:http/http.dart' as http;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +19,8 @@ class MyApp extends StatelessWidget {
       onGenerateRoute: RouteGenerator.routeGenrator,
       title: 'Aktüel Ürünler - Bim A101 Şok',
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.teal,
+        primaryColor: const Color(0xFF3B4257),
       ),
     );
   }

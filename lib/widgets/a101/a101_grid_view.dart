@@ -2,8 +2,6 @@ import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
-import 'package:hexcolor/hexcolor.dart';
-import 'package:shimmer/shimmer.dart';
 
 class A101GridView extends StatefulWidget {
   const A101GridView(
@@ -20,7 +18,7 @@ class _A101GridViewState extends State<A101GridView> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Constants.A101_COLOR,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           widget.date,
         ),
