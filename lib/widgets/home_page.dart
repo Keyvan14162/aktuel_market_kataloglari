@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
 import 'package:aktuel_urunler_bim_a101_sok/helpers/bim.dart';
@@ -49,9 +50,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   bool bimIsAnimated = false;
   bool sokIsAnimated = false;
 
+  late StreamSubscription<InternetConnectionStatus> internetConnectionListener;
+
   @override
   void initState() {
     super.initState();
+
+    internetConnectionListener =
+        InternetConnectionChecker().onStatusChange.listen((status) {
+      print(status);
+      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      setState(() {});
+    });
+
     a101IconController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
     a101IconController.forward().then((value) async {
@@ -76,6 +87,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   void dispose() {
+    internetConnectionListener.cancel();
     a101IconController.dispose();
     bimIconController.dispose();
     sokIconController.dispose();
@@ -84,17 +96,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    var isDeviceConnected = false;
-
-    var subscription = Connectivity()
-        .onConnectivityChanged
-        .listen((ConnectivityResult result) async {
-      if (result != ConnectivityResult.none) {
-        isDeviceConnected = await InternetConnectionChecker().hasConnection;
-        print(result);
-        print("--------");
-      }
-    });
+    connectionStatusSnackbar();
     return Scaffold(
       // Kaldirilabilir
       appBar: AppBar(
@@ -841,5 +843,31 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             ),
           )
         : const SizedBox();
+  }
+
+  connectionStatusSnackbar() async {
+    await (InternetConnectionChecker().hasConnection).then((value) {
+      if (!value) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            duration: const Duration(seconds: 100),
+            backgroundColor: Colors.white,
+            content: const Text(
+              "İnternet Bağlantısı Bulunamadı",
+              style: TextStyle(
+                color: Colors.black,
+              ),
+            ),
+            action: SnackBarAction(
+              label: 'Yenile',
+              onPressed: () {
+                ScaffoldMessenger.of(context).hideCurrentSnackBar;
+                setState(() {});
+              },
+            ),
+          ),
+        );
+      }
+    });
   }
 }
