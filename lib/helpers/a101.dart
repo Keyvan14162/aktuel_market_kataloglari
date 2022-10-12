@@ -11,11 +11,10 @@ class A101 {
     //If the http request is successful the statusCode will be 200
     if (response.statusCode == 200) {
       var document = parse(response.body);
-      document
+      for (var li in document
           .getElementsByClassName("brochures-list")[0]
           .children[0]
-          .children
-          .forEach((li) {
+          .children) {
         bannerElements.add(
           A101BannerModel(
             // category url
@@ -28,7 +27,7 @@ class A101 {
             li.children[0].children[1].text.trim(),
           ),
         );
-      });
+      }
 
       return bannerElements;
     } else {

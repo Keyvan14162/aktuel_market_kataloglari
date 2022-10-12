@@ -24,7 +24,7 @@ class _A101GridViewState extends State<A101GridView> {
         ),
       ),
       body: Container(
-        color: constants.A101_COLOR.withOpacity(0.1),
+        color: constants.a101Color.withOpacity(0.1),
         child: FutureBuilder(
           future: A101().getBrochurePageImageUrls(widget.categoryUrl),
           builder: (context, snapshot) {
@@ -49,7 +49,7 @@ class _A101GridViewState extends State<A101GridView> {
                             .pushNamed("/bannerPage", arguments: [
                           brochurePages,
                           index,
-                          constants.A101_COLOR,
+                          constants.a101Color,
                         ]);
                       },
                       child: Container(

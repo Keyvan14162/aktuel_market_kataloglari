@@ -21,7 +21,7 @@ class _BimGridViewState extends State<BimGridView> {
         title: Text(widget.date),
       ),
       body: Container(
-        color: constants.BIM_COLOR.withOpacity(0.1),
+        color: constants.bimColor.withOpacity(0.1),
         child: GridView.builder(
           itemCount: widget.brochurePages.length,
           gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -39,7 +39,7 @@ class _BimGridViewState extends State<BimGridView> {
                   Navigator.of(context).pushNamed("/bannerPage", arguments: [
                     widget.brochurePages,
                     index,
-                    constants.BIM_COLOR,
+                    constants.bimColor,
                   ]);
                 },
                 child: Container(

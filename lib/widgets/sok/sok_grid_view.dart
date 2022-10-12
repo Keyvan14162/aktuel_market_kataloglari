@@ -1,8 +1,7 @@
-import 'package:aktuel_urunler_bim_a101_sok/helpers/a101.dart';
 import 'package:aktuel_urunler_bim_a101_sok/helpers/sok.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as Constants;
+import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as constants;
 
 class SokGridView extends StatefulWidget {
   const SokGridView({required this.pageUrl, required this.title, super.key});
@@ -22,7 +21,7 @@ class _SokGridViewState extends State<SokGridView> {
         title: Text(widget.title),
       ),
       body: Container(
-        color: Constants.SOK_COLOR.withOpacity(0.1),
+        color: constants.sokColor.withOpacity(0.1),
         child: FutureBuilder(
           future: Sok().getSokBrochurePageImgUrls(widget.pageUrl),
           builder: (context, snapshot) {
@@ -47,7 +46,7 @@ class _SokGridViewState extends State<SokGridView> {
                             .pushNamed("/bannerPage", arguments: [
                           brochurePages,
                           index,
-                          Constants.SOK_COLOR,
+                          constants.sokColor,
                         ]);
                       },
                       child: Container(

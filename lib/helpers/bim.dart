@@ -12,10 +12,8 @@ class Bim {
       List<BimBannerModel> banners = [];
       var document = parse(response.body);
 
-      document
-          .getElementsByClassName("no-gutters")[1]
-          .children
-          .forEach((element) {
+      for (var element
+          in document.getElementsByClassName("no-gutters")[1].children) {
         // gecen hafta
         try {
           if (element.className.contains("grup1")) {
@@ -87,7 +85,7 @@ class Bim {
         } catch (e) {
           print("Bim sayfalar cekilirken hata");
         }
-      });
+      }
 
       return banners;
     }

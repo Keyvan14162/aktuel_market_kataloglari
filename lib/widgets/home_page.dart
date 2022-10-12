@@ -9,14 +9,12 @@ import 'package:aktuel_urunler_bim_a101_sok/models/bim_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/my_animated_icon.dart';
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../constants.dart' as constants;
-import 'package:http/http.dart' as http;
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -31,6 +29,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
       const EdgeInsets.fromLTRB(10, 10, 0, 10);
 
   var animationDuration = 500;
+
+  double openedHeight = 300;
 
   var sokShow = false;
   var sokTopPadding = 0.0;
@@ -190,7 +190,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: a101HomePageItem(),
                 ),
               ),
-              showBottomLine(a101Show, constants.A101_COLOR),
+              showBottomLine(a101Show, constants.a101Color),
 
               // BİM
               Padding(
@@ -214,7 +214,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: bimHomePageItem(),
                 ),
               ),
-              showBottomLine(bimShow, constants.BIM_COLOR),
+              showBottomLine(bimShow, constants.bimColor),
 
               // Sok
               Padding(
@@ -238,7 +238,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   child: sokHomePageItem(context),
                 ),
               ),
-              showBottomLine(sokShow, constants.SOK_COLOR),
+              showBottomLine(sokShow, constants.sokColor),
             ],
           ),
         ),
@@ -263,7 +263,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
                 return sokShow
                     ? Container(
-                        height: 300,
+                        height: openedHeight,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -301,7 +301,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 3,
                                         height: 40,
                                         decoration: const BoxDecoration(
-                                          color: constants.SOK_COLOR,
+                                          color: constants.sokColor,
                                           borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(12),
                                             bottomRight: Radius.circular(12),
@@ -378,7 +378,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             width: MediaQuery.of(context).size.width - 20,
                             height: 8,
                             decoration: BoxDecoration(
-                              color: constants.SOK_COLOR,
+                              color: constants.sokColor,
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -416,7 +416,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     width: MediaQuery.of(context).size.width / 4,
                     padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
                     decoration: const BoxDecoration(
-                      color: constants.SOK_COLOR,
+                      color: constants.sokColor,
                       borderRadius: BorderRadius.all(
                         Radius.circular(12),
                       ),
@@ -435,7 +435,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w900,
-                            color: constants.SOK_COLOR,
+                            color: constants.sokColor,
                           ),
                           maxLines: 1,
                         ),
@@ -473,7 +473,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
                 return bimShow
                     ? Container(
-                        height: 300,
+                        height: openedHeight,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -509,7 +509,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                                                 2,
                                         height: 40,
                                         decoration: const BoxDecoration(
-                                          color: constants.BIM_COLOR,
+                                          color: constants.bimColor,
                                           borderRadius: BorderRadius.only(
                                             bottomLeft: Radius.circular(12),
                                             bottomRight: Radius.circular(12),
@@ -587,7 +587,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                               width: MediaQuery.of(context).size.width - 20,
                               height: 8,
                               decoration: BoxDecoration(
-                                color: constants.BIM_COLOR,
+                                color: constants.bimColor,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                             ),
@@ -635,7 +635,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w900,
-                            color: constants.BIM_COLOR,
+                            color: constants.bimColor,
                           ),
                           maxLines: 1,
                         ),
@@ -673,7 +673,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
                 return a101Show
                     ? Container(
-                        height: 300,
+                        height: openedHeight,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
                           shrinkWrap: true,
@@ -764,7 +764,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             width: MediaQuery.of(context).size.width - 20,
                             height: 8,
                             decoration: BoxDecoration(
-                              color: constants.A101_COLOR,
+                              color: constants.a101Color,
                               borderRadius: BorderRadius.circular(10),
                             ),
                           ),
@@ -809,7 +809,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                           style: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.w900,
-                            color: constants.A101_COLOR,
+                            color: constants.a101Color,
                           ),
                           maxLines: 1,
                         ),
