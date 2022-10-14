@@ -12,6 +12,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../constants.dart' as constants;
@@ -246,6 +247,73 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     );
   }
 
+  createHomaPageItem(
+    onTapFunc,
+    Color color,
+    String iconAssetPath,
+    String text,
+    Widget animatedIcon,
+  ) {
+    return GestureDetector(
+      // ontap
+      onTap: () {
+        setState(onTapFunc);
+      },
+      child: Container(
+        color: Colors.white,
+        height: headerHeight,
+        child: Padding(
+          padding: headerPadding,
+          child: Row(
+            children: [
+              // logo
+              Container(
+                width: MediaQuery.of(context).size.width / 4,
+                padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+                decoration: BoxDecoration(
+                  color: text.contains("BİM") || text.contains("A101")
+                      ? Colors.white
+                      : color,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ),
+                child: Image.asset(
+                  iconAssetPath,
+                ),
+              ),
+              // text
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      text,
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w900,
+                        color: color,
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
+                ),
+              ),
+              // Buton
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: animatedIcon,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // I didnt use expans,on tile bcs
+  // i couldnt make it slidable
   Stack sokHomePageItem(BuildContext context) {
     return Stack(
       children: [
@@ -394,63 +462,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             },
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              MyAnimatedIcon()
-                  .animateIcon("sok", sokIconController, sokIsAnimated);
-              sokIsAnimated = !sokIsAnimated;
-              sokShow = !sokShow;
-              sokTopPadding = sokTopPadding == 0 ? headerHeight : 0.0;
-              sokBottomPadding = sokBottomPadding == 0 ? 10 : 0.0;
-            });
+        createHomaPageItem(
+          () {
+            MyAnimatedIcon()
+                .animateIcon("sok", sokIconController, sokIsAnimated);
+            sokIsAnimated = !sokIsAnimated;
+            sokShow = !sokShow;
+            sokTopPadding = sokTopPadding == 0 ? headerHeight : 0.0;
+            sokBottomPadding = sokBottomPadding == 0 ? 10 : 0.0;
           },
-          child: Container(
-            color: Colors.white,
-            height: headerHeight,
-            child: Padding(
-              padding: headerPadding,
-              child: Row(
-                children: [
-                  Container(
-                    width: MediaQuery.of(context).size.width / 4,
-                    padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
-                    decoration: const BoxDecoration(
-                      color: constants.sokColor,
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(12),
-                      ),
-                    ),
-                    child: Image.asset(
-                      "assets/images/sok_logo.png",
-                    ),
-                  ),
-                  const Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          "ŞOK Güncel Katalogları",
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.w900,
-                            color: constants.sokColor,
-                          ),
-                          maxLines: 1,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: MyAnimatedIcon()
-                        .animatedIconButton("sok", sokIconController),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          constants.sokColor,
+          "assets/images/sok_logo.png",
+          "ŞOK Güncel Katalogları",
+          MyAnimatedIcon().animatedIconButton("sok", sokIconController),
         ),
       ],
     );
@@ -604,54 +628,20 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             },
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              MyAnimatedIcon()
-                  .animateIcon("bim", bimIconController, bimIsAnimated);
-              bimIsAnimated = !bimIsAnimated;
-              bimShow = !bimShow;
-              bimTopPadding = bimTopPadding == 0 ? headerHeight : 0.0;
-              bimBottomPadding = bimBottomPadding == 0 ? 10 : 0.0;
-            });
+        createHomaPageItem(
+          () {
+            MyAnimatedIcon()
+                .animateIcon("bim", bimIconController, bimIsAnimated);
+            bimIsAnimated = !bimIsAnimated;
+            bimShow = !bimShow;
+            bimTopPadding = bimTopPadding == 0 ? headerHeight : 0.0;
+            bimBottomPadding = bimBottomPadding == 0 ? 10 : 0.0;
           },
-          child: Container(
-            color: Colors.white,
-            height: headerHeight,
-            child: Padding(
-              padding: headerPadding,
-              child: Row(
-                children: [
-                  Image.asset(
-                    "assets/images/bim_logo.png",
-                  ),
-                  const Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          "BİM Güncel Katalogları",
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.w900,
-                            color: constants.bimColor,
-                          ),
-                          maxLines: 1,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: MyAnimatedIcon()
-                        .animatedIconButton("bim", bimIconController),
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
+          constants.bimColor,
+          "assets/images/bim_logo.png",
+          "BİM Güncel Katalogları",
+          MyAnimatedIcon().animatedIconButton("bim", bimIconController),
+        )
       ],
     );
   }
@@ -780,51 +770,19 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             },
           ),
         ),
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              MyAnimatedIcon()
-                  .animateIcon("a101", a101IconController, a101IsAnimated);
-              a101IsAnimated = !a101IsAnimated;
-              a101Show = !a101Show;
-              a101TopPadding = a101TopPadding == 0 ? headerHeight : 0.0;
-              a101BottomPadding = a101BottomPadding == 0 ? 10 : 0.0;
-            });
+        createHomaPageItem(
+          () {
+            MyAnimatedIcon()
+                .animateIcon("a101", a101IconController, a101IsAnimated);
+            a101IsAnimated = !a101IsAnimated;
+            a101Show = !a101Show;
+            a101TopPadding = a101TopPadding == 0 ? headerHeight : 0.0;
+            a101BottomPadding = a101BottomPadding == 0 ? 10 : 0.0;
           },
-          child: Container(
-            color: Colors.white,
-            height: headerHeight,
-            child: Padding(
-              padding: headerPadding,
-              child: Row(
-                children: [
-                  Image.asset("assets/images/a101_logo.png"),
-                  const Flexible(
-                    child: Padding(
-                      padding: EdgeInsets.all(8.0),
-                      child: FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child: Text(
-                          "A·101 Güncel Katalogları",
-                          style: TextStyle(
-                            fontSize: 32,
-                            fontWeight: FontWeight.w900,
-                            color: constants.a101Color,
-                          ),
-                          maxLines: 1,
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: MyAnimatedIcon()
-                        .animatedIconButton("a101", a101IconController),
-                  ),
-                ],
-              ),
-            ),
-          ),
+          constants.a101Color,
+          "assets/images/a101_logo.png",
+          "A101 Güncel Katalogları",
+          MyAnimatedIcon().animatedIconButton("a101", a101IconController),
         ),
       ],
     );
