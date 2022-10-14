@@ -10,6 +10,7 @@ import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/my_animated_icon.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_launcher_icons/xml_templates.dart';
@@ -60,7 +61,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
     internetConnectionListener =
         InternetConnectionChecker().onStatusChange.listen((status) {
       print(status);
-      ScaffoldMessenger.of(context).hideCurrentSnackBar();
+      ScaffoldMessenger.of(context).clearSnackBars();
       setState(() {});
     });
 
@@ -181,6 +182,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     ),
                     boxShadow: [
                       BoxShadow(
+                        // 0.4 5 7 0.3
                         color: Colors.grey.withOpacity(0.4),
                         spreadRadius: 5,
                         blurRadius: 7,
@@ -240,70 +242,10 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                 ),
               ),
               showBottomLine(sokShow, constants.sokColor),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
-  createHomaPageItem(
-    onTapFunc,
-    Color color,
-    String iconAssetPath,
-    String text,
-    Widget animatedIcon,
-  ) {
-    return GestureDetector(
-      // ontap
-      onTap: () {
-        setState(onTapFunc);
-      },
-      child: Container(
-        color: Colors.white,
-        height: headerHeight,
-        child: Padding(
-          padding: headerPadding,
-          child: Row(
-            children: [
-              // logo
-              Container(
-                width: MediaQuery.of(context).size.width / 4,
-                padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
-                decoration: BoxDecoration(
-                  color: text.contains("BİM") || text.contains("A101")
-                      ? Colors.white
-                      : color,
-                  borderRadius: const BorderRadius.all(
-                    Radius.circular(12),
-                  ),
-                ),
-                child: Image.asset(
-                  iconAssetPath,
-                ),
-              ),
-              // text
-              Flexible(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: FittedBox(
-                    fit: BoxFit.scaleDown,
-                    child: Text(
-                      text,
-                      style: TextStyle(
-                        fontSize: 32,
-                        fontWeight: FontWeight.w900,
-                        color: color,
-                      ),
-                      maxLines: 1,
-                    ),
-                  ),
-                ),
-              ),
-              // Buton
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: animatedIcon,
+              // for creating a gap on the bottom
+              const SizedBox(
+                height: 100,
               ),
             ],
           ),
@@ -803,6 +745,71 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         : const SizedBox();
   }
 
+  createHomaPageItem(
+    onTapFunc,
+    Color color,
+    String iconAssetPath,
+    String text,
+    Widget animatedIcon,
+  ) {
+    return GestureDetector(
+      // ontap
+      onTap: () {
+        setState(onTapFunc);
+      },
+      child: Container(
+        color: Colors.white,
+        height: headerHeight,
+        child: Padding(
+          padding: headerPadding,
+          child: Row(
+            children: [
+              // logo
+              Container(
+                width: MediaQuery.of(context).size.width / 4,
+                padding: const EdgeInsets.fromLTRB(0, 2, 0, 2),
+                decoration: BoxDecoration(
+                  color: text.contains("BİM") || text.contains("A101")
+                      ? Colors.white
+                      : color,
+                  borderRadius: const BorderRadius.all(
+                    Radius.circular(12),
+                  ),
+                ),
+                child: Image.asset(
+                  iconAssetPath,
+                ),
+              ),
+              // text
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      text,
+                      style: TextStyle(
+                        fontSize: 32,
+                        fontWeight: FontWeight.w900,
+                        color: color,
+                      ),
+                      maxLines: 1,
+                    ),
+                  ),
+                ),
+              ),
+              // Buton
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: animatedIcon,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
   connectionStatusSnackbar() async {
     await (InternetConnectionChecker().hasConnection).then((value) {
       if (!value) {
@@ -819,7 +826,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
             action: SnackBarAction(
               label: 'Yenile',
               onPressed: () {
-                ScaffoldMessenger.of(context).hideCurrentSnackBar;
                 setState(() {});
               },
             ),

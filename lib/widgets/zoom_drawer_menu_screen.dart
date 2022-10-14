@@ -1,4 +1,8 @@
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -78,11 +82,37 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
               Column(
                 children: [
                   createDrawerMenuItem(
-                      Icons.star, Colors.yellow, "Uygulamayı Puanla"),
-                  createDrawerMenuItem(Icons.email,
-                      Theme.of(context).primaryColor, "Market İsteği Bildir"),
-                  createDrawerMenuItem(Icons.exit_to_app,
-                      Theme.of(context).primaryColor, "Çıkış"),
+                    Icons.star,
+                    Colors.yellow,
+                    "Uygulamayı Puanla",
+                    () {},
+                  ),
+                  createDrawerMenuItem(
+                    Icons.email,
+                    Theme.of(context).primaryColor,
+                    "Market İsteği Bildir",
+                    () async {
+                      if (!await launchUrl(
+                        Uri.parse(
+                            "mailto:ismailkyvsn2000@gmail.com?subject=Merhaba%20!&body="),
+                        mode: LaunchMode.externalApplication,
+                      )) {
+                        throw "Could not launch ";
+                      }
+                    },
+                  ),
+                  createDrawerMenuItem(
+                    Icons.exit_to_app,
+                    Theme.of(context).primaryColor,
+                    "Çıkış",
+                    () {
+                      if (defaultTargetPlatform == TargetPlatform.android) {
+                        SystemNavigator.pop();
+                      } else {
+                        exit(0);
+                      }
+                    },
+                  ),
                 ],
               ),
             ],
@@ -117,7 +147,27 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                 children: [
                   GestureDetector(
                     onTap: () async {
-                      // show about message to user
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Center(
+                              child: Text("Aktüel Market Katalogları"),
+                            ),
+                            content: const Text(
+                              "Bim, A101 ve Şok marketleri aktüel kataloglarını canlı olarak takip edebilmeniz için geliştirilmiş bir uygulamadır. Uygulama kişisel verilerinize erişim izni istemez, kişisel verilerinizi göremez, kullanamaz yada değiştiremez. Uygulamamıza destek vermek için yorum yapmayı ve puanlamayı unutmayınız!\n\n İyi alışverişler dileriz...",
+                            ),
+                            actions: [
+                              TextButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: const Text("Tamam"),
+                              ),
+                            ],
+                          );
+                        },
+                      );
                     },
                     child: Row(
                       children: [
@@ -150,43 +200,49 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
     );
   }
 
-  createDrawerMenuItem(IconData icon, Color iconColor, String text) {
-    return Column(
-      children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
-              child: Icon(
-                icon,
-                color: iconColor,
+  createDrawerMenuItem(
+      IconData icon, Color iconColor, String text, onPressedFunc) {
+    return GestureDetector(
+      onTap: () {
+        onPressedFunc();
+      },
+      child: Column(
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Padding(
+                padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
+                child: Icon(
+                  icon,
+                  color: iconColor,
+                ),
               ),
-            ),
-            Flexible(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(2, 8, 8, 8),
-                child: FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child: Text(
-                    text,
-                    style: const TextStyle(color: Colors.white),
-                    maxLines: 1,
+              Flexible(
+                child: Padding(
+                  padding: const EdgeInsets.fromLTRB(2, 8, 8, 8),
+                  child: FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      text,
+                      style: const TextStyle(color: Colors.white),
+                      maxLines: 1,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width / 2,
-          height: 1,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
+            ],
           ),
-        ),
-      ],
+          Container(
+            width: MediaQuery.of(context).size.width / 2,
+            height: 1,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+          ),
+        ],
+      ),
     );
   }
 
