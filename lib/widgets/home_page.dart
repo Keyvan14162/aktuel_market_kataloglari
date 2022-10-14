@@ -10,10 +10,8 @@ import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/my_animated_icon.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_launcher_icons/xml_templates.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import '../constants.dart' as constants;
@@ -60,7 +58,6 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
 
     internetConnectionListener =
         InternetConnectionChecker().onStatusChange.listen((status) {
-      print(status);
       ScaffoldMessenger.of(context).clearSnackBars();
       setState(() {});
     });

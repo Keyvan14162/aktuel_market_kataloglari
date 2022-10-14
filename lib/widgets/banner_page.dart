@@ -110,6 +110,21 @@ class _BannerPageState extends State<BannerPage> {
                               );
                             }
                           },
+                          onScaleStart: (details) {
+                            Navigator.of(context).pushNamed(
+                              "/detailPage",
+                              arguments: [widget.brochurePageUrls, _current],
+                            ).then(
+                              (value) {
+                                if (_current != value as int) {
+                                  setState(() {
+                                    _current = value;
+                                    _controller.jumpToPage(_current);
+                                  });
+                                }
+                              },
+                            );
+                          },
                           child: ClipRRect(
                             borderRadius: const BorderRadius.all(
                               Radius.circular(5.0),

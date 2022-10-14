@@ -51,6 +51,8 @@ class _DetailPageState extends State<DetailPage> {
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: (BuildContext context, int index) {
                   return PhotoViewGalleryPageOptions(
+                    maxScale: PhotoViewComputedScale.covered,
+                    initialScale: PhotoViewComputedScale.contained,
                     imageProvider:
                         CachedNetworkImageProvider(widget.imageUrls[index]),
                     heroAttributes:

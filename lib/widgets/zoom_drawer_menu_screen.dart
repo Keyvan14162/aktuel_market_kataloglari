@@ -145,8 +145,8 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  GestureDetector(
-                    onTap: () async {
+                  InkWell(
+                    onTap: () {
                       showDialog(
                         context: context,
                         builder: (context) {
@@ -202,7 +202,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
 
   createDrawerMenuItem(
       IconData icon, Color iconColor, String text, onPressedFunc) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onPressedFunc();
       },
