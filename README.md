@@ -1,5 +1,5 @@
-# aktuel_urunler_bim_a101_sok
-Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği bir uygulama.
+# AKTUEL MARKET KATALOGLARI
+Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, katalogların kolayca takip edilebileceği bir uygulama.
 
 ## Getting Started
 
