@@ -3,7 +3,7 @@ Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, kataloglar�
 
 <p> <img src="./logos/1024.png" width="350" title="hover text"> </p>
 
-![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
+[![Keyvan14162's GitHub stats](https://github-readme-stats.vercel.app/api?username=Keyvan14162)](https://github.com/anuraghazra/github-readme-stats)
 
 
 # Ana Sayfa
@@ -39,7 +39,7 @@ Afişi yakınlaştırın, ürünleri daha yakından inceleyin：
 # Drawer
 > ZoomDrawer
 
-FDaha fazla seçenek ve iletişim için drawer menü'yü kullanın：
+Daha fazla seçenek ve iletişim için drawer menü'yü kullanın：
 
 <p> <img src="./logos/5.jpg" width="350" height="710" title="hover text"> </p>
 
