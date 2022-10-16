@@ -13,6 +13,7 @@ Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, kataloglar�
 Kullanışlı ve basit bir arayüz, bütün marketlere tek ekrandan ulaşın ve hangi katalogların yayınlandığını görün：
 
 <p> <img src="./logos/1.jpg" width="350" height="710" title="hover text"> </p>
+
 # Katalog Sayfaları
 
 > GridView.builder
