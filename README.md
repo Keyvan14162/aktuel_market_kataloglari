@@ -1,15 +1,47 @@
-# AKTUEL MARKET KATALOGLARI
+# AKTÜEL MARKET KATALOGLARI
 Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, katalogların kolayca takip edilebileceği bir uygulama.
 
-## Getting Started
+![](./logos/1024.png)
 
-This project is a starting point for a Flutter application.
+![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
 
-A few resources to get you started if this is your first Flutter project:
+**目录 (Table of Contents)**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+[TOCM]
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+[TOC]
+
+# Ana Sayfa
+
+adadadadas (Image + Link)：
+
+[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+
+# Katalog Sayfaları
+> asdadasdasd
+
+adadadadas (Image + Link)：
+
+[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+
+# Afiş Sayfası
+
+adadadadas (Image + Link)：
+
+[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+
+# Detay Sayfası
+> asdadasdasd
+
+adadadadas (Image + Link)：
+
+[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+
+# Drawer
+> asdadasdasd
+
+adadadadas (Image + Link)：
+
+[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+
+> asdadadasdas
