@@ -3,7 +3,12 @@ Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, kataloglar�
 
 <p> <img src="./logos/1024.png" width="350" title="hover text"> </p>
 
-[![Keyvan14162's GitHub stats](https://github-readme-stats.vercel.app/api?username=Keyvan14162)](https://github.com/anuraghazra/github-readme-stats)
+<a href="https://github.com/Keyvan14162/aktuel_market_kataloglari/stargazers"><img src="https://img.shields.io/github/stars/Keyvan14162/aktuel_market_kataloglari" alt="Stars Badge"/></a>
+<a href="https://github.com/Keyvan14162/aktuel_market_kataloglari/network/members"><img src="https://img.shields.io/github/forks/Keyvan14162/aktuel_market_kataloglari" alt="Forks Badge"/></a>
+<a href="https://github.com/Keyvan14162/aktuel_market_kataloglari/pulls"><img src="https://img.shields.io/github/issues-pr/Keyvan14162/aktuel_market_kataloglari" alt="Pull Requests Badge"/></a>
+<a href="https://github.com/Keyvan14162/aktuel_market_kataloglari/issues"><img src="https://img.shields.io/github/issues/Keyvan14162/aktuel_market_kataloglari" alt="Issues Badge"/></a>
+<a href="https://github.com/Keyvan14162/aktuel_market_kataloglari/graphs/contributors"><img alt="GitHub contributors" src="https://img.shields.io/github/contributors/Keyvan14162/awesome-github-profile-readme?color=2b9348"></a>
+<a href="https://github.com/Keyvan14162/aktuel_market_kataloglari/blob/master/LICENSE"><img src="https://img.shields.io/github/license/abhisheknaiidu/aktuel_market_kataloglari?color=2b9348" alt="License Badge"/></a>
 
 
 # Ana Sayfa
