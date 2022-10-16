@@ -15,11 +15,15 @@ class DetailPage extends StatefulWidget {
 class _DetailPageState extends State<DetailPage> {
   late PageController _pageController;
   int _current = 0;
+  late PhotoViewController _photoViewController;
+  late PhotoViewScaleStateController _photoViewScaleStateController;
 
   @override
   void initState() {
     _current = widget.clickedIndex;
     _pageController = PageController(initialPage: _current);
+    _photoViewController = PhotoViewController();
+    _photoViewScaleStateController = PhotoViewScaleStateController();
     super.initState();
   }
 
@@ -51,7 +55,19 @@ class _DetailPageState extends State<DetailPage> {
                 scrollPhysics: const BouncingScrollPhysics(),
                 builder: (BuildContext context, int index) {
                   return PhotoViewGalleryPageOptions(
-                    maxScale: PhotoViewComputedScale.covered,
+                    controller: _photoViewController,
+                    // maxScale: PhotoViewComputedScale.covered,
+                    minScale: PhotoViewComputedScale.contained,
+                    scaleStateController: _photoViewScaleStateController,
+                    onScaleEnd: (context, details, controllerValue) {
+                      // if user zoomed out on initial position, go back
+                      if (_photoViewScaleStateController.prevScaleState ==
+                              PhotoViewScaleState.initial &&
+                          _photoViewScaleStateController.scaleState ==
+                              PhotoViewScaleState.zoomedOut) {
+                        Navigator.of(context).pop(_current);
+                      }
+                    },
                     initialScale: PhotoViewComputedScale.contained,
                     imageProvider:
                         CachedNetworkImageProvider(widget.imageUrls[index]),
