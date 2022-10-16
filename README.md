@@ -1,7 +1,7 @@
 # AKTÜEL MARKET KATALOGLARI
 Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, katalogların kolayca takip edilebileceği bir uygulama.
 
-![](./logos/1024.png width="200" height="200")
+![](./logos/1024.png = 200x200)
 
 ![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
 
