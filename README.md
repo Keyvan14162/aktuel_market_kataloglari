@@ -12,32 +12,36 @@ Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, kataloglar�
 
 Kullanışlı ve basit bir arayüz, bütün marketlere tek ekrandan ulaşın ve hangi katalogların yayınlandığını görün：
 
-![](./logos/1.jpg  width="350" height="350")
+<p> <img src="./logos/1024.png" width="350" title="hover text"> </p>
 # Katalog Sayfaları
 > GridView.builder
 
 Seçilen kataloğun tüm sayfalarını tek ekranda görün ve istediklerinizi daha yakından inceleyin：
 
-![](./logos/2.jpg  width="350" height="350")
+<p> <img src="./logos/1024.png" width="350" title="hover text"> </p>
+
 
 # Afiş Sayfası
 
 Afişler arasında kolayca gezinin ve daha detaylı incelemek için tıklayın：
 > CarouselSlider
 
-![](./logos/3.jpg  width="350" height="350")
+<p> <img src="./logos/1024.png" width="350" title="hover text"> </p>
+
 
 # Detay Sayfası
 > PhotoViewGallery.builder
 
 Afişi yakınlaştırın, ürünleri daha yakından inceleyin：
 
-![](https://pandao.github.io/editor.md/examples/images/7.jpg  width="350" height="350")
+<p> <img src="./logos/1024.png" width="350" title="hover text"> </p>
+
 
 # Drawer
 > ZoomDrawer
 
 FDaha fazla seçenek ve iletişim için drawer menü'yü kullanın：
 
-![](./logos/1.jpg  width="350" height="350")
+<p> <img src="./logos/1024.png" width="350" title="hover text"> </p>
+
 
