@@ -1,42 +1,43 @@
 # AKTÜEL MARKET KATALOGLARI
 Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, katalogların kolayca takip edilebileceği bir uygulama.
 
-<a href="url"><img src="./logos/1024.png" align="left" height="306" width="306" ></a>
+<p align="center"> <img src="https://pandao.github.io/editor.md/examples/images/7.jpg" width="350" title="hover text"> </p>
 
 ![](https://img.shields.io/github/stars/pandao/editor.md.svg) ![](https://img.shields.io/github/forks/pandao/editor.md.svg) ![](https://img.shields.io/github/tag/pandao/editor.md.svg) ![](https://img.shields.io/github/release/pandao/editor.md.svg) ![](https://img.shields.io/github/issues/pandao/editor.md.svg) ![](https://img.shields.io/bower/v/editor.md.svg)
 
 
 # Ana Sayfa
+> AnimatedPadding
+> CachedNetworkImage
 
-adadadadas (Image + Link)：
+Kullanışlı ve basit bir arayüz, bütün marketlere tek ekrandan ulaşın ve hangi katalogların yayınlandığını görün：
 
-[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
-
+![](https://pandao.github.io/editor.md/examples/images/7.jpg)
 # Katalog Sayfaları
-> asdadasdasd
+> GridView.builder
 
-adadadadas (Image + Link)：
+Seçilen kataloğun tüm sayfalarını tek ekranda görün ve istediklerinizi daha yakından inceleyin：
 
-[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+![](https://pandao.github.io/editor.md/examples/images/7.jpg)
 
 # Afiş Sayfası
 
-adadadadas (Image + Link)：
+Afişler arasında kolayca gezinin ve daha detaylı incelemek için tıklayın：
+> CarouselSlider
 
-[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+![](https://pandao.github.io/editor.md/examples/images/7.jpg)
 
 # Detay Sayfası
-> asdadasdasd
+> PhotoViewGallery.builder
 
-adadadadas (Image + Link)：
+Afişi yakınlaştırın, ürünleri daha yakından inceleyin：
 
-[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+![](https://pandao.github.io/editor.md/examples/images/7.jpg)
 
 # Drawer
-> asdadasdasd
+> ZoomDrawer
 
-adadadadas (Image + Link)：
+FDaha fazla seçenek ve iletişim için drawer menü'yü kullanın：
 
-[![](https://pandao.github.io/editor.md/examples/images/7.jpg)](https://pandao.github.io/editor.md/images/7.jpg "李健首张专辑《似水流年》封面")
+![](https://pandao.github.io/editor.md/examples/images/7.jpg)
 
-> asdadadasdas
