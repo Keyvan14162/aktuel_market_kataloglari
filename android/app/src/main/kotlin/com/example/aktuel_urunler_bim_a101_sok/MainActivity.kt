@@ -1,4 +1,4 @@
-package com.example.aktuel_urunler_bim_a101_sok
+package com.ismailkeyvan.aktuel_urunler_bim_a101_sok
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -85,7 +85,15 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                     Icons.star,
                     Colors.yellow,
                     "Uygulamayı Puanla",
-                    () {},
+                    () async {
+                      if (!await launchUrl(
+                        Uri.parse(
+                            "https://play.google.com/store/apps/details?id=com.ismailkeyvan.aktuel_urunler_bim_a101_sok"),
+                        mode: LaunchMode.externalApplication,
+                      )) {
+                        throw "Could not launch ";
+                      }
+                    },
                   ),
                   createDrawerMenuItem(
                     Icons.email,
