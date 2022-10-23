@@ -21,7 +21,6 @@ if (flutterVersionName == null) {
     flutterVersionName = '1.0'
 }
 
-android.buildTypes.release.ndk.debugSymbolLevel = { SYMBOL_TABLE | FULL }
 
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
@@ -85,3 +84,5 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$kotlin_version"
     implementation 'androidx.work:work-runtime-ktx:2.7.0'
 }
+
+android.buildTypes.release.ndk.debugSymbolLevel = 'FULL'
