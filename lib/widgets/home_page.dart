@@ -97,8 +97,12 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
   Widget build(BuildContext context) {
     connectionStatusSnackbar();
     return Scaffold(
-      // Kaldirilabilir
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          statusBarColor: Colors.white70,
+        ),
+
         title: Row(
           children: [
             IconButton(
@@ -159,92 +163,94 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           });
           return Future.value(false);
         },
-        child: SingleChildScrollView(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const SizedBox(
-                height: 20,
-              ),
-
-              // A 101
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        // 0.4 5 7 0.3
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
-                  ),
-                  child: a101HomePageItem(),
+        child: SafeArea(
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 20,
                 ),
-              ),
-              showBottomLine(a101Show, constants.a101Color),
 
-              // BİM
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
-                    ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
+                // A 101
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
                       ),
-                    ],
-                  ),
-                  child: bimHomePageItem(),
-                ),
-              ),
-              showBottomLine(bimShow, constants.bimColor),
-
-              // Sok
-              Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: const BorderRadius.only(
-                      bottomLeft: Radius.circular(10),
-                      bottomRight: Radius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                          // 0.4 5 7 0.3
+                          color: Colors.grey.withOpacity(0.4),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
                     ),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(0.4),
-                        spreadRadius: 5,
-                        blurRadius: 7,
-                        offset: const Offset(0, 3),
-                      ),
-                    ],
+                    child: a101HomePageItem(),
                   ),
-                  child: sokHomePageItem(context),
                 ),
-              ),
-              showBottomLine(sokShow, constants.sokColor),
+                showBottomLine(a101Show, constants.a101Color),
 
-              // for creating a gap on the bottom
-              const SizedBox(
-                height: 100,
-              ),
-            ],
+                // BİM
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.4),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: bimHomePageItem(),
+                  ),
+                ),
+                showBottomLine(bimShow, constants.bimColor),
+
+                // Sok
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      borderRadius: const BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10),
+                      ),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(0.4),
+                          spreadRadius: 5,
+                          blurRadius: 7,
+                          offset: const Offset(0, 3),
+                        ),
+                      ],
+                    ),
+                    child: sokHomePageItem(context),
+                  ),
+                ),
+                showBottomLine(sokShow, constants.sokColor),
+
+                // for creating a gap on the bottom
+                const SizedBox(
+                  height: 100,
+                ),
+              ],
+            ),
           ),
         ),
       ),
