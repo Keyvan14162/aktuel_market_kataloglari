@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "134942953873",
+    "project_id": "aktuel-urunler-e74b5",
+    "storage_bucket": "aktuel-urunler-e74b5.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:134942953873:android:3b60f30b517cefc754ca30",
+        "android_client_info": {
+          "package_name": "com.ismailkeyvan.aktuel_urunler_bim_a101_sok"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "134942953873-4odje96sp9l57c7fpkm0osqn86l6cr07.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxVABYVljFxlkSb-zfneVDZ_bDGUI8QGs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "134942953873-4odje96sp9l57c7fpkm0osqn86l6cr07.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "134942953873-ov77c1p9bg10sgln0nlvv5j1ohhflh8b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aktuelUrunlerBimA101Sok"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
