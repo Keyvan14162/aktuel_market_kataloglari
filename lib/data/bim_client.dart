@@ -1,15 +1,30 @@
-import 'package:aktuel_urunler_bim_a101_sok/models/bim_banner_model.dart';
+import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
-class Bim {
-  getBimBannerData() async {
+class BimClient {
+  Future getBannerData() async {
+    var data = [await _getAllData()][0][0];
+
+    return data;
+  }
+
+  Future getBrochurePageImageUrls(int index) async {
+    List data = [await _getAllData()][0][1][index];
+    data.removeAt(0);
+
+    return data;
+  }
+
+  Future _getAllData() async {
     var response = await http.Client().get(
       Uri.parse("https://www.bim.com.tr/Categories/680/afisler.aspx"),
     );
 
     if (response.statusCode == 200) {
-      List<BimBannerModel> banners = [];
+      List<BannerModel> bannerData = [];
+      List<List<String>> brochurePageImgUrls = [];
+
       var document = parse(response.body);
 
       for (var element
@@ -29,14 +44,14 @@ class Bim {
               }
             });
 
-            banners.add(
-              BimBannerModel(
+            bannerData.add(
+              BannerModel(
                 "GEÇEN HAFTA",
                 element.getElementsByClassName("subTabArea")[0].text.trim(),
                 "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
-                imgUrls,
               ),
             );
+            brochurePageImgUrls.add(imgUrls);
           } // bu hafta
           else if (element.className.contains("grup2")) {
             List<String> imgUrls = [];
@@ -51,14 +66,14 @@ class Bim {
               }
             });
 
-            banners.add(
-              BimBannerModel(
+            bannerData.add(
+              BannerModel(
                 "BU HAFTA",
                 element.getElementsByClassName("subTabArea")[0].text.trim(),
                 "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
-                imgUrls,
               ),
             );
+            brochurePageImgUrls.add(imgUrls);
           }
           // sonraki hafta
           else if (element.className.contains("grup3")) {
@@ -73,21 +88,21 @@ class Bim {
                 );
               }
             });
-            banners.add(
-              BimBannerModel(
+            bannerData.add(
+              BannerModel(
                 "GELECEK HAFTA",
                 element.getElementsByClassName("subTabArea")[0].text.trim(),
                 "https://www.bim.com.tr${element.getElementsByTagName("img")[1].attributes["src"]}",
-                imgUrls,
               ),
             );
+            brochurePageImgUrls.add(imgUrls);
           }
         } catch (e) {
           print("Bim sayfalar cekilirken hata");
         }
       }
 
-      return banners;
+      return [bannerData, brochurePageImgUrls];
     }
   }
 }

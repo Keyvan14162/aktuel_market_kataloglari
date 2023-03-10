@@ -1,33 +1,43 @@
-import 'package:aktuel_urunler_bim_a101_sok/helpers/sok.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants.dart' as constants;
+import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
+    as constants;
 
-class SokGridView extends StatefulWidget {
-  const SokGridView({required this.pageUrl, required this.title, super.key});
-  final String pageUrl;
-  final String title;
+class GridPage extends StatefulWidget {
+  const GridPage(
+      {required this.brochurePageImagesFuture,
+      required this.date,
+      required this.color,
+      super.key});
+  final Future brochurePageImagesFuture;
+  final String date;
+  final Color color;
 
   @override
-  State<SokGridView> createState() => _SokGridViewState();
+  State<GridPage> createState() => _GridPageState();
 }
 
-class _SokGridViewState extends State<SokGridView> {
+class _GridPageState extends State<GridPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColor,
-        title: Text(widget.title),
+        title: Text(
+          widget.date,
+        ),
       ),
       body: Container(
-        color: constants.sokColor.withOpacity(0.1),
+        color: widget.color.withOpacity(0.1),
         child: FutureBuilder(
-          future: Sok().getSokBrochurePageImgUrls(widget.pageUrl),
+          future: widget.brochurePageImagesFuture,
           builder: (context, snapshot) {
-            if (snapshot.hasData) {
+            if (snapshot.connectionState == ConnectionState.done &&
+                snapshot.hasData &&
+                snapshot.data != null) {
               List<String> brochurePages = snapshot.data as List<String>;
               // grid view
+
               return GridView.builder(
                 itemCount: brochurePages.length,
                 gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
@@ -38,22 +48,26 @@ class _SokGridViewState extends State<SokGridView> {
                 ),
                 itemBuilder: (BuildContext ctx, index) {
                   // gridview items
-                  return Hero(
-                    tag: brochurePages[index],
-                    child: GestureDetector(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushNamed("/bannerPage", arguments: [
-                          brochurePages,
-                          index,
-                          constants.sokColor,
-                        ]);
-                      },
-                      child: Container(
-                        alignment: Alignment.center,
-                        child: Padding(
-                          padding: const EdgeInsets.fromLTRB(1, 2, 1, 0),
-                          // IMAGE
+                  return GestureDetector(
+                    onTap: () {
+                      Navigator.of(context).pushNamed("/bannerPage",
+                          arguments: [brochurePages, index, widget.color]);
+                    },
+                    onPanStart: (details) {
+                      Navigator.of(context)
+                          .pushNamed("/bannerPage", arguments: [
+                        brochurePages,
+                        index,
+                        constants.a101Color,
+                      ]);
+                    },
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Padding(
+                        padding: const EdgeInsets.fromLTRB(1, 2, 1, 0),
+                        // IMAGE
+                        child: Hero(
+                          tag: brochurePages[index],
                           child: CachedNetworkImage(
                             fit: BoxFit.contain,
                             imageUrl: brochurePages[index],

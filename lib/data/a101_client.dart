@@ -1,10 +1,10 @@
-import 'package:aktuel_urunler_bim_a101_sok/models/a101_banner_model.dart';
+import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
-class A101 {
-  getA101BannerImageUrls() async {
-    List<A101BannerModel> bannerElements = [];
+class A101Client {
+  Future getBannerData() async {
+    List<BannerModel> bannerElements = [];
     var response = await http.Client().get(
       Uri.parse("https://www.a101.com.tr/afisler"),
     );
@@ -15,16 +15,22 @@ class A101 {
           .getElementsByClassName("brochures-list")[0]
           .children[0]
           .children) {
+        // print(li.children[0].attributes["href"]);
+        // print(li.children[0].children[0].children[0].attributes["src"]);
+        // print(li.children[0].children[2].attributes["src"]);
+        List list = li.children[0].children[1].text.trim().split("\n");
+        String date = "${list[0].trim()} ${list[2].trim()}";
+
         bannerElements.add(
-          A101BannerModel(
-            // category url
-            li.children[0].attributes["href"],
-            // afis img usteundeki badge img
-            li.children[0].children[0].children[0].attributes["src"],
-            // banner img url
+          BannerModel(
+            li.children[0].attributes["href"]
+                ?.replaceAll("/afisler", "")
+                .replaceAll("-", " ")
+                .replaceAll("/", "")
+                .toUpperCase(),
+            date,
             li.children[0].children[2].attributes["src"],
-            // date text
-            li.children[0].children[1].text.trim(),
+            catagoryUrl: li.children[0].attributes["href"],
           ),
         );
       }
@@ -36,11 +42,11 @@ class A101 {
     }
   }
 
-  getBrochurePageImageUrls(String url) async {
+  Future getBrochurePageImageUrls(String url) async {
     List<String> brochurePages = [];
 
     var response = await http.Client().get(
-      Uri.parse(url.trim()),
+      Uri.parse("https://www.a101.com.tr${url.trim()}"),
     );
     //If the http request is successful the statusCode will be 200
     if (response.statusCode == 200) {

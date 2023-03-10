@@ -1,11 +1,11 @@
-import 'package:aktuel_urunler_bim_a101_sok/models/sok_banner_model.dart';
+import 'package:aktuel_urunler_bim_a101_sok/helpers/functions.dart';
+import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
-class Sok {
+class SokClient {
   _getSokPageUrls(String url) async {
     var response = await http.Client().get(
-      // https://www.kataloglar.com.tr/sok-market/haftann-arambadan-itibaren-05-10-2022-3550/
       Uri.parse(url),
     );
     List<String> pageUrls = [];
@@ -24,7 +24,7 @@ class Sok {
     }
   }
 
-  getSokBrochurePageImgUrls(String url) async {
+  Future getBrochurePageImageUrls(String url) async {
     List<String> pageUrls = await _getSokPageUrls(url);
 
     List<String> brochurePageImgUrls = [];
@@ -50,13 +50,13 @@ class Sok {
     return brochurePageImgUrls;
   }
 
-  getBannerUrls() async {
+  Future getBannerData() async {
     var response = await http.Client().get(
       Uri.parse("https://www.kataloglar.com.tr/sok-market/"),
     );
     if (response.statusCode == 200) {
       var document = parse(response.body);
-      List<SokBannerModel> banners = [];
+      List<BannerModel> banners = [];
 
       for (var element in document
           .getElementsByClassName("letaky-grid")[0]
@@ -86,13 +86,21 @@ class Sok {
                   .attributes["src"]
                   .toString();
             }
-            // print(imgUrl);
+            String date =
+                " ${element.children[0].children[0].attributes["title"]?.substring(0, 23).split(" ")[0].substring(0, 2)} ${Functions().convertNumberToMonth(
+              int.parse(element.children[0].children[0].attributes["title"]
+                      ?.substring(0, 23)
+                      .split(" ")[0]
+                      .split(".")[1] ??
+                  "1"),
+            )} ";
 
             banners.add(
-              SokBannerModel(
-                element.children[0].children[0].attributes["title"],
+              BannerModel(
+                "Yeni ve Güncel",
+                date,
                 imgUrl,
-                brochurePageUrl,
+                catagoryUrl: brochurePageUrl,
               ),
             );
           }
@@ -102,30 +110,3 @@ class Sok {
     }
   }
 }
-
-  /*
-  getSokBrochurePagesUrls(String url) async {
-    var response = await http.Client().get(
-      // url
-      Uri.parse(
-          "https://www.akakce.com/brosurler/sok-5-ekim-2022-aktuel-katalogu-haftanin-firsatlari-23122"),
-    );
-
-    if (response.statusCode == 200) {
-      var document = parse(response.body);
-      document.getElementsByTagName("ul")[1].children.forEach((element) {
-        try {
-          if (element.children[0].toString() == "<html img>") {
-            String imgTag = element.children[0].attributes["style"]!;
-            var firstBracketIndex = imgTag.indexOf("(");
-            var lastBracketIndex = imgTag.indexOf(")");
-            print(imgTag.substring(firstBracketIndex + 1, lastBracketIndex));
-          }
-        } catch (e) {
-          print("Sok sayfalar cekilirken hata");
-        }
-      });
-    }
-  }
-  */
-

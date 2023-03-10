@@ -1,4 +1,4 @@
-import 'package:aktuel_urunler_bim_a101_sok/widgets/home_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/home_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';

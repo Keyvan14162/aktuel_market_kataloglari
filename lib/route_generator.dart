@@ -1,9 +1,7 @@
-import 'package:aktuel_urunler_bim_a101_sok/widgets/banner_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/detail_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/a101/a101_grid_view.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/bim/bim_grid_view.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/sok/sok_grid_view.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_screen.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/banner_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/detail_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/grid_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/zoom_drawer_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -35,30 +33,17 @@ class RouteGenerator {
           ),
           settings,
         );
-      case "/a101GridView":
+
+      case "/gridPage":
         return _generateRoute(
-          A101GridView(
-            categoryUrl: (settings.arguments as List)[0] as String,
+          GridPage(
+            brochurePageImagesFuture: (settings.arguments as List)[0] as Future,
             date: (settings.arguments as List)[1] as String,
+            color: (settings.arguments as List)[2] as Color,
           ),
           settings,
         );
-      case "/bimGridView":
-        return _generateRoute(
-          BimGridView(
-            brochurePages: (settings.arguments as List)[0] as List<String>,
-            date: (settings.arguments as List)[1] as String,
-          ),
-          settings,
-        );
-      case "/sokGridView":
-        return _generateRoute(
-          SokGridView(
-            pageUrl: (settings.arguments as List)[0] as String,
-            title: (settings.arguments as List)[1] as String,
-          ),
-          settings,
-        );
+
       case "/detailPage":
         return _generateRoute(
           DetailPage(
