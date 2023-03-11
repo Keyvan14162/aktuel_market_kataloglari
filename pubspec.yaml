@@ -47,6 +47,10 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   lottie: ^2.2.0
   shimmer: ^2.0.0
+  google_sign_in: ^6.0.2
+  firebase_auth: ^4.2.10
+  firebase_core: ^2.7.1
+  flutter_signin_button: ^2.0.0
  
   
 

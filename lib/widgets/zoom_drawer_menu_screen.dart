@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -66,6 +67,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                       ),
                                     ],
                                   ),
+                                  /*
                                   Container(
                                     decoration: BoxDecoration(
                                       color: Colors.white,
@@ -79,6 +81,9 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                       ),
                                     ),
                                   ),
+                                  */
+                                  // google signin
+                                  ZoomDrawerProfile(),
                                 ],
                               ),
                             ),
