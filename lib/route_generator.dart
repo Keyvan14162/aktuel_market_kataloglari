@@ -1,5 +1,4 @@
 import 'package:aktuel_urunler_bim_a101_sok/pages/banner_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/pages/deneme.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/detail_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/grid_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/zoom_drawer_page.dart';
