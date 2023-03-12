@@ -11,7 +11,6 @@ import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
     as constant_values;
-import 'package:lottie/lottie.dart';
 import 'package:shimmer/shimmer.dart';
 
 class HomePage extends StatefulWidget {
@@ -81,7 +80,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
         // marketCode 0:A101 1:Bim 2:Şok
         child: Column(
           children: [
-            LottieMain(),
+            const LottieMain(),
 
             // a101
             expansionPanel(

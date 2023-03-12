@@ -1,4 +1,5 @@
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
+import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
@@ -37,7 +38,7 @@ class A101Client {
 
       return bannerElements;
     } else {
-      print("getA101BannerImageUrls 200 değil");
+      debugPrint("getA101BannerImageUrls 200 değil");
       return [];
     }
   }
@@ -57,12 +58,12 @@ class A101Client {
         try {
           brochurePages.add(element.children[0].attributes["src"].toString());
         } catch (e) {
-          print("Sayfa cekilemedi");
+          debugPrint("Sayfa cekilemedi");
         }
       });
       return brochurePages;
     } else {
-      print("getBrochurePageImageUrls 200 değil");
+      debugPrint("getBrochurePageImageUrls 200 değil");
       return [];
     }
   }

@@ -1,13 +1,10 @@
 import 'package:aktuel_urunler_bim_a101_sok/firebase/sign_functions.dart';
+import 'package:aktuel_urunler_bim_a101_sok/helpers/top_snackbar.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
-import 'package:flutter_launcher_icons/xml_templates.dart';
-import 'package:flutter_signin_button/button_list.dart';
-import 'package:flutter_signin_button/button_view.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 
 class ZoomDrawerProfile extends StatefulWidget {
   const ZoomDrawerProfile({super.key});
@@ -25,11 +22,9 @@ class _ZoomDrawerProfileState extends State<ZoomDrawerProfile> {
     auth = FirebaseAuth.instance;
     auth.authStateChanges().listen((User? user) {
       if (user == null) {
-        print(" -------- User is currently signed out.");
         isSigned = false;
         setState(() {});
       } else {
-        print(" -------- User signed in ${user.email} - ${user.emailVerified}");
         isSigned = true;
         setState(() {});
       }
@@ -53,24 +48,44 @@ class _ZoomDrawerProfileState extends State<ZoomDrawerProfile> {
                 ),
               ),
               const SizedBox(
-                height: 10,
+                height: 8,
               ),
               Text(
                 " ${auth.currentUser?.displayName ?? "Kullanıcı"}",
+                textAlign: TextAlign.center,
                 style: const TextStyle(
                     color: Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
               Text(
-                " ${auth.currentUser?.email ?? "Kullanıcı"}",
+                " ${auth.currentUser?.email ?? "kullanici@gmail.com"}",
                 style: const TextStyle(color: Colors.white),
               ),
-              SignInButton(
-                Buttons.Google,
-                text: "Çıkış Yap",
+              MaterialButton(
+                color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.network(
+                      'http://pngimg.com/uploads/google/google_PNG19635.png',
+                      fit: BoxFit.cover,
+                      width: 40,
+                      height: 40,
+                    ),
+                    const FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text("Çıkış Yap"),
+                    )
+                  ],
+                ),
                 onPressed: () async {
-                  await auth.signOut();
+                  await googleSignOut(_googleSignIn, auth);
+                  // ignore: use_build_context_synchronously
+                  TopSnackbar().showSnackbar(
+                    context,
+                    const CustomSnackBar.success(message: "Çıkış Yapıldı"),
+                  );
                 },
               )
             ],
@@ -86,11 +101,35 @@ class _ZoomDrawerProfileState extends State<ZoomDrawerProfile> {
                   color: Colors.white,
                 ),
               ),
-              SignInButton(
-                Buttons.Google,
-                text: "Google ile Giriş Yap",
+              const SizedBox(
+                height: 20,
+              ),
+              MaterialButton(
+                color: Colors.white,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Image.network(
+                      'http://pngimg.com/uploads/google/google_PNG19635.png',
+                      fit: BoxFit.cover,
+                      width: 40,
+                      height: 40,
+                    ),
+                    const FittedBox(
+                      fit: BoxFit.fitWidth,
+                      child: Text("Google ile Giriş Yap"),
+                    )
+                  ],
+                ),
                 onPressed: () async {
                   UserCredential userCredential = await googleSign();
+                  // ignore: use_build_context_synchronously
+                  TopSnackbar().showSnackbar(
+                    context,
+                    CustomSnackBar.success(
+                        message:
+                            "${userCredential.user?.displayName ?? ""} Giriş Yapıldı"),
+                  );
                 },
               )
             ],

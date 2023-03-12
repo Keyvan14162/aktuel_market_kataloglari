@@ -67,23 +67,9 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                       ),
                                     ],
                                   ),
-                                  /*
-                                  Container(
-                                    decoration: BoxDecoration(
-                                      color: Colors.white,
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Image.asset(
-                                        "assets/images/icon.png",
-                                        height: 140,
-                                      ),
-                                    ),
-                                  ),
-                                  */
+
                                   // google signin
-                                  ZoomDrawerProfile(),
+                                  const ZoomDrawerProfile(),
                                 ],
                               ),
                             ),

@@ -147,7 +147,7 @@ class _BannerPageState extends State<BannerPage> {
                     try {
                       _controller.animateToPage(entry.key);
                     } catch (e) {
-                      print("$e Durum İndikatörü Hata");
+                      debugPrint("$e Durum İndikatörü Hata");
                     }
                   },
                   child: Container(

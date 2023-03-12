@@ -1,4 +1,5 @@
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
+import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
@@ -98,7 +99,7 @@ class BimClient {
             brochurePageImgUrls.add(imgUrls);
           }
         } catch (e) {
-          print("Bim sayfalar cekilirken hata");
+          debugPrint("Bim sayfalar cekilirken hata");
         }
       }
 

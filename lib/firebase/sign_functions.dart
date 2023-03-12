@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 class SignFunctions {}
@@ -18,4 +19,15 @@ Future<UserCredential> googleSign() async {
 
   // Once signed in, return the UserCredential
   return await FirebaseAuth.instance.signInWithCredential(credential);
+}
+
+googleSignOut(GoogleSignIn googleSignIn, FirebaseAuth auth) async {
+  final googleCurrentUser =
+      GoogleSignIn().currentUser ?? await googleSignIn.signIn();
+  if (googleCurrentUser != null) {
+    await googleSignIn.disconnect().catchError((e, stack) {
+      debugPrint(stack);
+    });
+  }
+  await auth.signOut();
 }
