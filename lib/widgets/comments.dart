@@ -265,7 +265,7 @@ class _CommentsState extends State<Comments> {
         ),
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
-          child: Text(
+          child: SelectableText(
             comment,
             style: TextStyle(color: Colors.grey.shade800),
           ),
