@@ -14,11 +14,27 @@
       },
       "oauth_client": [
         {
-          "client_id": "94148954337-uuljngsjv4i12m1b9uhchni8t6i90i7o.apps.googleusercontent.com",
+          "client_id": "94148954337-76j2vj8m1jtiauqni9p7fco9hamd3i63.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.ismailkeyvan.aktuel_urunler_bim_a101_sok",
             "certificate_hash": "4634aa51f7120d66e9447d9797fdc48f3b40a0c1"
+          }
+        },
+        {
+          "client_id": "94148954337-hj1a75jksc6ed9kuaelb5cc61e8csmch.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ismailkeyvan.aktuel_urunler_bim_a101_sok",
+            "certificate_hash": "2de0b8f4cd30b51cafc9a1be616946d941ba2938"
+          }
+        },
+        {
+          "client_id": "94148954337-r3md1iu6otgoq08s8nbav9un95403rri.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ismailkeyvan.aktuel_urunler_bim_a101_sok",
+            "certificate_hash": "a4622284f4d63ae7d60ee973d7c6b66d9b4de3ba"
           }
         },
         {
@@ -37,6 +53,13 @@
             {
               "client_id": "94148954337-rkuhkva6ejbhuei7t92b3s1vvuam3ajs.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "94148954337-pbch64lcre7iq5nqnp0ksvf1eo4tqip1.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aktuelUrunlerBimA101Sok"
+              }
             }
           ]
         }
