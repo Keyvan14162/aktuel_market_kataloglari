@@ -1,5 +1,5 @@
 # AKTÜEL MARKET KATALOGLARI
-Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, katalogların kolayca takip edilebileceği bir uygulama.
+Bim A101 ve Şok ve dahaa birçok marketin aktüel ürünlerinin listeleneceği, katalogların kolayca takip edilebileceği bir uygulama.
 
 <p> <img src="./logos/1024.png" width="350" title="hover text"> </p>
 
@@ -13,39 +13,44 @@ Bim A101 ve Şok marketlerinin aktüel ürünlerinin listeleneceği, kataloglar�
 
 # Ana Sayfa
 > AnimatedPadding
+
 > CachedNetworkImage
 
 Kullanışlı ve basit bir arayüz, bütün marketlere tek ekrandan ulaşın ve hangi katalogların yayınlandığını görün：
 
-<p> <img src="./logos/1.jpg" width="350" height="710" title="ana sayfa"> </p>
+<p> <img src="./sample_images/0.jpeg" width="300" height="660" title="ana sayfa">
+<img src="./sample_images/1.jpeg" width="300" height="660" title="ana sayfa"> </p>
 
 # Katalog Sayfaları
 
 > GridView.builder
 
-Seçilen kataloğun tüm sayfalarını tek ekranda görün ve istediklerinizi daha yakından inceleyin：
+> Firebases
 
-<p> <img src="./logos/4.jpg" width="350" height="710" title="katalog sayfaları"> </p>
+Seçilen kataloğun tüm sayfalarını tek ekranda görün ve diğer kullanıcalarla yorumlayın：
+
+<p> <img src="./sample_images/3.jpeg" width="300" height="660" title="katalog sayfaları">
+<img src="./sample_images/4.jpeg" width="300" height="660" title="katalog sayfaları"></p>
 
 # Afiş Sayfası
 
 Afişler arasında kolayca gezinin ve daha detaylı incelemek için tıklayın：
 > CarouselSlider
 
-<p> <img src="./logos/3.jpg" width="350" height="710" title="afiş sayfası"> </p>
+<p> <img src="./sample_images/5.jpeg" width="300" height="660" title="afiş sayfası"> </p>
 
 # Detay Sayfası
 > PhotoViewGallery.builder
 
 Afişi yakınlaştırın, ürünleri daha yakından inceleyin：
 
-<p> <img src="./logos/2.jpg" width="350" height="710" title="detay sayfası"> </p>
+<p> <img src="./sample_images/6.jpeg" width="300" height="660" title="detay sayfası"> </p>
 
 # Drawer
 > ZoomDrawer
 
 Daha fazla seçenek ve iletişim için drawer menü'yü kullanın：
 
-<p> <img src="./logos/5.jpg" width="350" height="710" title="drawer"> </p>
+<p> <img src="./sample_images/2.jpeg" width="300" height="660" title="drawer"> </p>
 
 
