@@ -102,7 +102,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                               child: createDrawerMenuItem(
                                 Icons.shopping_bag,
                                 Colors.white,
-                                "Teksil Marketler",
+                                "Giyim Marketleri",
                                 () {
                                   widget.setIndex(
                                       constant_values.textilePageCode);

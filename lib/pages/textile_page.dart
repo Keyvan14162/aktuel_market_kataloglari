@@ -63,7 +63,7 @@ class _TextilePageState extends State<TextilePage>
               width: 40,
             ),
             const Text(
-              "Tekstil Market Katalogları",
+              "Giyim Market Katalogları",
               style: TextStyle(
                 color: Colors.white,
               ),
