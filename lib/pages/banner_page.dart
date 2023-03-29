@@ -18,12 +18,13 @@ class BannerPage extends StatefulWidget {
 
 class _BannerPageState extends State<BannerPage> {
   int _current = 0;
-  final CarouselController _controller = CarouselController();
+  late CarouselController carouselController;
   List<CachedNetworkImage> imageList = [];
 
   @override
   void initState() {
     _current = widget.clickedIndex;
+    carouselController = CarouselController();
 
     for (var url in widget.brochurePageUrls) {
       imageList.add(
@@ -48,7 +49,7 @@ class _BannerPageState extends State<BannerPage> {
             // img
             Expanded(
               child: CarouselSlider(
-                carouselController: _controller,
+                carouselController: carouselController,
                 options: CarouselOptions(
                   //aspectRatio: 1.0,
                   initialPage: _current,
@@ -79,7 +80,7 @@ class _BannerPageState extends State<BannerPage> {
                                 if (_current != value as int) {
                                   setState(() {
                                     _current = value;
-                                    _controller.jumpToPage(_current);
+                                    carouselController.jumpToPage(_current);
                                   });
                                 }
                               },
@@ -103,7 +104,7 @@ class _BannerPageState extends State<BannerPage> {
                                   if (_current != value as int) {
                                     setState(() {
                                       _current = value;
-                                      _controller.jumpToPage(_current);
+                                      carouselController.jumpToPage(_current);
                                     });
                                   }
                                 },
@@ -119,7 +120,7 @@ class _BannerPageState extends State<BannerPage> {
                                 if (_current != value as int) {
                                   setState(() {
                                     _current = value;
-                                    _controller.jumpToPage(_current);
+                                    carouselController.jumpToPage(_current);
                                   });
                                 }
                               },
@@ -139,34 +140,35 @@ class _BannerPageState extends State<BannerPage> {
               ),
             ),
             // durum indikatoru
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: widget.brochurePageUrls.asMap().entries.map((entry) {
-                return GestureDetector(
-                  onTap: () {
-                    try {
-                      _controller.animateToPage(entry.key);
-                    } catch (e) {
-                      debugPrint("$e Durum İndikatörü Hata");
-                    }
-                  },
-                  child: Container(
-                    width: 12.0,
-                    height: 12.0,
-                    margin: const EdgeInsets.symmetric(
-                      vertical: 8.0,
-                      horizontal: 4.0,
+
+            FittedBox(
+              fit: BoxFit.scaleDown,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: widget.brochurePageUrls.asMap().entries.map((entry) {
+                  return GestureDetector(
+                    onTap: () {
+                      try {
+                        carouselController.animateToPage(entry.key);
+                      } catch (e) {
+                        debugPrint("$e Durum İndikatörü Hata");
+                      }
+                    },
+                    child: Container(
+                      width: 12.0,
+                      height: 12.0,
+                      margin: const EdgeInsets.only(bottom: 8.0, left: 8.0),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        color: (Theme.of(context).brightness == Brightness.dark
+                                ? Colors.white
+                                : Theme.of(context).primaryColor)
+                            .withOpacity(_current == entry.key ? 0.9 : 0.4),
+                      ),
                     ),
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: (Theme.of(context).brightness == Brightness.dark
-                              ? Colors.white
-                              : Theme.of(context).primaryColor)
-                          .withOpacity(_current == entry.key ? 0.9 : 0.4),
-                    ),
-                  ),
-                );
-              }).toList(),
+                  );
+                }).toList(),
+              ),
             ),
           ],
         ),

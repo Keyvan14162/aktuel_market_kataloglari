@@ -1,14 +1,18 @@
 import 'dart:io';
-
 import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
+    as constant_values;
 
 class ZoomDrawerMenuScreen extends StatefulWidget {
-  const ZoomDrawerMenuScreen({super.key});
+  ZoomDrawerMenuScreen(
+      {required this.setIndex, required this.currentIndex, super.key});
+  final ValueSetter setIndex;
+  int currentIndex;
 
   @override
   State<ZoomDrawerMenuScreen> createState() => _ZoomDrawerMenuScreenState();
@@ -16,6 +20,7 @@ class ZoomDrawerMenuScreen extends StatefulWidget {
 
 class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
   final double dividerContainerHeight = 1;
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -33,45 +38,40 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                     Column(
                       children: [
                         // title and image
-                        GestureDetector(
-                          onTap: () {
-                            ZoomDrawer.of(context)!.toggle();
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 28, 8, 40),
-                            child: Center(
-                              child: Column(
-                                children: [
-                                  Row(
-                                    children: [
-                                      IconButton(
-                                        onPressed: () {
-                                          ZoomDrawer.of(context)!.toggle();
-                                        },
-                                        icon: const Icon(
-                                          Icons.menu_open,
-                                          color: Colors.white,
+                        Padding(
+                          padding: const EdgeInsets.fromLTRB(8, 28, 8, 40),
+                          child: Center(
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    IconButton(
+                                      onPressed: () {
+                                        ZoomDrawer.of(context)!.toggle();
+                                      },
+                                      icon: const Icon(
+                                        Icons.menu_open,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const Flexible(
+                                      child: FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(
+                                          "Aktüel Market Katalogları",
+                                          style: TextStyle(
+                                              color: Colors.white,
+                                              fontSize: 14),
+                                          maxLines: 1,
                                         ),
                                       ),
-                                      const Flexible(
-                                        child: FittedBox(
-                                          fit: BoxFit.scaleDown,
-                                          child: Text(
-                                            "Aktüel Market Katalogları",
-                                            style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14),
-                                            maxLines: 1,
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
+                                ),
 
-                                  // google signin
-                                  const ZoomDrawerProfile(),
-                                ],
-                              ),
+                                // google signin
+                                const ZoomDrawerProfile(),
+                              ],
                             ),
                           ),
                         ),
@@ -79,6 +79,36 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                         // menu items
                         Column(
                           children: [
+                            Container(
+                              color: widget.currentIndex ==
+                                      constant_values.marketPageCode
+                                  ? Colors.grey.withOpacity(0.2)
+                                  : Colors.transparent,
+                              child: createDrawerMenuItem(
+                                Icons.shopping_cart,
+                                Colors.white,
+                                "Aktüel Marketler",
+                                () {
+                                  widget
+                                      .setIndex(constant_values.marketPageCode);
+                                },
+                              ),
+                            ),
+                            Container(
+                              color: widget.currentIndex ==
+                                      constant_values.textilePageCode
+                                  ? Colors.grey.withOpacity(0.2)
+                                  : Colors.transparent,
+                              child: createDrawerMenuItem(
+                                Icons.shopping_bag,
+                                Colors.white,
+                                "Teksil Marketler",
+                                () {
+                                  widget.setIndex(
+                                      constant_values.textilePageCode);
+                                },
+                              ),
+                            ),
                             createDrawerMenuItem(
                               Icons.star,
                               Colors.yellow,
@@ -163,7 +193,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                             Text("Aktüel Market Katalogları"),
                                       ),
                                       content: const Text(
-                                        "Bim, A101 ve Şok marketleri aktüel kataloglarını canlı olarak takip edebilmeniz için geliştirilmiş bir uygulamadır. Uygulama kişisel verilerinize erişim izni istemez, kişisel verilerinizi göremez, kullanamaz yada değiştiremez. Uygulamamıza destek vermek için yorum yapmayı ve puanlamayı unutmayınız!\n\n İyi alışverişler dileriz...",
+                                        "Bim, A101 ve Şok  ve diğer birçok marketlerin aktüel kataloglarını ve tekstil ürünleri kataloglarını canlı olarak takip edebilmeniz için geliştirilmiş bir uygulamadır. Uygulama kişisel verilerinize erişim izni istemez, kişisel verilerinizi göremez, kullanamaz yada değiştiremez. Uygulamamıza destek vermek için yorum yapmayı ve puanlamayı unutmayınız!\n\n İyi alışverişler dileriz...",
                                       ),
                                       actions: [
                                         TextButton(
@@ -214,7 +244,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
     );
   }
 
-  createDrawerMenuItem(
+  Widget createDrawerMenuItem(
       IconData icon, Color iconColor, String text, onPressedFunc) {
     return InkWell(
       onTap: () {
@@ -260,7 +290,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
     );
   }
 
-  createBottomLinkeText(String text, String url) {
+  Widget createBottomLinkeText(String text, String url) {
     return Flexible(
       child: GestureDetector(
         onTap: () async {

@@ -1,7 +1,10 @@
 import 'package:aktuel_urunler_bim_a101_sok/pages/banner_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/detail_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/grid_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/market_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/textile_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/zoom_drawer_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/custom_expansion_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -23,6 +26,30 @@ class RouteGenerator {
     switch (settings.name) {
       case "/":
         return _generateRoute(const ZoomDrawerScreen(), settings);
+
+      case "/customExpansionPanel":
+        return _generateRoute(
+          CustomExpansionPanel(
+            dataFuture: (settings.arguments as List)[0] as Future,
+            logoPath: (settings.arguments as List)[1] as String,
+            headerText: (settings.arguments as List)[2] as String,
+            color: (settings.arguments as List)[3] as Color,
+            marketCode: (settings.arguments as List)[4] as int,
+          ),
+          settings,
+        );
+
+      case "/textilePage":
+        return _generateRoute(
+          const TextilePage(),
+          settings,
+        );
+
+      case "/marketPage":
+        return _generateRoute(
+          const MarketPage(),
+          settings,
+        );
 
       case "/bannerPage":
         return _generateRoute(

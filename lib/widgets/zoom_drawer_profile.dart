@@ -73,9 +73,10 @@ class _ZoomDrawerProfileState extends State<ZoomDrawerProfile> {
                       width: 40,
                       height: 40,
                     ),
-                    const FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text("Çıkış Yap"),
+                    const Flexible(
+                      child: Text(
+                        "Çıkış Yap",
+                      ),
                     )
                   ],
                 ),
@@ -109,15 +110,16 @@ class _ZoomDrawerProfileState extends State<ZoomDrawerProfile> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.network(
-                      'http://pngimg.com/uploads/google/google_PNG19635.png',
+                    Image.asset(
+                      'assets/images/google.png',
                       fit: BoxFit.cover,
                       width: 40,
                       height: 40,
                     ),
-                    const FittedBox(
-                      fit: BoxFit.fitWidth,
-                      child: Text("Google ile Giriş Yap"),
+                    const Flexible(
+                      child: Text(
+                        "Google ile Giriş Yap",
+                      ),
                     )
                   ],
                 ),

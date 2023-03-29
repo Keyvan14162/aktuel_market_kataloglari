@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
-class SokClient {
-  String bannerPageUrl = "https://www.kataloglar.com.tr/sok-market/";
+class LcClient {
+  String bannerPageUrl = "https://www.kataloglar.com.tr/lc-waikiki/";
+
   _getPageUrls(String url) async {
     var response = await http.Client().get(
       Uri.parse(url),
@@ -15,7 +16,6 @@ class SokClient {
       var document = parse(response.body);
       var buttonList =
           document.getElementsByClassName("pages-btn-group")[0].children;
-      // print(buttonList[buttonList.length - 2].text);
 
       try {
         pageUrls.add(

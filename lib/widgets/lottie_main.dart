@@ -3,7 +3,8 @@ import 'package:lottie/lottie.dart';
 import 'dart:math' as math;
 
 class LottieMain extends StatefulWidget {
-  const LottieMain({super.key});
+  LottieMain({required this.lottiePath, super.key});
+  String lottiePath;
 
   @override
   State<LottieMain> createState() => _LottieMainState();
@@ -46,8 +47,8 @@ class _LottieMainState extends State<LottieMain> with TickerProviderStateMixin {
         }
       },
       child: SizedBox(
-        height: MediaQuery.of(context).size.height / 3,
-        width: MediaQuery.of(context).size.height / 3,
+        height: MediaQuery.of(context).size.height / 4.2,
+        width: MediaQuery.of(context).size.height / 4.2,
         child: Transform(
           alignment: Alignment.center,
           transform: Matrix4.rotationX(rotationX),
@@ -57,7 +58,7 @@ class _LottieMainState extends State<LottieMain> with TickerProviderStateMixin {
             child: Transform.rotate(
               angle: angle,
               child: Lottie.asset(
-                "assets/lotties/walking.json",
+                widget.lottiePath,
                 height: MediaQuery.of(context).size.height / 3,
               ),
             ),

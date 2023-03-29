@@ -1,137 +1,47 @@
-import 'dart:async';
 import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/bim_client.dart';
+import 'package:aktuel_urunler_bim_a101_sok/data/bizim_client.dart';
+import 'package:aktuel_urunler_bim_a101_sok/data/defacto_client.dart';
+import 'package:aktuel_urunler_bim_a101_sok/data/flo_client.dart';
+import 'package:aktuel_urunler_bim_a101_sok/data/lc_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/sok_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/lottie_main.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
     as constant_values;
-import 'package:shimmer/shimmer.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class CustomExpansionPanel extends StatefulWidget {
+  CustomExpansionPanel(
+      {required this.dataFuture,
+      required this.logoPath,
+      required this.headerText,
+      required this.color,
+      required this.marketCode,
+      super.key});
+
+  Future dataFuture;
+  String logoPath;
+  String headerText;
+  Color color;
+  int marketCode;
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<CustomExpansionPanel> createState() => _CustomExpansionPanelState();
 }
 
-class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
-  late StreamSubscription<InternetConnectionStatus> internetConnectionListener;
-
-  @override
-  void initState() {
-    super.initState();
-
-    internetConnectionListener =
-        InternetConnectionChecker().onStatusChange.listen((status) {
-      ScaffoldMessenger.of(context).clearSnackBars();
-      setState(() {});
-    });
-  }
-
-  @override
-  void dispose() {
-    internetConnectionListener.cancel();
-
-    super.dispose();
-  }
-
+class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
-    double height = MediaQuery.of(context).size.height;
-
-    // connectionStatusSnackbar();
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        systemOverlayStyle: const SystemUiOverlayStyle(
-          statusBarColor: Colors.white70,
-        ),
-
-        title: Row(
-          children: [
-            IconButton(
-              onPressed: () {
-                ZoomDrawer.of(context)!.toggle();
-              },
-              icon: const Icon(Icons.menu),
-            ),
-            const SizedBox(
-              width: 40,
-            ),
-            const Text(
-              "Aktüel Market Katalogları",
-              style: TextStyle(
-                color: Colors.white,
-              ),
-            ),
-          ],
-        ),
-        backgroundColor: Theme.of(context).primaryColor,
-        // elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        // marketCode 0:A101 1:Bim 2:Şok
-        child: Column(
-          children: [
-            const LottieMain(),
-
-            // a101
-            expansionPanel(
-                A101Client().getBannerData(),
-                width,
-                "assets/images/a101_logo.png",
-                "A101 Güncel Katalogları",
-                constant_values.a101Color,
-                0),
-            divider(width, constant_values.a101Color),
-
-            // bim
-            expansionPanel(
-                BimClient().getBannerData(),
-                width,
-                "assets/images/bim_logo.png",
-                "BİM Güncel Katalogları",
-                constant_values.bimColor,
-                1),
-            divider(width, constant_values.bimColor),
-
-            // şok
-            expansionPanel(
-                SokClient().getBannerData(),
-                width,
-                "assets/images/sok_logo.png",
-                "ŞOK Güncel Katalogları",
-                constant_values.sokColor,
-                2),
-            divider(width, constant_values.sokColor),
-
-            // white space
-            SizedBox(
-              height: height / 4,
-            )
-          ],
-        ),
-      ),
-    );
-  }
-
-  Center divider(double width, Color color) {
-    return Center(
-      child: Container(
-        width: width - 16,
-        height: 8,
-        decoration: BoxDecoration(
-          color: color,
-          borderRadius: BorderRadius.circular(10),
-        ),
-      ),
+    return expansionPanel(
+      widget.dataFuture,
+      width,
+      widget.logoPath,
+      widget.headerText,
+      widget.color,
+      widget.marketCode,
     );
   }
 
@@ -154,6 +64,7 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                   value: 1,
                   headerBuilder: (context, isExpanded) {
                     return SizedBox(
+                      //width: double.infinity,
                       height: width / 5,
                       child: Row(
                         children: [
@@ -203,21 +114,54 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                       itemCount: data.length,
                       itemBuilder: (context, index) {
                         Future brochurePageImagesFuture;
-                        if (marketCode == 0) {
-                          brochurePageImagesFuture =
-                              A101Client().getBrochurePageImageUrls(
-                            data[index].catagoryUrl.toString(),
-                          );
-                        } else if (marketCode == 1) {
-                          brochurePageImagesFuture =
-                              BimClient().getBrochurePageImageUrls(index);
-                        } else {
-                          brochurePageImagesFuture =
-                              SokClient().getBrochurePageImageUrls(
-                            data[index].catagoryUrl.toString(),
-                          );
+                        switch (marketCode) {
+                          case constant_values.a101Code:
+                            brochurePageImagesFuture =
+                                A101Client().getBrochurePageImageUrls(
+                              data[index].catagoryUrl.toString(),
+                            );
+                            break;
+                          case constant_values.bimCode:
+                            brochurePageImagesFuture =
+                                brochurePageImagesFuture =
+                                    BimClient().getBrochurePageImageUrls(index);
+                            break;
+                          case constant_values.sokCode:
+                            brochurePageImagesFuture =
+                                SokClient().getBrochurePageImageUrls(
+                              data[index].catagoryUrl.toString(),
+                            );
+                            break;
+                          case constant_values.bizimCode:
+                            brochurePageImagesFuture =
+                                BizimClient().getBrochurePageImageUrls(
+                              data[index].catagoryUrl.toString(),
+                            );
+                            break;
+                          case constant_values.floCode:
+                            brochurePageImagesFuture =
+                                FloClient().getBrochurePageImageUrls(
+                              data[index].catagoryUrl.toString(),
+                            );
+                            break;
+                          case constant_values.lcCode:
+                            brochurePageImagesFuture =
+                                LcClient().getBrochurePageImageUrls(
+                              data[index].catagoryUrl.toString(),
+                            );
+                            break;
+                          case constant_values.defactoCode:
+                            brochurePageImagesFuture =
+                                DefactoClient().getBrochurePageImageUrls(
+                              data[index].catagoryUrl.toString(),
+                            );
+                            break;
+                          default:
+                            brochurePageImagesFuture =
+                                SokClient().getBrochurePageImageUrls(
+                              data[index].catagoryUrl.toString(),
+                            );
                         }
-
                         return expansionPanelItem(
                           data,
                           index,

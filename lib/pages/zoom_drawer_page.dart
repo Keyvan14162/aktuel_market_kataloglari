@@ -1,8 +1,11 @@
-import 'package:aktuel_urunler_bim_a101_sok/pages/home_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/market_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/textile_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
+    as constant_values;
 
 class ZoomDrawerScreen extends StatefulWidget {
   const ZoomDrawerScreen({super.key});
@@ -13,6 +16,7 @@ class ZoomDrawerScreen extends StatefulWidget {
 
 class _ZoomDrawerScreenState extends State<ZoomDrawerScreen> {
   final _drawerController = ZoomDrawerController();
+  int currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -22,16 +26,34 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen> {
         androidCloseOnBackTap: true,
         mainScreenTapClose: true,
         controller: _drawerController,
-        menuScreen: const ZoomDrawerMenuScreen(),
-        mainScreen: const HomePage(),
+        menuScreen: ZoomDrawerMenuScreen(
+          setIndex: (index) {
+            setState(() {
+              currentIndex = index;
+            });
+          },
+          currentIndex: currentIndex,
+        ),
+        mainScreen: currentScreen(),
         menuBackgroundColor: Theme.of(context).primaryColor.withOpacity(0.9),
         borderRadius: 24.0,
         showShadow: true,
+        // slideWidth: 200,
         angle: 0.0,
-        // openCurve: Curves.easeIn,
-        // closeCurve: Curves.easeOut,
         duration: const Duration(milliseconds: 300),
       ),
     );
+  }
+
+  Widget currentScreen() {
+    switch (currentIndex) {
+      case constant_values.marketPageCode:
+        return const MarketPage();
+      case constant_values.textilePageCode:
+        return const TextilePage();
+
+      default:
+        return const MarketPage();
+    }
   }
 }

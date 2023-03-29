@@ -27,6 +27,7 @@ googleSignOut(GoogleSignIn googleSignIn, FirebaseAuth auth) async {
   if (googleCurrentUser != null) {
     await googleSignIn.disconnect().catchError((e, stack) {
       debugPrint(stack);
+      return e;
     });
   }
   await auth.signOut();
