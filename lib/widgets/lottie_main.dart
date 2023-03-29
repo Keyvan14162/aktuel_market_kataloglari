@@ -3,8 +3,8 @@ import 'package:lottie/lottie.dart';
 import 'dart:math' as math;
 
 class LottieMain extends StatefulWidget {
-  LottieMain({required this.lottiePath, super.key});
-  String lottiePath;
+  const LottieMain({required this.lottiePath, super.key});
+  final String lottiePath;
 
   @override
   State<LottieMain> createState() => _LottieMainState();

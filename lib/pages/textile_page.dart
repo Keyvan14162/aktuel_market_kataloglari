@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/defacto_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/flo_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/lc_client.dart';
@@ -76,7 +75,7 @@ class _TextilePageState extends State<TextilePage>
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
+            const Center(
               child: LottieMain(
                 lottiePath: "assets/lotties/walking_women.json",
               ),

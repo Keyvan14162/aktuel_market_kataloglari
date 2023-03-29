@@ -13,7 +13,7 @@ import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
     as constant_values;
 
 class CustomExpansionPanel extends StatefulWidget {
-  CustomExpansionPanel(
+  const CustomExpansionPanel(
       {required this.dataFuture,
       required this.logoPath,
       required this.headerText,
@@ -21,11 +21,11 @@ class CustomExpansionPanel extends StatefulWidget {
       required this.marketCode,
       super.key});
 
-  Future dataFuture;
-  String logoPath;
-  String headerText;
-  Color color;
-  int marketCode;
+  final Future dataFuture;
+  final String logoPath;
+  final String headerText;
+  final Color color;
+  final int marketCode;
 
   @override
   State<CustomExpansionPanel> createState() => _CustomExpansionPanelState();

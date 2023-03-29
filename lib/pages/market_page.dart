@@ -79,7 +79,7 @@ class _HomePageState extends State<MarketPage> with TickerProviderStateMixin {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Center(
+            const Center(
               child: LottieMain(lottiePath: "assets/lotties/walking_man.json"),
             ),
             CustomExpansionPanel(

@@ -9,10 +9,10 @@ import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
     as constant_values;
 
 class ZoomDrawerMenuScreen extends StatefulWidget {
-  ZoomDrawerMenuScreen(
+  const ZoomDrawerMenuScreen(
       {required this.setIndex, required this.currentIndex, super.key});
   final ValueSetter setIndex;
-  int currentIndex;
+  final int currentIndex;
 
   @override
   State<ZoomDrawerMenuScreen> createState() => _ZoomDrawerMenuScreenState();
