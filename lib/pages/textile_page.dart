@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:aktuel_urunler_bim_a101_sok/data/defacto_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/flo_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/lc_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/custom_expansion_panel.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/custom_expansion_panel.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/lottie_main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -15,16 +15,16 @@ class TextilePage extends StatefulWidget {
   const TextilePage({super.key});
 
   @override
-  State<TextilePage> createState() => _TextilePageState();
+  State<TextilePage> createState() => _HomePageState();
 }
 
-class _TextilePageState extends State<TextilePage>
-    with TickerProviderStateMixin {
+class _HomePageState extends State<TextilePage> with TickerProviderStateMixin {
   late StreamSubscription<InternetConnectionStatus> internetConnectionListener;
-
+  final List<Widget> _customExpansionPanelList = [];
   @override
   void initState() {
     super.initState();
+
     internetConnectionListener =
         InternetConnectionChecker().onStatusChange.listen((status) {
       ScaffoldMessenger.of(context).clearSnackBars();
@@ -50,6 +50,8 @@ class _TextilePageState extends State<TextilePage>
         systemOverlayStyle: const SystemUiOverlayStyle(
           statusBarColor: Colors.white70,
         ),
+        automaticallyImplyLeading: false,
+        backgroundColor: Theme.of(context).primaryColor,
         title: Row(
           children: [
             IconButton(
@@ -62,47 +64,44 @@ class _TextilePageState extends State<TextilePage>
               width: 40,
             ),
             const Text(
-              "Giyim Market Katalogları",
+              "Aktüel Market Katalogları",
               style: TextStyle(
                 color: Colors.white,
               ),
             ),
           ],
         ),
-        backgroundColor: Theme.of(context).primaryColor,
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Center(
-              child: LottieMain(
-                lottiePath: "assets/lotties/walking_women.json",
-              ),
+      body: ListView(
+        addRepaintBoundaries: false,
+        children: [
+          const Center(
+            child: LottieMain(
+              lottiePath: "assets/lotties/walking_woman.json",
             ),
-            CustomExpansionPanel(
-                dataFuture: FloClient().getBannerData(),
-                logoPath: constant_values.floLogoPath,
-                headerText: "Flo Güncel Ürünleri",
-                color: constant_values.floColor,
-                marketCode: constant_values.floCode),
-            divider(width, constant_values.floColor),
-            CustomExpansionPanel(
-                dataFuture: LcClient().getBannerData(),
-                logoPath: constant_values.lcLogoPath,
-                headerText: "Lc Waikiki Ürünleri",
-                color: constant_values.lcColor,
-                marketCode: constant_values.lcCode),
-            divider(width, constant_values.lcColor),
-            CustomExpansionPanel(
-                dataFuture: DefactoClient().getBannerData(),
-                logoPath: constant_values.defactoLogoPath,
-                headerText: "Defacto Güncel Ürünleri",
-                color: constant_values.defactoColor,
-                marketCode: constant_values.defactoCode),
-            divider(width, constant_values.defactoColor),
-          ],
-        ),
+          ),
+          CustomExpansionPanel(
+              dataFuture: FloClient().getBannerData(),
+              logoPath: constant_values.floLogoPath,
+              headerText: "Flo Güncel Ürünleri",
+              color: constant_values.floColor,
+              marketCode: constant_values.floCode),
+          divider(width, constant_values.floColor),
+          CustomExpansionPanel(
+              dataFuture: LcClient().getBannerData(),
+              logoPath: constant_values.lcLogoPath,
+              headerText: "Lc Waikiki Ürünleri",
+              color: constant_values.lcColor,
+              marketCode: constant_values.lcCode),
+          divider(width, constant_values.lcColor),
+          CustomExpansionPanel(
+              dataFuture: DefactoClient().getBannerData(),
+              logoPath: constant_values.defactoLogoPath,
+              headerText: "Defacto Güncel Ürünleri",
+              color: constant_values.defactoColor,
+              marketCode: constant_values.defactoCode),
+          divider(width, constant_values.defactoColor),
+        ],
       ),
     );
   }

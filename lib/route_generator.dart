@@ -4,7 +4,7 @@ import 'package:aktuel_urunler_bim_a101_sok/pages/grid_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/market_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/textile_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/zoom_drawer_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/custom_expansion_panel.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/custom_expansion_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
