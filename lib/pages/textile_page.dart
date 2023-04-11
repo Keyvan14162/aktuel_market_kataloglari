@@ -1,7 +1,5 @@
 import 'dart:async';
-import 'package:aktuel_urunler_bim_a101_sok/data/defacto_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/flo_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/lc_client.dart';
+import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/custom_expansion_panel.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/lottie_main.dart';
 import 'package:flutter/material.dart';
@@ -81,21 +79,24 @@ class _HomePageState extends State<TextilePage> with TickerProviderStateMixin {
             ),
           ),
           CustomExpansionPanel(
-              dataFuture: FloClient().getBannerData(),
+              dataFuture: KataloglarClient()
+                  .getBannerData(constant_values.floBannerPageUrl),
               logoPath: constant_values.floLogoPath,
               headerText: "Flo Güncel Ürünleri",
               color: constant_values.floColor,
               marketCode: constant_values.floCode),
           divider(width, constant_values.floColor),
           CustomExpansionPanel(
-              dataFuture: LcClient().getBannerData(),
+              dataFuture: KataloglarClient()
+                  .getBannerData(constant_values.lcBannerPageUrl),
               logoPath: constant_values.lcLogoPath,
               headerText: "Lc Waikiki Ürünleri",
               color: constant_values.lcColor,
               marketCode: constant_values.lcCode),
           divider(width, constant_values.lcColor),
           CustomExpansionPanel(
-              dataFuture: DefactoClient().getBannerData(),
+              dataFuture: KataloglarClient()
+                  .getBannerData(constant_values.defactoBannerPageUrl),
               logoPath: constant_values.defactoLogoPath,
               headerText: "Defacto Güncel Ürünleri",
               color: constant_values.defactoColor,

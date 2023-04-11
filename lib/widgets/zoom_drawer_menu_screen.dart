@@ -19,8 +19,6 @@ class ZoomDrawerMenuScreen extends StatefulWidget {
 }
 
 class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
-  final double dividerContainerHeight = 1;
-
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -84,7 +82,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                       constant_values.marketPageCode
                                   ? Colors.grey.withOpacity(0.2)
                                   : Colors.transparent,
-                              child: createDrawerMenuItem(
+                              child: drawerMenuItem(
                                 Icons.shopping_cart,
                                 Colors.white,
                                 "Aktüel Marketler",
@@ -99,7 +97,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                       constant_values.textilePageCode
                                   ? Colors.grey.withOpacity(0.2)
                                   : Colors.transparent,
-                              child: createDrawerMenuItem(
+                              child: drawerMenuItem(
                                 Icons.shopping_bag,
                                 Colors.white,
                                 "Giyim Marketleri",
@@ -109,7 +107,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                 },
                               ),
                             ),
-                            createDrawerMenuItem(
+                            drawerMenuItem(
                               Icons.star,
                               Colors.yellow,
                               "Uygulamayı Puanla",
@@ -123,7 +121,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                 }
                               },
                             ),
-                            createDrawerMenuItem(
+                            drawerMenuItem(
                               Icons.email,
                               Theme.of(context).primaryColor,
                               "Market İsteği Bildir",
@@ -137,7 +135,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                 }
                               },
                             ),
-                            createDrawerMenuItem(
+                            drawerMenuItem(
                               Icons.exit_to_app,
                               Theme.of(context).primaryColor,
                               "Çıkış",
@@ -164,13 +162,13 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            createBottomLinkeText("Instagram",
+                            bottomLinkeText("Instagram",
                                 "https://www.instagram.com/ismail_kyvsn/"),
                             const Text(" "),
-                            createBottomLinkeText("Linkedin",
+                            bottomLinkeText("Linkedin",
                                 "https://www.linkedin.com/in/ismail-keyvan/"),
                             const Text(" "),
-                            createBottomLinkeText(
+                            bottomLinkeText(
                                 "Github", "https://github.com/Keyvan14162"),
                           ],
                         ),
@@ -240,11 +238,10 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
           ),
         );
       },
-      /* */
     );
   }
 
-  Widget createDrawerMenuItem(
+  Widget drawerMenuItem(
       IconData icon, Color iconColor, String text, onPressedFunc) {
     return InkWell(
       onTap: () {
@@ -269,7 +266,9 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                     fit: BoxFit.scaleDown,
                     child: Text(
                       text,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(
+                        color: Colors.white,
+                      ),
                       maxLines: 1,
                     ),
                   ),
@@ -277,20 +276,24 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
               ),
             ],
           ),
-          Container(
-            width: MediaQuery.of(context).size.width / 2,
-            height: 1,
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(10),
-            ),
-          ),
+          customDivider(),
         ],
       ),
     );
   }
 
-  Widget createBottomLinkeText(String text, String url) {
+  Container customDivider() {
+    return Container(
+      width: MediaQuery.of(context).size.width / 2,
+      height: 1,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(10),
+      ),
+    );
+  }
+
+  Widget bottomLinkeText(String text, String url) {
     return Flexible(
       child: GestureDetector(
         onTap: () async {

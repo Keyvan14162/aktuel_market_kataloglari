@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/bim_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/bizim_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/sok_client.dart';
+import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/custom_expansion_panel.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/lottie_main.dart';
 import 'package:flutter/material.dart';
@@ -21,7 +20,6 @@ class MarketPage extends StatefulWidget {
 
 class _HomePageState extends State<MarketPage> with TickerProviderStateMixin {
   late StreamSubscription<InternetConnectionStatus> internetConnectionListener;
-  final List<Widget> _customExpansionPanelList = [];
   @override
   void initState() {
     super.initState();
@@ -98,7 +96,8 @@ class _HomePageState extends State<MarketPage> with TickerProviderStateMixin {
           ),
           divider(width, constant_values.bimColor),
           CustomExpansionPanel(
-            dataFuture: SokClient().getBannerData(),
+            dataFuture: KataloglarClient()
+                .getBannerData(constant_values.sokBannerPageUrl),
             logoPath: constant_values.sokLogoPath,
             headerText: "Şok Güncel Katalogları",
             color: constant_values.sokColor,
@@ -106,7 +105,8 @@ class _HomePageState extends State<MarketPage> with TickerProviderStateMixin {
           ),
           divider(width, constant_values.sokColor),
           CustomExpansionPanel(
-            dataFuture: BizimClient().getBannerData(),
+            dataFuture: KataloglarClient()
+                .getBannerData(constant_values.bizimBannerPageUrl),
             logoPath: constant_values.bizimLogoPath,
             headerText: "Bizim Güncel Katalogları",
             color: constant_values.bizimColor,

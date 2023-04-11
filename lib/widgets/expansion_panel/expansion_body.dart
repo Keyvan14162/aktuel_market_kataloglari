@@ -1,10 +1,6 @@
 import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/bim_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/bizim_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/defacto_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/flo_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/lc_client.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/sok_client.dart';
+import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
@@ -46,13 +42,16 @@ class ExpansionBody extends StatelessWidget {
               brochurePageImagesFuture = brochurePageImagesFuture =
                   BimClient().getBrochurePageImageUrls(index);
               break;
+            /*
             case constant_values.sokCode:
-              brochurePageImagesFuture = SokClient().getBrochurePageImageUrls(
+              brochurePageImagesFuture =
+                  KataloglarClient().getBrochurePageImageUrls(
                 data[index].catagoryUrl.toString(),
               );
               break;
             case constant_values.bizimCode:
-              brochurePageImagesFuture = BizimClient().getBrochurePageImageUrls(
+              brochurePageImagesFuture =
+                  KataloglarClient().getBrochurePageImageUrls(
                 data[index].catagoryUrl.toString(),
               );
               break;
@@ -72,8 +71,10 @@ class ExpansionBody extends StatelessWidget {
                 data[index].catagoryUrl.toString(),
               );
               break;
+            */
             default:
-              brochurePageImagesFuture = SokClient().getBrochurePageImageUrls(
+              brochurePageImagesFuture =
+                  KataloglarClient().getBrochurePageImageUrls(
                 data[index].catagoryUrl.toString(),
               );
           }

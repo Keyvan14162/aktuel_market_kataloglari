@@ -36,7 +36,6 @@ class _ZoomDrawerProfileState extends State<ZoomDrawerProfile> {
   Widget build(BuildContext context) {
     return isSigned
         ? Column(
-            //crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Center(
                 child: CircleAvatar(

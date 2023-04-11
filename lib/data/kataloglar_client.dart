@@ -1,12 +1,13 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/resolve_date.dart';
 import 'package:aktuel_urunler_bim_a101_sok/helpers/functions.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
-class BizimClient {
-  String bannerPageUrl = "https://www.kataloglar.com.tr/bizim-toptan/";
+// KATALOGLAR.COM WEBSITESINDEN CEKILEN MAGAZALAR ICIN
 
+class KataloglarClient {
   _getPageUrls(String url) async {
     var response = await http.Client().get(
       Uri.parse(url),
@@ -61,10 +62,11 @@ class BizimClient {
     return brochurePageImgUrls;
   }
 
-  Future getBannerData() async {
+  Future getBannerData(String bannerPageUrl) async {
     var response = await http.Client().get(
       Uri.parse(bannerPageUrl),
     );
+
     if (response.statusCode == 200) {
       var document = parse(response.body);
       List<BannerModel> banners = [];
@@ -97,14 +99,12 @@ class BizimClient {
                   .attributes["src"]
                   .toString();
             }
+
+            String fullDateString =
+                element.children[0].children[0].attributes["title"] ?? "";
+            int indexOfFirstDot = fullDateString.indexOf(".");
             String date =
-                " ${element.children[0].children[0].attributes["title"]?.substring(0, 23).split(" ")[0].substring(0, 2)} ${Functions().convertNumberToMonth(
-              int.parse(element.children[0].children[0].attributes["title"]
-                      ?.substring(0, 23)
-                      .split(" ")[0]
-                      .split(".")[1] ??
-                  "1"),
-            )} ";
+                "${toRevolveDate(fullDateString.substring(indexOfFirstDot - 2, indexOfFirstDot + 8))} ve Sonrasında";
 
             banners.add(
               BannerModel(

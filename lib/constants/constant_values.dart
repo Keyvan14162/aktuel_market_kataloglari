@@ -11,6 +11,12 @@ const int floCode = 5;
 const int lcCode = 6;
 const int defactoCode = 7;
 
+const String bizimBannerPageUrl = "https://www.kataloglar.com.tr/bizim-toptan/";
+const String defactoBannerPageUrl = "https://www.kataloglar.com.tr/defacto/";
+const String floBannerPageUrl = "https://www.kataloglar.com.tr/flo/";
+const String lcBannerPageUrl = "https://www.kataloglar.com.tr/lc-waikiki/";
+const String sokBannerPageUrl = "https://www.kataloglar.com.tr/sok-market/";
+
 const String a101LogoPath = "assets/images/a101_logo.png";
 const String bimLogoPath = "assets/images/bim_logo.png";
 const String sokLogoPath = "assets/images/sok_logo.png";
