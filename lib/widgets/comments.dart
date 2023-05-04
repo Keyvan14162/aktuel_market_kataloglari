@@ -159,9 +159,13 @@ class _CommentsState extends State<Comments> {
                                 width: 40,
                                 height: 40,
                               ),
-                              const FittedBox(
-                                fit: BoxFit.fitWidth,
-                                child: Text("Yorum Yapmak İçin Giriş Yapınız"),
+                              const Flexible(
+                                child: Center(
+                                  child: Text(
+                                    "Yorum Yapmak ve Yorumları Görmek İçin Giriş Yapınız",
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
                               )
                             ],
                           ),
@@ -180,32 +184,35 @@ class _CommentsState extends State<Comments> {
                     height: 10,
                   ),
 
-                  Padding(
-                    padding: const EdgeInsets.all(12.0),
-                    child: StreamBuilder(
-                      stream: CommentFunctions()
-                          .getComments(widget.brochureDateText),
-                      builder: (context, snapshot) {
-                        if (snapshot.hasData) {
-                          QuerySnapshot<Map<String, dynamic>> data = (snapshot
-                              .data as QuerySnapshot<Map<String, dynamic>>);
-                          return Column(
-                            children: [
-                              for (var element in data.docs)
-                                commentItem(
-                                  element.data()["userName"],
-                                  element.data()["commentText"],
-                                  element.data()["date"],
-                                  element.data()["profilePicUrl"],
-                                ),
-                            ],
-                          );
-                        } else {
-                          return const SizedBox();
-                        }
-                      },
-                    ),
-                  ),
+                  isSigned
+                      ? Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: StreamBuilder(
+                            stream: CommentFunctions()
+                                .getComments(widget.brochureDateText),
+                            builder: (context, snapshot) {
+                              if (snapshot.hasData) {
+                                QuerySnapshot<Map<String, dynamic>> data =
+                                    (snapshot.data
+                                        as QuerySnapshot<Map<String, dynamic>>);
+                                return Column(
+                                  children: [
+                                    for (var element in data.docs)
+                                      commentItem(
+                                        element.data()["userName"],
+                                        element.data()["commentText"],
+                                        element.data()["date"],
+                                        element.data()["profilePicUrl"],
+                                      ),
+                                  ],
+                                );
+                              } else {
+                                return const SizedBox();
+                              }
+                            },
+                          ),
+                        )
+                      : const SizedBox(),
                   const SizedBox(
                     height: 20,
                   ),

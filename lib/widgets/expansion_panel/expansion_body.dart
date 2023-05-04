@@ -42,36 +42,6 @@ class ExpansionBody extends StatelessWidget {
               brochurePageImagesFuture = brochurePageImagesFuture =
                   BimClient().getBrochurePageImageUrls(index);
               break;
-            /*
-            case constant_values.sokCode:
-              brochurePageImagesFuture =
-                  KataloglarClient().getBrochurePageImageUrls(
-                data[index].catagoryUrl.toString(),
-              );
-              break;
-            case constant_values.bizimCode:
-              brochurePageImagesFuture =
-                  KataloglarClient().getBrochurePageImageUrls(
-                data[index].catagoryUrl.toString(),
-              );
-              break;
-            case constant_values.floCode:
-              brochurePageImagesFuture = FloClient().getBrochurePageImageUrls(
-                data[index].catagoryUrl.toString(),
-              );
-              break;
-            case constant_values.lcCode:
-              brochurePageImagesFuture = LcClient().getBrochurePageImageUrls(
-                data[index].catagoryUrl.toString(),
-              );
-              break;
-            case constant_values.defactoCode:
-              brochurePageImagesFuture =
-                  DefactoClient().getBrochurePageImageUrls(
-                data[index].catagoryUrl.toString(),
-              );
-              break;
-            */
             default:
               brochurePageImagesFuture =
                   KataloglarClient().getBrochurePageImageUrls(
