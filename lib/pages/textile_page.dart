@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
+import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/custom_expansion_panel.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/lottie_main.dart';
@@ -6,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
-    as constant_values;
 
 class TextilePage extends StatefulWidget {
   const TextilePage({super.key});
@@ -18,7 +18,6 @@ class TextilePage extends StatefulWidget {
 
 class _HomePageState extends State<TextilePage> with TickerProviderStateMixin {
   late StreamSubscription<InternetConnectionStatus> internetConnectionListener;
-  final List<Widget> _customExpansionPanelList = [];
   @override
   void initState() {
     super.initState();
@@ -79,29 +78,29 @@ class _HomePageState extends State<TextilePage> with TickerProviderStateMixin {
             ),
           ),
           CustomExpansionPanel(
-              dataFuture: KataloglarClient()
-                  .getBannerData(constant_values.floBannerPageUrl),
-              logoPath: constant_values.floLogoPath,
+              dataFuture:
+                  KataloglarClient().getBannerData(Constants.floBannerPageUrl),
+              logoPath: Constants.floLogoPath,
               headerText: "Flo Güncel Ürünleri",
-              color: constant_values.floColor,
-              marketCode: constant_values.floCode),
-          divider(width, constant_values.floColor),
+              color: Constants.floColor,
+              marketCode: MarketCode.flo),
+          divider(width, Constants.floColor),
           CustomExpansionPanel(
-              dataFuture: KataloglarClient()
-                  .getBannerData(constant_values.lcBannerPageUrl),
-              logoPath: constant_values.lcLogoPath,
+              dataFuture:
+                  KataloglarClient().getBannerData(Constants.lcBannerPageUrl),
+              logoPath: Constants.lcLogoPath,
               headerText: "Lc Waikiki Ürünleri",
-              color: constant_values.lcColor,
-              marketCode: constant_values.lcCode),
-          divider(width, constant_values.lcColor),
+              color: Constants.lcColor,
+              marketCode: MarketCode.lc),
+          divider(width, Constants.lcColor),
           CustomExpansionPanel(
               dataFuture: KataloglarClient()
-                  .getBannerData(constant_values.defactoBannerPageUrl),
-              logoPath: constant_values.defactoLogoPath,
+                  .getBannerData(Constants.defactoBannerPageUrl),
+              logoPath: Constants.defactoLogoPath,
               headerText: "Defacto Güncel Ürünleri",
-              color: constant_values.defactoColor,
-              marketCode: constant_values.defactoCode),
-          divider(width, constant_values.defactoColor),
+              color: Constants.defactoColor,
+              marketCode: MarketCode.defacto),
+          divider(width, Constants.defactoColor),
         ],
       ),
     );

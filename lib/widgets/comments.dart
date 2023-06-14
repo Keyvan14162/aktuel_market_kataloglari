@@ -9,7 +9,11 @@ import 'package:top_snackbar_flutter/custom_snack_bar.dart';
 
 class Comments extends StatefulWidget {
   const Comments(
-      {required this.brochureDateText, required this.color, super.key});
+      {required this.scrollDown,
+      required this.brochureDateText,
+      required this.color,
+      super.key});
+  final VoidCallback scrollDown;
   final String brochureDateText;
   final Color color;
 
@@ -65,10 +69,14 @@ class _CommentsState extends State<Comments> {
         ),
         child: ExpansionPanelList.radio(
           elevation: 0,
+          expansionCallback: (panelIndex, isExpanded) {
+            widget.scrollDown();
+          },
           children: [
             ExpansionPanelRadio(
               backgroundColor: Colors.transparent,
               value: widget.brochureDateText,
+              canTapOnHeader: true,
               headerBuilder: (context, isExpanded) {
                 return Container(
                   decoration: BoxDecoration(

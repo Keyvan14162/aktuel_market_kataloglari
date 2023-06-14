@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
+import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/bim_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
@@ -8,8 +10,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
-    as constant_values;
 
 class MarketPage extends StatefulWidget {
   const MarketPage({super.key});
@@ -81,38 +81,38 @@ class _HomePageState extends State<MarketPage> with TickerProviderStateMixin {
           ),
           CustomExpansionPanel(
             dataFuture: A101Client().getBannerData(),
-            logoPath: constant_values.a101LogoPath,
+            logoPath: Constants.a101LogoPath,
             headerText: "A101 Güncel Katalogları",
-            color: constant_values.a101Color,
-            marketCode: constant_values.a101Code,
+            color: Constants.a101Color,
+            marketCode: MarketCode.a101,
           ),
-          divider(width, constant_values.a101Color),
+          divider(width, Constants.a101Color),
           CustomExpansionPanel(
             dataFuture: BimClient().getBannerData(),
-            logoPath: constant_values.bimLogoPath,
+            logoPath: Constants.bimLogoPath,
             headerText: "Bim Güncel Katalogları",
-            color: constant_values.bimColor,
-            marketCode: constant_values.bimCode,
+            color: Constants.bimColor,
+            marketCode: MarketCode.bim,
           ),
-          divider(width, constant_values.bimColor),
+          divider(width, Constants.bimColor),
           CustomExpansionPanel(
-            dataFuture: KataloglarClient()
-                .getBannerData(constant_values.sokBannerPageUrl),
-            logoPath: constant_values.sokLogoPath,
+            dataFuture:
+                KataloglarClient().getBannerData(Constants.sokBannerPageUrl),
+            logoPath: Constants.sokLogoPath,
             headerText: "Şok Güncel Katalogları",
-            color: constant_values.sokColor,
-            marketCode: constant_values.sokCode,
+            color: Constants.sokColor,
+            marketCode: MarketCode.sok,
           ),
-          divider(width, constant_values.sokColor),
+          divider(width, Constants.sokColor),
           CustomExpansionPanel(
-            dataFuture: KataloglarClient()
-                .getBannerData(constant_values.bizimBannerPageUrl),
-            logoPath: constant_values.bizimLogoPath,
+            dataFuture:
+                KataloglarClient().getBannerData(Constants.bizimBannerPageUrl),
+            logoPath: Constants.bizimLogoPath,
             headerText: "Bizim Güncel Katalogları",
-            color: constant_values.bizimColor,
-            marketCode: constant_values.bizimCode,
+            color: Constants.bizimColor,
+            marketCode: MarketCode.bizim,
           ),
-          divider(width, constant_values.bizimColor),
+          divider(width, Constants.bizimColor),
         ],
       ),
     );

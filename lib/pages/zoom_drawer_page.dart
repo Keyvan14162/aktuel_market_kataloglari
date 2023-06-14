@@ -1,11 +1,10 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/market_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/textile_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_menu_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_zoom_drawer/config.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
-    as constant_values;
 
 class ZoomDrawerScreen extends StatefulWidget {
   const ZoomDrawerScreen({super.key});
@@ -47,9 +46,9 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen> {
 
   Widget currentScreen() {
     switch (currentIndex) {
-      case constant_values.marketPageCode:
+      case Constants.marketPageCode:
         return const MarketPage();
-      case constant_values.textilePageCode:
+      case Constants.textilePageCode:
         return const TextilePage();
 
       default:

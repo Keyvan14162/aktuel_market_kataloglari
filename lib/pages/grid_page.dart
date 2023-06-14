@@ -1,8 +1,10 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
+import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/comments.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/shimmer_custom.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
-    as constants;
 
 class GridPage extends StatefulWidget {
   const GridPage(
@@ -19,6 +21,7 @@ class GridPage extends StatefulWidget {
 }
 
 class _GridPageState extends State<GridPage> {
+  final ScrollController _scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +36,7 @@ class _GridPageState extends State<GridPage> {
           return Container(
             color: widget.color.withOpacity(0.1),
             child: SingleChildScrollView(
+              controller: _scrollController,
               child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: p1.maxHeight),
                 child: FutureBuilder(
@@ -62,53 +66,17 @@ class _GridPageState extends State<GridPage> {
                               ),
                               itemBuilder: (BuildContext ctx, index) {
                                 // gridview items
-                                return GestureDetector(
-                                  onTap: () {
-                                    FocusScopeNode currentFocus =
-                                        FocusScope.of(context);
-                                    if (!currentFocus.hasPrimaryFocus) {
-                                      currentFocus.unfocus();
-                                    }
-                                    Navigator.of(context)
-                                        .pushNamed("/bannerPage", arguments: [
-                                      brochurePages,
-                                      index,
-                                      widget.color
-                                    ]);
-                                  },
-                                  onPanStart: (details) {
-                                    Navigator.of(context)
-                                        .pushNamed("/bannerPage", arguments: [
-                                      brochurePages,
-                                      index,
-                                      constants.a101Color,
-                                    ]);
-                                  },
-                                  child: Container(
-                                    alignment: Alignment.center,
-                                    child: Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(1, 2, 1, 0),
-                                      // IMAGE
-                                      child: Hero(
-                                        tag: brochurePages[index],
-                                        child: CachedNetworkImage(
-                                          fit: BoxFit.contain,
-                                          imageUrl: brochurePages[index],
-                                          placeholder: (context, url) =>
-                                              const CircularProgressIndicator(),
-                                          errorWidget: (context, url, error) =>
-                                              const Icon(Icons.error),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                );
+                                return gridImgItem(
+                                    context, brochurePages, index);
                               },
                             ),
 
                             // comments
                             Comments(
+                              scrollDown: () {
+                                _scrollController.jumpTo(
+                                    _scrollController.position.maxScrollExtent);
+                              },
                               brochureDateText: widget.date,
                               color: widget.color,
                             )
@@ -116,8 +84,8 @@ class _GridPageState extends State<GridPage> {
                         ),
                       );
                     } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
+                      return Center(
+                        child: loadingText(),
                       );
                     }
                   },
@@ -127,6 +95,60 @@ class _GridPageState extends State<GridPage> {
           );
         },
       ),
+    );
+  }
+
+  GestureDetector gridImgItem(
+      BuildContext context, List<String> brochurePages, int index) {
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+        Navigator.of(context).pushNamed(Pages.bannerPage,
+            arguments: [brochurePages, index, widget.color]);
+      },
+      onPanStart: (details) {
+        Navigator.of(context).pushNamed(Pages.bannerPage, arguments: [
+          brochurePages,
+          index,
+          Constants.a101Color,
+        ]);
+      },
+      child: Card(
+        color: widget.color.withOpacity(0.1),
+        semanticContainer: true,
+        clipBehavior: Clip.antiAliasWithSaveLayer,
+        child: Hero(
+          tag: brochurePages[index],
+          child: CachedNetworkImage(
+            fit: BoxFit.fill,
+            imageUrl: brochurePages[index],
+            placeholder: (context, url) => ShimmerCustom.baseShimmer(),
+            errorWidget: (context, url, error) => const Icon(Icons.error),
+          ),
+        ),
+      ),
+    );
+  }
+
+  AnimatedTextKit loadingText() {
+    return AnimatedTextKit(
+      animatedTexts: [
+        TyperAnimatedText(
+          "Katalog yükleniyor...",
+          textStyle: const TextStyle(fontSize: 16),
+        ),
+        TyperAnimatedText(
+          "Lütfen bekleyin...",
+          textStyle: const TextStyle(fontSize: 16),
+        ),
+        TyperAnimatedText(
+          "Az kaldı...",
+          textStyle: const TextStyle(fontSize: 16),
+        ),
+      ],
     );
   }
 }

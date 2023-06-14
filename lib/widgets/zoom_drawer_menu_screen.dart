@@ -1,12 +1,11 @@
 import 'dart:io';
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
-    as constant_values;
 
 class ZoomDrawerMenuScreen extends StatefulWidget {
   const ZoomDrawerMenuScreen(
@@ -79,7 +78,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                           children: [
                             Container(
                               color: widget.currentIndex ==
-                                      constant_values.marketPageCode
+                                      Constants.marketPageCode
                                   ? Colors.grey.withOpacity(0.2)
                                   : Colors.transparent,
                               child: drawerMenuItem(
@@ -87,14 +86,13 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                 Colors.white,
                                 "Aktüel Marketler",
                                 () {
-                                  widget
-                                      .setIndex(constant_values.marketPageCode);
+                                  widget.setIndex(Constants.marketPageCode);
                                 },
                               ),
                             ),
                             Container(
                               color: widget.currentIndex ==
-                                      constant_values.textilePageCode
+                                      Constants.textilePageCode
                                   ? Colors.grey.withOpacity(0.2)
                                   : Colors.transparent,
                               child: drawerMenuItem(
@@ -102,8 +100,7 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                 Colors.white,
                                 "Giyim Marketleri",
                                 () {
-                                  widget.setIndex(
-                                      constant_values.textilePageCode);
+                                  widget.setIndex(Constants.textilePageCode);
                                 },
                               ),
                             ),

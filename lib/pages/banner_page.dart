@@ -1,3 +1,4 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -73,7 +74,7 @@ class _BannerPageState extends State<BannerPage> {
                         child: GestureDetector(
                           onTap: () {
                             Navigator.of(context).pushNamed(
-                              "/detailPage",
+                              Pages.detailPage,
                               arguments: [widget.brochurePageUrls, _current],
                             ).then(
                               (value) {
@@ -97,7 +98,7 @@ class _BannerPageState extends State<BannerPage> {
                             if (details.primaryVelocity! > 0) {
                               // down
                               Navigator.of(context).pushNamed(
-                                "/detailPage",
+                                Pages.detailPage,
                                 arguments: [widget.brochurePageUrls, _current],
                               ).then(
                                 (value) {
@@ -113,7 +114,7 @@ class _BannerPageState extends State<BannerPage> {
                           },
                           onScaleStart: (details) {
                             Navigator.of(context).pushNamed(
-                              "/detailPage",
+                              Pages.detailPage,
                               arguments: [widget.brochurePageUrls, _current],
                             ).then(
                               (value) {
@@ -139,39 +140,42 @@ class _BannerPageState extends State<BannerPage> {
                     .toList(),
               ),
             ),
-            // durum indikatoru
 
-            FittedBox(
-              fit: BoxFit.scaleDown,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: widget.brochurePageUrls.asMap().entries.map((entry) {
-                  return GestureDetector(
-                    onTap: () {
-                      try {
-                        carouselController.animateToPage(entry.key);
-                      } catch (e) {
-                        debugPrint("$e Durum İndikatörü Hata");
-                      }
-                    },
-                    child: Container(
-                      width: 12.0,
-                      height: 12.0,
-                      margin: const EdgeInsets.only(bottom: 8.0, left: 8.0),
-                      decoration: BoxDecoration(
-                        shape: BoxShape.circle,
-                        color: (Theme.of(context).brightness == Brightness.dark
-                                ? Colors.white
-                                : Theme.of(context).primaryColor)
-                            .withOpacity(_current == entry.key ? 0.9 : 0.4),
-                      ),
-                    ),
-                  );
-                }).toList(),
-              ),
-            ),
+            pageIndicator(context),
           ],
         ),
+      ),
+    );
+  }
+
+  FittedBox pageIndicator(BuildContext context) {
+    return FittedBox(
+      fit: BoxFit.scaleDown,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: widget.brochurePageUrls.asMap().entries.map((entry) {
+          return GestureDetector(
+            onTap: () {
+              try {
+                carouselController.animateToPage(entry.key);
+              } catch (e) {
+                debugPrint("$e Durum İndikatörü Hata");
+              }
+            },
+            child: Container(
+              width: 12.0,
+              height: 12.0,
+              margin: const EdgeInsets.only(bottom: 8.0, left: 8.0),
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: (Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Theme.of(context).primaryColor)
+                    .withOpacity(_current == entry.key ? 0.9 : 0.4),
+              ),
+            ),
+          );
+        }).toList(),
       ),
     );
   }

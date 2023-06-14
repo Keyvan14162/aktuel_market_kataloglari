@@ -1,17 +1,19 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
+import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/bim_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:aktuel_urunler_bim_a101_sok/constants/constant_values.dart'
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart'
     as constant_values;
 
 class ExpansionBody extends StatelessWidget {
   final List<BannerModel> data;
   final double width;
   final Color color;
-  final int marketCode;
+  final MarketCode marketCode;
 
   const ExpansionBody(
       {required this.data,
@@ -33,12 +35,12 @@ class ExpansionBody extends StatelessWidget {
         itemBuilder: (context, index) {
           Future brochurePageImagesFuture;
           switch (marketCode) {
-            case constant_values.a101Code:
+            case MarketCode.a101:
               brochurePageImagesFuture = A101Client().getBrochurePageImageUrls(
                 data[index].catagoryUrl.toString(),
               );
               break;
-            case constant_values.bimCode:
+            case MarketCode.bim:
               brochurePageImagesFuture = brochurePageImagesFuture =
                   BimClient().getBrochurePageImageUrls(index);
               break;
@@ -50,7 +52,7 @@ class ExpansionBody extends StatelessWidget {
           }
           return GestureDetector(
             onTap: () {
-              Navigator.of(context).pushNamed("/gridPage", arguments: [
+              Navigator.of(context).pushNamed(Pages.gridPage, arguments: [
                 brochurePageImagesFuture,
                 data[index].date ?? "hata",
                 color,

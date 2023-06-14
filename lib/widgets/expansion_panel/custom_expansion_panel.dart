@@ -1,6 +1,8 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/expansion_body.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/expansion_header.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/shimmer_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
@@ -17,7 +19,7 @@ class CustomExpansionPanel extends StatefulWidget {
   final String logoPath;
   final String headerText;
   final Color color;
-  final int marketCode;
+  final MarketCode marketCode;
 
   @override
   State<CustomExpansionPanel> createState() => _CustomExpansionPanelState();
@@ -38,7 +40,7 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
   }
 
   Widget expansionPanel(Future dataFuture, double width, String logoPath,
-      String headerText, Color color, int marketCode) {
+      String headerText, Color color, MarketCode marketCode) {
     return FutureBuilder(
       future: dataFuture,
       builder: (context, snapshot) {
@@ -72,15 +74,11 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
             ),
           );
         } else {
-          return Shimmer.fromColors(
-            baseColor: Colors.grey.withOpacity(0.2),
-            highlightColor: Colors.grey.withOpacity(0.05),
-            child: Padding(
-              padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
-              child: Container(
-                height: width / 5,
-                color: Colors.white,
-              ),
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
+            child: SizedBox(
+              height: width / 5,
+              child: ShimmerCustom.baseShimmer(),
             ),
           );
         }

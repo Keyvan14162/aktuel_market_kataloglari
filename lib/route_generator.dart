@@ -1,3 +1,4 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/banner_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/detail_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/grid_page.dart';
@@ -24,34 +25,22 @@ class RouteGenerator {
 
   static Route<dynamic>? routeGenrator(RouteSettings settings) {
     switch (settings.name) {
-      case "/":
+      case Pages.homePage:
         return _generateRoute(const ZoomDrawerScreen(), settings);
 
-      case "/customExpansionPanel":
-        return _generateRoute(
-          CustomExpansionPanel(
-            dataFuture: (settings.arguments as List)[0] as Future,
-            logoPath: (settings.arguments as List)[1] as String,
-            headerText: (settings.arguments as List)[2] as String,
-            color: (settings.arguments as List)[3] as Color,
-            marketCode: (settings.arguments as List)[4] as int,
-          ),
-          settings,
-        );
-
-      case "/textilePage":
+      case Pages.textilePage:
         return _generateRoute(
           const TextilePage(),
           settings,
         );
 
-      case "/marketPage":
+      case Pages.marketPage:
         return _generateRoute(
           const MarketPage(),
           settings,
         );
 
-      case "/bannerPage":
+      case Pages.bannerPage:
         return _generateRoute(
           BannerPage(
             brochurePageUrls: (settings.arguments as List)[0] as List<String>,
@@ -61,7 +50,7 @@ class RouteGenerator {
           settings,
         );
 
-      case "/gridPage":
+      case Pages.gridPage:
         return _generateRoute(
           GridPage(
             brochurePageImagesFuture: (settings.arguments as List)[0] as Future,
@@ -71,7 +60,7 @@ class RouteGenerator {
           settings,
         );
 
-      case "/detailPage":
+      case Pages.detailPage:
         return _generateRoute(
           DetailPage(
             imageUrls: (settings.arguments as List)[0] as List<String>,
