@@ -26,6 +26,7 @@ class _GridPageState extends State<GridPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
           widget.date,
@@ -48,39 +49,42 @@ class _GridPageState extends State<GridPage> {
                       List<String> brochurePages =
                           snapshot.data as List<String>;
                       return SafeArea(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            // brochure pages
-                            GridView.builder(
-                              physics: const NeverScrollableScrollPhysics(),
-                              shrinkWrap: true,
-                              itemCount: brochurePages.length,
-                              gridDelegate:
-                                  SliverGridDelegateWithMaxCrossAxisExtent(
-                                maxCrossAxisExtent:
-                                    MediaQuery.of(context).size.width / 3,
-                                childAspectRatio: 1 / 1.5,
-                                crossAxisSpacing: 4,
-                                mainAxisSpacing: 4,
+                        child: Padding(
+                          padding: const EdgeInsets.all(4.0),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              // brochure pages
+                              GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: brochurePages.length,
+                                gridDelegate:
+                                    SliverGridDelegateWithMaxCrossAxisExtent(
+                                  maxCrossAxisExtent:
+                                      MediaQuery.of(context).size.width / 3,
+                                  childAspectRatio: 1 / 1.5,
+                                  crossAxisSpacing: 4,
+                                  mainAxisSpacing: 4,
+                                ),
+                                itemBuilder: (BuildContext ctx, index) {
+                                  // gridview items
+                                  return gridImgItem(
+                                      context, brochurePages, index);
+                                },
                               ),
-                              itemBuilder: (BuildContext ctx, index) {
-                                // gridview items
-                                return gridImgItem(
-                                    context, brochurePages, index);
-                              },
-                            ),
 
-                            // comments
-                            Comments(
-                              scrollDown: () {
-                                _scrollController.jumpTo(
-                                    _scrollController.position.maxScrollExtent);
-                              },
-                              brochureDateText: widget.date,
-                              color: widget.color,
-                            )
-                          ],
+                              // comments
+                              Comments(
+                                scrollDown: () {
+                                  _scrollController.jumpTo(_scrollController
+                                      .position.maxScrollExtent);
+                                },
+                                brochureDateText: widget.date,
+                                color: widget.color,
+                              )
+                            ],
+                          ),
                         ),
                       );
                     } else {
@@ -116,16 +120,15 @@ class _GridPageState extends State<GridPage> {
           Constants.a101Color,
         ]);
       },
-      child: Card(
-        color: widget.color.withOpacity(0.1),
-        semanticContainer: true,
-        clipBehavior: Clip.antiAliasWithSaveLayer,
+      child: Material(
+        elevation: 4,
         child: Hero(
           tag: brochurePages[index],
           child: CachedNetworkImage(
             fit: BoxFit.fill,
             imageUrl: brochurePages[index],
-            placeholder: (context, url) => ShimmerCustom.baseShimmer(),
+            placeholder: (context, url) =>
+                ShimmerCustom.baseShimmer(widget.color),
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),

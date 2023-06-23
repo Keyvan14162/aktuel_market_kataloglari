@@ -1,4 +1,5 @@
 import 'package:flutter/animation.dart';
+import 'package:flutter/material.dart';
 
 class Constants {
   static const int marketPageCode = 0;
@@ -29,4 +30,6 @@ class Constants {
   static const Color floColor = Color.fromARGB(255, 243, 128, 45);
   static const Color lcColor = Color.fromARGB(255, 1, 114, 187);
   static const Color defactoColor = Color.fromARGB(255, 0, 0, 0);
+
+  static const Color greyColor = Colors.grey;
 }

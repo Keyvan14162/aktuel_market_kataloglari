@@ -1,3 +1,4 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/expansion_body.dart';
@@ -78,7 +79,7 @@ class _CustomExpansionPanelState extends State<CustomExpansionPanel> {
             padding: const EdgeInsets.fromLTRB(8.0, 8.0, 8.0, 0),
             child: SizedBox(
               height: width / 5,
-              child: ShimmerCustom.baseShimmer(),
+              child: ShimmerCustom.baseShimmer(Constants.greyColor),
             ),
           );
         }
