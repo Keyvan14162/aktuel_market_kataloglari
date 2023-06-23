@@ -17,7 +17,6 @@ class ExpansionHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      //width: double.infinity,
       height: width / 5,
       child: Row(
         children: [

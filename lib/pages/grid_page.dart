@@ -38,6 +38,7 @@ class _GridPageState extends State<GridPage> {
             color: widget.color.withOpacity(0.1),
             child: SingleChildScrollView(
               controller: _scrollController,
+              physics: BouncingScrollPhysics(),
               child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: p1.maxHeight),
                 child: FutureBuilder(
@@ -56,7 +57,6 @@ class _GridPageState extends State<GridPage> {
                             children: [
                               // brochure pages
                               GridView.builder(
-                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: brochurePages.length,
                                 gridDelegate:
@@ -112,13 +112,6 @@ class _GridPageState extends State<GridPage> {
         }
         Navigator.of(context).pushNamed(Pages.bannerPage,
             arguments: [brochurePages, index, widget.color]);
-      },
-      onPanStart: (details) {
-        Navigator.of(context).pushNamed(Pages.bannerPage, arguments: [
-          brochurePages,
-          index,
-          Constants.a101Color,
-        ]);
       },
       child: Material(
         elevation: 4,
