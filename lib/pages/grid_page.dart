@@ -1,10 +1,10 @@
 import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
 import 'package:aktuel_urunler_bim_a101_sok/widgets/comments.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/shimmer_custom.dart';
-import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/loadings.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class GridPage extends StatefulWidget {
   const GridPage(
@@ -38,7 +38,7 @@ class _GridPageState extends State<GridPage> {
             color: widget.color.withOpacity(0.1),
             child: SingleChildScrollView(
               controller: _scrollController,
-              physics: BouncingScrollPhysics(),
+              physics: const BouncingScrollPhysics(),
               child: ConstrainedBox(
                 constraints: BoxConstraints(minHeight: p1.maxHeight),
                 child: FutureBuilder(
@@ -51,18 +51,19 @@ class _GridPageState extends State<GridPage> {
                           snapshot.data as List<String>;
                       return SafeArea(
                         child: Padding(
-                          padding: const EdgeInsets.all(4.0),
+                          padding: const EdgeInsets.all(
+                              Constants.defaultPadding / 2),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               // brochure pages
                               GridView.builder(
+                                physics: const NeverScrollableScrollPhysics(),
                                 shrinkWrap: true,
                                 itemCount: brochurePages.length,
                                 gridDelegate:
                                     SliverGridDelegateWithMaxCrossAxisExtent(
-                                  maxCrossAxisExtent:
-                                      MediaQuery.of(context).size.width / 3,
+                                  maxCrossAxisExtent: 0.33.sw,
                                   childAspectRatio: 1 / 1.5,
                                   crossAxisSpacing: 4,
                                   mainAxisSpacing: 4,
@@ -89,7 +90,7 @@ class _GridPageState extends State<GridPage> {
                       );
                     } else {
                       return Center(
-                        child: loadingText(),
+                        child: Loadings.animatedLoadingText(),
                       );
                     }
                   },
@@ -120,31 +121,11 @@ class _GridPageState extends State<GridPage> {
           child: CachedNetworkImage(
             fit: BoxFit.fill,
             imageUrl: brochurePages[index],
-            placeholder: (context, url) =>
-                ShimmerCustom.baseShimmer(widget.color),
+            placeholder: (context, url) => Loadings.baseShimmer(widget.color),
             errorWidget: (context, url, error) => const Icon(Icons.error),
           ),
         ),
       ),
-    );
-  }
-
-  AnimatedTextKit loadingText() {
-    return AnimatedTextKit(
-      animatedTexts: [
-        TyperAnimatedText(
-          "Katalog yükleniyor...",
-          textStyle: const TextStyle(fontSize: 16),
-        ),
-        TyperAnimatedText(
-          "Lütfen bekleyin...",
-          textStyle: const TextStyle(fontSize: 16),
-        ),
-        TyperAnimatedText(
-          "Az kaldı...",
-          textStyle: const TextStyle(fontSize: 16),
-        ),
-      ],
     );
   }
 }

@@ -1,32 +1,29 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExpansionHeader extends StatelessWidget {
-  final double width;
-  final String logoPath;
-  final String headerText;
-  final Color color;
   const ExpansionHeader(
-      {required this.width,
-      required this.logoPath,
+      {required this.logoPath,
       required this.headerText,
       required this.color,
       super.key});
-
+  final String logoPath;
+  final String headerText;
+  final Color color;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: width / 5,
+      height: 0.2.sw,
       child: Row(
         children: [
           // logo
           Container(
-            width: width / 4,
+            width: 0.25.sw,
             padding: const EdgeInsets.fromLTRB(6, 4, 2, 4),
             decoration: const BoxDecoration(
               borderRadius: BorderRadius.all(
-                Radius.circular(12),
+                Radius.circular(Constants.defaultBorderRadius),
               ),
             ),
             child: Image.asset(
@@ -37,7 +34,7 @@ class ExpansionHeader extends StatelessWidget {
           //text
           Flexible(
             child: Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(Constants.defaultPadding),
               child: FittedBox(
                 fit: BoxFit.scaleDown,
                 child: Text(

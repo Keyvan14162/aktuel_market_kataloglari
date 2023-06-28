@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:lottie/lottie.dart';
 import 'dart:math' as math;
 
@@ -47,8 +48,8 @@ class _LottieMainState extends State<LottieMain> with TickerProviderStateMixin {
         }
       },
       child: SizedBox(
-        height: MediaQuery.of(context).size.height / 4.2,
-        width: MediaQuery.of(context).size.height / 4.2,
+        height: 0.25.sh,
+        width: 0.25.sh,
         child: Transform(
           alignment: Alignment.center,
           transform: Matrix4.rotationX(rotationX),

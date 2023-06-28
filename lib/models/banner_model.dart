@@ -1,9 +1,13 @@
 class BannerModel {
-  final String? categoryName;
+  final String? bannerName;
   final String? date;
-  final String? catalogImgUrl;
-  final String? catagoryUrl;
+  final String? bannerImgUrl;
+  final String? bannerUrl;
 
-  BannerModel(this.categoryName, this.date, this.catalogImgUrl,
-      {this.catagoryUrl = ""});
+  BannerModel(
+    this.bannerName,
+    this.date,
+    this.bannerImgUrl, {
+    this.bannerUrl = "",
+  });
 }

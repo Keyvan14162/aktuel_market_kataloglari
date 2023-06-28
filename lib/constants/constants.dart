@@ -1,10 +1,17 @@
-import 'package:flutter/animation.dart';
 import 'package:flutter/material.dart';
 
 class Constants {
-  static const int marketPageCode = 0;
-  static const int textilePageCode = 1;
+  static const String isOldKey = "isOldKey";
 
+  static const int marketCatagoryCode = 0;
+  static const int textileCatagoryCode = 1;
+
+  static const double defaultBorderRadius = 8.0;
+  static const double defaultPadding = 8.0;
+
+  static const String a101BannerPageUrl = "https://www.a101.com.tr/afisler";
+  static const String bimBannerPageUrl =
+      "https://www.bim.com.tr/Categories/680/afisler.aspx";
   static const String bizimBannerPageUrl =
       "https://www.kataloglar.com.tr/bizim-toptan/";
   static const String defactoBannerPageUrl =

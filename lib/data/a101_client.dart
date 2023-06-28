@@ -1,13 +1,14 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 class A101Client {
-  Future getBannerData() async {
+  Future<List<BannerModel>> getBannerData() async {
     List<BannerModel> bannerElements = [];
     var response = await http.Client().get(
-      Uri.parse("https://www.a101.com.tr/afisler"),
+      Uri.parse(Constants.a101BannerPageUrl),
     );
     //If the http request is successful the statusCode will be 200
     if (response.statusCode == 200) {
@@ -16,9 +17,6 @@ class A101Client {
           .getElementsByClassName("brochures-list")[0]
           .children[0]
           .children) {
-        // print(li.children[0].attributes["href"]);
-        // print(li.children[0].children[0].children[0].attributes["src"]);
-        // print(li.children[0].children[2].attributes["src"]);
         List list = li.children[0].children[1].text.trim().split("\n");
         String date = "${list[0].trim()} ${list[2].trim()}";
 
@@ -31,7 +29,7 @@ class A101Client {
                 .toUpperCase(),
             date,
             li.children[0].children[2].attributes["src"],
-            catagoryUrl: li.children[0].attributes["href"],
+            bannerUrl: li.children[0].attributes["href"],
           ),
         );
       }
@@ -43,7 +41,7 @@ class A101Client {
     }
   }
 
-  Future getBrochurePageImageUrls(String url) async {
+  Future<List<String>> getBrochurePageImageUrls(String url) async {
     List<String> brochurePages = [];
 
     var response = await http.Client().get(

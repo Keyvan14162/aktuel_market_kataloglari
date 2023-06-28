@@ -1,5 +1,4 @@
 import 'package:aktuel_urunler_bim_a101_sok/constants/resolve_date.dart';
-import 'package:aktuel_urunler_bim_a101_sok/helpers/functions.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
@@ -36,33 +35,7 @@ class KataloglarClient {
     }
   }
 
-  Future getBrochurePageImageUrls(String url) async {
-    List<String> pageUrls = await _getPageUrls(url);
-
-    List<String> brochurePageImgUrls = [];
-
-    for (var pageUrl in pageUrls) {
-      var response = await http.Client().get(
-        Uri.parse(pageUrl),
-      );
-      if (response.statusCode == 200) {
-        var document = parse(response.body);
-
-        // img url
-        brochurePageImgUrls.add(
-          document
-              .getElementsByClassName("letaky-grid-preview")[0]
-              .children[0]
-              .children[0]
-              .attributes["data-src"]
-              .toString(),
-        );
-      }
-    }
-    return brochurePageImgUrls;
-  }
-
-  Future getBannerData(String bannerPageUrl) async {
+  Future<List<BannerModel>> getBannerData(String bannerPageUrl) async {
     var response = await http.Client().get(
       Uri.parse(bannerPageUrl),
     );
@@ -115,64 +88,41 @@ class KataloglarClient {
                 "Yeni ve Güncel",
                 date,
                 imgUrl,
-                catagoryUrl: brochurePageUrl,
+                bannerUrl: brochurePageUrl,
               ),
             );
           }
         }
       }
       return banners;
+    } else {
+      return [];
     }
-    /*
-      for (var element in document
-          .getElementsByClassName("letaky-grid")[2]
-          .children[0]
-          .children) {
-        if (!element.className.contains("hidden") &&
-            !element.className.contains("visible")) {
-          if (!element.children[0].className.contains("old")) {
-            // banner Img Url
-            String imgAttributes = element.children[0]
-                .getElementsByTagName("img")[0]
-                .attributes
-                .toString();
+  }
 
-            String brochurePageUrl =
-                "https://www.kataloglar.com.tr${element.getElementsByTagName("a")[0].attributes["href"]}";
-            print(brochurePageUrl);
+  Future<List<String>> getBrochurePageImageUrls(String url) async {
+    List<String> pageUrls = await _getPageUrls(url);
 
-            String imgUrl = "";
-            if (imgAttributes.contains("data-src")) {
-              imgUrl = element.children[0]
-                  .getElementsByTagName("img")[0]
-                  .attributes["data-src"]
-                  .toString();
-            } else {
-              imgUrl = element.children[0]
-                  .getElementsByTagName("img")[0]
-                  .attributes["src"]
-                  .toString();
-            }
+    List<String> brochurePageImgUrls = [];
 
-            String fullDateString =
-                element.children[0].children[0].attributes["title"] ?? "";
-            int indexOfFirstDot = fullDateString.indexOf(".");
-            String date =
-                "${toRevolveDate(fullDateString.substring(indexOfFirstDot - 2, indexOfFirstDot + 8))} ve Sonrasında";
+    for (var pageUrl in pageUrls) {
+      var response = await http.Client().get(
+        Uri.parse(pageUrl),
+      );
+      if (response.statusCode == 200) {
+        var document = parse(response.body);
 
-            banners.add(
-              BannerModel(
-                "Yeni ve Güncel",
-                date,
-                imgUrl,
-                catagoryUrl: brochurePageUrl,
-              ),
-            );
-          }
-        }
+        // img url
+        brochurePageImgUrls.add(
+          document
+              .getElementsByClassName("letaky-grid-preview")[0]
+              .children[0]
+              .children[0]
+              .attributes["data-src"]
+              .toString(),
+        );
       }
-      return banners;
     }
-    */
+    return brochurePageImgUrls;
   }
 }

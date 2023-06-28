@@ -1,3 +1,4 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
@@ -6,27 +7,25 @@ import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ExpansionBody extends StatelessWidget {
-  final List<BannerModel> data;
-  final double width;
-  final Color color;
-  final MarketCode marketCode;
-
   const ExpansionBody(
       {required this.data,
-      required this.width,
       required this.color,
-      required this.marketCode,
+      required this.storeCode,
       super.key});
 
+  final List<BannerModel> data;
+  final Color color;
+  final StoreCode storeCode;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(left: 4.0, right: 4.0),
       child: SizedBox(
         width: double.infinity,
-        height: width / 2 * 1.6,
+        height: 1.sw / 2 * 1.6,
         child: ListView.builder(
           physics: const BouncingScrollPhysics(),
           clipBehavior: Clip.none,
@@ -35,21 +34,21 @@ class ExpansionBody extends StatelessWidget {
           itemCount: data.length,
           itemBuilder: (context, index) {
             Future brochurePageImagesFuture;
-            switch (marketCode) {
-              case MarketCode.a101:
+            switch (storeCode) {
+              case StoreCode.a101:
                 brochurePageImagesFuture =
                     A101Client().getBrochurePageImageUrls(
-                  data[index].catagoryUrl.toString(),
+                  data[index].bannerUrl.toString(),
                 );
                 break;
-              case MarketCode.bim:
+              case StoreCode.bim:
                 brochurePageImagesFuture = brochurePageImagesFuture =
                     BimClient().getBrochurePageImageUrls(index);
                 break;
               default:
                 brochurePageImagesFuture =
                     KataloglarClient().getBrochurePageImageUrls(
-                  data[index].catagoryUrl.toString(),
+                  data[index].bannerUrl.toString(),
                 );
             }
             return GestureDetector(
@@ -61,7 +60,7 @@ class ExpansionBody extends StatelessWidget {
                 ]);
               },
               child: Container(
-                width: width / 2,
+                width: 0.5.sw,
                 color: Colors.white,
                 child: Column(
                   children: [
@@ -69,7 +68,7 @@ class ExpansionBody extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.fromLTRB(1, 0, 1, 0),
                       child: Container(
-                        width: MediaQuery.of(context).size.width / 2,
+                        width: 0.5.sw,
                         height: 40,
                         decoration: BoxDecoration(
                           color: color,
@@ -78,10 +77,11 @@ class ExpansionBody extends StatelessWidget {
                           ),
                         ),
                         child: Padding(
-                          padding: const EdgeInsets.all(2.0),
+                          padding: const EdgeInsets.all(
+                              Constants.defaultPadding / 4),
                           child: Center(
                             child: Text(
-                              data[index].categoryName ?? "hata",
+                              data[index].bannerName ?? "hata",
                               overflow: TextOverflow.fade,
                               style: const TextStyle(
                                 color: Colors.white,
@@ -96,7 +96,12 @@ class ExpansionBody extends StatelessWidget {
                     // date
                     Center(
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 12, 8, 4),
+                        padding: const EdgeInsets.fromLTRB(
+                          Constants.defaultPadding,
+                          12,
+                          Constants.defaultPadding,
+                          4,
+                        ),
                         child: Text(
                           data[index].date ?? "hata",
                           textAlign: TextAlign.center,
@@ -109,7 +114,7 @@ class ExpansionBody extends StatelessWidget {
                     // image
                     Expanded(
                       child: CachedNetworkImage(
-                        imageUrl: data[index].catalogImgUrl ?? "",
+                        imageUrl: data[index].bannerImgUrl ?? "",
                       ),
                     ),
                   ],

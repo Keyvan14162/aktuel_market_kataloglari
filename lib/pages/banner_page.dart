@@ -1,3 +1,4 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -129,7 +130,7 @@ class _BannerPageState extends State<BannerPage> {
                           },
                           child: ClipRRect(
                             borderRadius: const BorderRadius.all(
-                              Radius.circular(5.0),
+                              Radius.circular(Constants.defaultBorderRadius),
                             ),
                             child:
                                 imageList[widget.brochurePageUrls.indexOf(url)],
@@ -165,7 +166,10 @@ class _BannerPageState extends State<BannerPage> {
             child: Container(
               width: 12.0,
               height: 12.0,
-              margin: const EdgeInsets.only(bottom: 8.0, left: 8.0),
+              margin: const EdgeInsets.only(
+                bottom: Constants.defaultPadding,
+                left: Constants.defaultPadding,
+              ),
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: (Theme.of(context).brightness == Brightness.dark

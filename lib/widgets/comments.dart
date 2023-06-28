@@ -1,3 +1,4 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/firebase/comment_functions.dart';
 import 'package:aktuel_urunler_bim_a101_sok/firebase/sign_functions.dart';
 import 'package:aktuel_urunler_bim_a101_sok/helpers/top_snackbar.dart';
@@ -25,7 +26,6 @@ class _CommentsState extends State<Comments> {
   late TextEditingController _textController;
   late FirebaseAuth auth;
   bool isSigned = false;
-  double borderRadius = 8;
 
   @override
   void initState() {
@@ -57,14 +57,14 @@ class _CommentsState extends State<Comments> {
 
   @override
   Widget build(BuildContext context) {
-    double width = MediaQuery.of(context).size.width;
-
     return Padding(
-      padding: const EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 20.0),
+      padding: const EdgeInsets.all(
+        Constants.defaultBorderRadius,
+      ),
       child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(
-            borderRadius,
+        decoration: const BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(Constants.defaultBorderRadius),
           ),
         ),
         child: ExpansionPanelList.radio(
@@ -80,8 +80,8 @@ class _CommentsState extends State<Comments> {
               headerBuilder: (context, isExpanded) {
                 return Container(
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(
-                      borderRadius,
+                    borderRadius: const BorderRadius.all(
+                      Radius.circular(Constants.defaultBorderRadius),
                     ),
                     color: widget.color.withOpacity(0.8),
                   ),
@@ -105,52 +105,54 @@ class _CommentsState extends State<Comments> {
                   isSigned
                       ? Row(
                           children: [
-                            Container(
-                              width: width - 16,
-                              decoration: const BoxDecoration(
-                                color: Colors.white,
-                              ),
-                              child: TextField(
-                                controller: _textController,
-                                textAlignVertical: TextAlignVertical.center,
-                                enableInteractiveSelection: true,
-                                maxLines: 1,
-                                decoration: InputDecoration(
-                                  hintText: "Yorum Ekleyin",
-                                  contentPadding: const EdgeInsets.all(8),
-                                  // border: InputBorder.none,
-                                  suffixIcon: MaterialButton(
-                                    child: const Text("Yorumu Gönder"),
-                                    //color: widget.color,
-                                    onPressed: () {
-                                      if (_textController.text != "") {
-                                        CommentFunctions().addComment(
-                                          auth.currentUser?.displayName ??
-                                              "Kullanici",
-                                          _textController.text,
-                                          auth.currentUser?.photoURL ?? "",
-                                          widget.brochureDateText,
-                                        );
-                                        _textController.text = "";
-                                        TopSnackbar().showSnackbar(
-                                          context,
-                                          const CustomSnackBar.success(
-                                              message: "Yorumunuz Eklendi"),
-                                        );
-                                      } else {
-                                        TopSnackbar().showSnackbar(
-                                          context,
-                                          const CustomSnackBar.error(
-                                              message:
-                                                  "Lütfen Yorum Metini Giriniz"),
-                                        );
-                                      }
-                                    },
-                                  ),
+                            Expanded(
+                              child: Container(
+                                decoration: const BoxDecoration(
+                                  color: Colors.white,
                                 ),
-                                style: const TextStyle(
-                                  fontSize: 17,
-                                  color: Colors.black,
+                                child: TextField(
+                                  controller: _textController,
+                                  textAlignVertical: TextAlignVertical.center,
+                                  enableInteractiveSelection: true,
+                                  maxLines: 1,
+                                  decoration: InputDecoration(
+                                    hintText: "Yorum Ekleyin",
+                                    contentPadding: const EdgeInsets.all(
+                                        Constants.defaultPadding),
+                                    // border: InputBorder.none,
+                                    suffixIcon: MaterialButton(
+                                      child: const Text("Yorumu Gönder"),
+                                      //color: widget.color,
+                                      onPressed: () {
+                                        if (_textController.text != "") {
+                                          CommentFunctions().addComment(
+                                            auth.currentUser?.displayName ??
+                                                "Kullanici",
+                                            _textController.text,
+                                            auth.currentUser?.photoURL ?? "",
+                                            widget.brochureDateText,
+                                          );
+                                          _textController.text = "";
+                                          TopSnackbar().showSnackbar(
+                                            context,
+                                            const CustomSnackBar.success(
+                                                message: "Yorumunuz Eklendi"),
+                                          );
+                                        } else {
+                                          TopSnackbar().showSnackbar(
+                                            context,
+                                            const CustomSnackBar.error(
+                                                message:
+                                                    "Lütfen Yorum Metini Giriniz"),
+                                          );
+                                        }
+                                      },
+                                    ),
+                                  ),
+                                  style: const TextStyle(
+                                    fontSize: 17,
+                                    color: Colors.black,
+                                  ),
                                 ),
                               ),
                             ),
@@ -194,7 +196,8 @@ class _CommentsState extends State<Comments> {
 
                   isSigned
                       ? Padding(
-                          padding: const EdgeInsets.all(12.0),
+                          padding:
+                              const EdgeInsets.all(Constants.defaultPadding),
                           child: StreamBuilder(
                             stream: CommentFunctions()
                                 .getComments(widget.brochureDateText),
@@ -279,14 +282,14 @@ class _CommentsState extends State<Comments> {
           ],
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: Constants.defaultPadding),
           child: SelectableText(
             comment,
             style: TextStyle(color: Colors.grey.shade800),
           ),
         ),
         const Padding(
-          padding: EdgeInsets.all(4.0),
+          padding: EdgeInsets.all(Constants.defaultPadding / 2),
           child: Divider(
             color: Colors.black,
           ),

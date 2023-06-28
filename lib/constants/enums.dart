@@ -1,4 +1,4 @@
-enum MarketCode {
+enum StoreCode {
   a101,
   bim,
   sok,

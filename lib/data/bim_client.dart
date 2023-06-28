@@ -1,25 +1,26 @@
+import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
 class BimClient {
-  Future getBannerData() async {
-    var data = [await _getAllData()][0][0];
+  Future<List<BannerModel>> getBannerData() async {
+    List<BannerModel> data = [await _getAllData()][0][0];
 
     return data;
   }
 
-  Future getBrochurePageImageUrls(int index) async {
-    List data = [await _getAllData()][0][1][index];
+  Future<List<String>> getBrochurePageImageUrls(int index) async {
+    List<String> data = [await _getAllData()][0][1][index];
     data.removeAt(0);
 
     return data;
   }
 
-  Future _getAllData() async {
+  Future<List<dynamic>> _getAllData() async {
     var response = await http.Client().get(
-      Uri.parse("https://www.bim.com.tr/Categories/680/afisler.aspx"),
+      Uri.parse(Constants.bimBannerPageUrl),
     );
 
     if (response.statusCode == 200) {
@@ -104,6 +105,8 @@ class BimClient {
       }
 
       return [bannerData, brochurePageImgUrls];
+    } else {
+      return [];
     }
   }
 }

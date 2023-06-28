@@ -1,10 +1,13 @@
 import 'dart:io';
 import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer_profile.dart';
+import 'package:aktuel_urunler_bim_a101_sok/providers/is_old_change_notifier.dart';
+import 'package:aktuel_urunler_bim_a101_sok/widgets/zoom_drawer/zoom_drawer_profile.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_zoom_drawer/flutter_zoom_drawer.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ZoomDrawerMenuScreen extends StatefulWidget {
@@ -20,6 +23,8 @@ class ZoomDrawerMenuScreen extends StatefulWidget {
 class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
   @override
   Widget build(BuildContext context) {
+    bool isOld = Provider.of<IsOldNotifier>(context, listen: false).isOld;
+
     return LayoutBuilder(
       builder: (p0, p1) {
         return SingleChildScrollView(
@@ -34,51 +39,18 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                   children: [
                     Column(
                       children: [
-                        // title and image
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(8, 28, 8, 40),
-                          child: Center(
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    IconButton(
-                                      onPressed: () {
-                                        ZoomDrawer.of(context)!.toggle();
-                                      },
-                                      icon: const Icon(
-                                        Icons.menu_open,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                    const Flexible(
-                                      child: FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: Text(
-                                          "Aktüel Market Katalogları",
-                                          style: TextStyle(
-                                              color: Colors.white,
-                                              fontSize: 14),
-                                          maxLines: 1,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-
-                                // google signin
-                                const ZoomDrawerProfile(),
-                              ],
-                            ),
-                          ),
+                        const SizedBox(
+                          height: 20,
                         ),
+                        // google signin
+                        const ZoomDrawerProfile(),
 
                         // menu items
                         Column(
                           children: [
                             Container(
                               color: widget.currentIndex ==
-                                      Constants.marketPageCode
+                                      Constants.marketCatagoryCode
                                   ? Colors.grey.withOpacity(0.2)
                                   : Colors.transparent,
                               child: drawerMenuItem(
@@ -86,24 +58,30 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                 Colors.white,
                                 "Aktüel Marketler",
                                 () {
-                                  widget.setIndex(Constants.marketPageCode);
+                                  widget.setIndex(Constants.marketCatagoryCode);
                                 },
                               ),
                             ),
-                            Container(
-                              color: widget.currentIndex ==
-                                      Constants.textilePageCode
-                                  ? Colors.grey.withOpacity(0.2)
-                                  : Colors.transparent,
-                              child: drawerMenuItem(
-                                Icons.shopping_bag,
-                                Colors.white,
-                                "Giyim Marketleri",
-                                () {
-                                  widget.setIndex(Constants.textilePageCode);
-                                },
-                              ),
-                            ),
+
+                            // eski arayuz kullanilmiyosa bu secenege gerek yok
+                            isOld
+                                ? Container(
+                                    color: widget.currentIndex ==
+                                            Constants.textileCatagoryCode
+                                        ? Colors.grey.withOpacity(0.2)
+                                        : Colors.transparent,
+                                    child: drawerMenuItem(
+                                      Icons.shopping_bag,
+                                      Colors.white,
+                                      "Giyim Marketleri",
+                                      () {
+                                        widget.setIndex(
+                                            Constants.textileCatagoryCode);
+                                      },
+                                    ),
+                                  )
+                                : const SizedBox.shrink(),
+
                             drawerMenuItem(
                               Icons.star,
                               Colors.yellow,
@@ -145,6 +123,35 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                 }
                               },
                             ),
+
+                            isOld
+                                ? drawerMenuItem(
+                                    Icons.change_circle_rounded,
+                                    Colors.white,
+                                    "Yeni Arayüzü Kullan",
+                                    () async {
+                                      context
+                                          .read<IsOldNotifier>()
+                                          .changeIsOld(isOld: false);
+
+                                      final SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.setBool(Constants.isOldKey, false);
+                                    },
+                                  )
+                                : drawerMenuItem(
+                                    Icons.change_circle_rounded,
+                                    Colors.white,
+                                    "Eski Arayüzü Kullan",
+                                    () async {
+                                      context
+                                          .read<IsOldNotifier>()
+                                          .changeIsOld(isOld: true);
+                                      final SharedPreferences prefs =
+                                          await SharedPreferences.getInstance();
+                                      prefs.setBool(Constants.isOldKey, true);
+                                    },
+                                  ),
                           ],
                         ),
                       ],
@@ -250,7 +257,12 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
               Padding(
-                padding: const EdgeInsets.fromLTRB(8, 8, 2, 8),
+                padding: const EdgeInsets.fromLTRB(
+                  Constants.defaultPadding,
+                  Constants.defaultPadding,
+                  2,
+                  Constants.defaultPadding,
+                ),
                 child: Icon(
                   icon,
                   color: iconColor,
@@ -258,7 +270,12 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
               ),
               Flexible(
                 child: Padding(
-                  padding: const EdgeInsets.fromLTRB(2, 8, 8, 8),
+                  padding: const EdgeInsets.fromLTRB(
+                    2,
+                    Constants.defaultPadding,
+                    Constants.defaultPadding,
+                    Constants.defaultPadding,
+                  ),
                   child: FittedBox(
                     fit: BoxFit.scaleDown,
                     child: Text(
@@ -281,11 +298,13 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
 
   Container customDivider() {
     return Container(
-      width: MediaQuery.of(context).size.width / 2,
+      width: 0.5.sw,
       height: 1,
-      decoration: BoxDecoration(
+      decoration: const BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.all(
+          Radius.circular(Constants.defaultBorderRadius),
+        ),
       ),
     );
   }

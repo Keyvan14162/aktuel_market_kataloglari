@@ -2,10 +2,8 @@ import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/banner_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/detail_page.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/grid_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/pages/market_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/pages/textile_page.dart';
+import 'package:aktuel_urunler_bim_a101_sok/pages/old/store_page_old.dart';
 import 'package:aktuel_urunler_bim_a101_sok/pages/zoom_drawer_page.dart';
-import 'package:aktuel_urunler_bim_a101_sok/widgets/expansion_panel/custom_expansion_panel.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -28,15 +26,10 @@ class RouteGenerator {
       case Pages.homePage:
         return _generateRoute(const ZoomDrawerScreen(), settings);
 
-      case Pages.textilePage:
+      case Pages.storePage:
         return _generateRoute(
-          const TextilePage(),
-          settings,
-        );
-
-      case Pages.marketPage:
-        return _generateRoute(
-          const MarketPage(),
+          StorePageOld(
+              expansionPanelItemsList: settings.arguments as List<Widget>),
           settings,
         );
 
