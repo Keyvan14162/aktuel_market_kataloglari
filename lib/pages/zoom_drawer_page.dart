@@ -99,7 +99,9 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen>
         Constants.a101LogoPath,
         "A101",
         StoreCode.a101,
-        A101Client().getBannerData(),
+        //A101Client().getBannerData(),
+        KataloglarClient().getBannerData(Constants.a101BannerPageUrl),
+
         Constants.a101Color,
       ),
       StoreModel(

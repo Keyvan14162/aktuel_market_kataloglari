@@ -55,8 +55,8 @@ class StoreLoadingPage extends StatelessWidget {
     for (var storeCode in storeCodeList) {
       switch (storeCode) {
         case StoreCode.a101:
-          await A101Client()
-              .getBannerData()
+          await KataloglarClient()
+              .getBannerData(Constants.a101BannerPageUrl)
               .then(
                 (List<BannerModel> bannerModelsList) => expansionPanelList.add(
                   CustomExpansionPanel(

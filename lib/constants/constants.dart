@@ -9,7 +9,8 @@ class Constants {
   static const double defaultBorderRadius = 8.0;
   static const double defaultPadding = 8.0;
 
-  static const String a101BannerPageUrl = "https://www.a101.com.tr/afisler";
+  static const String a101BannerPageUrl = "https://www.kataloglar.com.tr/a101/";
+  // "https://www.a101.com.tr/afisler";
   static const String bimBannerPageUrl =
       "https://www.bim.com.tr/Categories/680/afisler.aspx";
   static const String bizimBannerPageUrl =

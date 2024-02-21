@@ -35,12 +35,14 @@ class BannerGridView extends StatelessWidget {
             itemBuilder: (context, index) {
               Future brochurePageImagesFuture;
               switch (store.storeCode) {
+                /*
                 case StoreCode.a101:
                   brochurePageImagesFuture =
                       A101Client().getBrochurePageImageUrls(
                     banners[index].bannerUrl.toString(),
                   );
                   break;
+                  */
                 case StoreCode.bim:
                   brochurePageImagesFuture = brochurePageImagesFuture =
                       BimClient().getBrochurePageImageUrls(index);

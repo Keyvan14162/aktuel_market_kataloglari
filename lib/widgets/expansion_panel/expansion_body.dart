@@ -35,12 +35,14 @@ class ExpansionBody extends StatelessWidget {
           itemBuilder: (context, index) {
             Future brochurePageImagesFuture;
             switch (storeCode) {
+              /*
               case StoreCode.a101:
                 brochurePageImagesFuture =
                     A101Client().getBrochurePageImageUrls(
                   data[index].bannerUrl.toString(),
                 );
                 break;
+                */
               case StoreCode.bim:
                 brochurePageImagesFuture = brochurePageImagesFuture =
                     BimClient().getBrochurePageImageUrls(index);
