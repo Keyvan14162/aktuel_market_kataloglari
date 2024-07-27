@@ -1,7 +1,6 @@
 import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/pages.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/bim_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
@@ -35,14 +34,6 @@ class BannerGridView extends StatelessWidget {
             itemBuilder: (context, index) {
               Future brochurePageImagesFuture;
               switch (store.storeCode) {
-                /*
-                case StoreCode.a101:
-                  brochurePageImagesFuture =
-                      A101Client().getBrochurePageImageUrls(
-                    banners[index].bannerUrl.toString(),
-                  );
-                  break;
-                  */
                 case StoreCode.bim:
                   brochurePageImagesFuture = brochurePageImagesFuture =
                       BimClient().getBrochurePageImageUrls(index);
@@ -129,6 +120,7 @@ class BannerGridView extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(Constants.defaultPadding),
                   child: Text(
+                    maxLines: 1,
                     bannerName,
                     textAlign: TextAlign.center,
                   ),

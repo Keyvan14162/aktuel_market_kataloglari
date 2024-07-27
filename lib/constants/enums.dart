@@ -3,7 +3,5 @@ enum StoreCode {
   bim,
   sok,
   bizim,
-  flo,
-  lc,
-  defacto,
+  migros,
 }

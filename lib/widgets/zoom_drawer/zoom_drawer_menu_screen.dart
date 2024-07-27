@@ -48,40 +48,6 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                         // menu items
                         Column(
                           children: [
-                            Container(
-                              color: widget.currentIndex ==
-                                      Constants.marketCatagoryCode
-                                  ? Colors.grey.withOpacity(0.2)
-                                  : Colors.transparent,
-                              child: drawerMenuItem(
-                                Icons.shopping_cart,
-                                Colors.white,
-                                "Aktüel Marketler",
-                                () {
-                                  widget.setIndex(Constants.marketCatagoryCode);
-                                },
-                              ),
-                            ),
-
-                            // eski arayuz kullanilmiyosa bu secenege gerek yok
-                            isOld
-                                ? Container(
-                                    color: widget.currentIndex ==
-                                            Constants.textileCatagoryCode
-                                        ? Colors.grey.withOpacity(0.2)
-                                        : Colors.transparent,
-                                    child: drawerMenuItem(
-                                      Icons.shopping_bag,
-                                      Colors.white,
-                                      "Giyim Marketleri",
-                                      () {
-                                        widget.setIndex(
-                                            Constants.textileCatagoryCode);
-                                      },
-                                    ),
-                                  )
-                                : const SizedBox.shrink(),
-
                             drawerMenuItem(
                               Icons.star,
                               Colors.yellow,
@@ -123,7 +89,6 @@ class _ZoomDrawerMenuScreenState extends State<ZoomDrawerMenuScreen> {
                                 }
                               },
                             ),
-
                             isOld
                                 ? drawerMenuItem(
                                     Icons.change_circle_rounded,

@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/bim_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/store_model.dart';
@@ -49,6 +48,7 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen>
   _setIsOld() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
 
+    // ignore: use_build_context_synchronously
     context.read<IsOldNotifier>().changeIsOld(
           isOld: prefs.getBool(Constants.isOldKey) ?? false,
         );
@@ -99,9 +99,7 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen>
         Constants.a101LogoPath,
         "A101",
         StoreCode.a101,
-        //A101Client().getBannerData(),
         KataloglarClient().getBannerData(Constants.a101BannerPageUrl),
-
         Constants.a101Color,
       ),
       StoreModel(
@@ -126,49 +124,17 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen>
         Constants.bizimColor,
       ),
       StoreModel(
-        Constants.floLogoPath,
-        "Flo",
-        StoreCode.flo,
-        KataloglarClient().getBannerData(Constants.floBannerPageUrl),
-        Constants.floColor,
-      ),
-      StoreModel(
-        Constants.lcLogoPath,
-        "LcWaikiki",
-        StoreCode.lc,
-        KataloglarClient().getBannerData(Constants.lcBannerPageUrl),
-        Constants.lcColor,
-      ),
-      StoreModel(
-        Constants.defactoLogoPath,
-        "Defacto",
-        StoreCode.defacto,
-        KataloglarClient().getBannerData(Constants.defactoBannerPageUrl),
-        Constants.defactoColor,
+        Constants.migrosLogoPath,
+        "Migros",
+        StoreCode.migros,
+        KataloglarClient().getBannerData(Constants.migrosBannerPageUrl),
+        Constants.migrosColor,
       ),
     ]);
   }
 
   Widget oldStorePage() {
     switch (currentIndex) {
-      case Constants.marketCatagoryCode:
-        return const StoreLoadingPage(
-          stores: [
-            StoreCode.a101,
-            StoreCode.bim,
-            StoreCode.sok,
-            StoreCode.bizim,
-          ],
-        );
-      case Constants.textileCatagoryCode:
-        return const StoreLoadingPage(
-          stores: [
-            StoreCode.flo,
-            StoreCode.lc,
-            StoreCode.defacto,
-          ],
-        );
-
       default:
         return const StoreLoadingPage(
           stores: [
@@ -176,6 +142,7 @@ class _ZoomDrawerScreenState extends State<ZoomDrawerScreen>
             StoreCode.bim,
             StoreCode.sok,
             StoreCode.bizim,
+            StoreCode.migros,
           ],
         );
     }

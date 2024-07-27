@@ -1,40 +1,11 @@
-import 'package:aktuel_urunler_bim_a101_sok/constants/resolve_date.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
 import 'package:flutter/material.dart';
 import 'package:html/parser.dart';
 import 'package:http/http.dart' as http;
 
-// KATALOGLAR.COM WEBSITESINDEN CEKILEN MAGAZALAR ICIN
+// CIMRI.COM WEBSITESINDEN CEKILEN MAGAZALAR ICIN
 
 class KataloglarClient {
-  _getPageUrls(String url) async {
-    var response = await http.Client().get(
-      Uri.parse(url),
-    );
-    List<String> pageUrls = [];
-    if (response.statusCode == 200) {
-      var document = parse(response.body);
-      var buttonList =
-          document.getElementsByClassName("pages-btn-group")[0].children;
-      // print(buttonList[buttonList.length - 2].text);
-
-      try {
-        pageUrls.add(
-            "https://www.kataloglar.com.tr/${document.getElementsByClassName("pages-btn-group")[0].children[0].attributes["href"]}");
-        for (var i = 2;
-            i < int.parse(buttonList[buttonList.length - 2].text);
-            i++) {
-          pageUrls.add(
-              "https://www.kataloglar.com.tr/${buttonList[1].attributes["href"]!.substring(0, buttonList[1].attributes["href"]!.length - 1) + i.toString()}");
-        }
-      } catch (e) {
-        debugPrint(e.toString());
-      }
-
-      return pageUrls;
-    }
-  }
-
   Future<List<BannerModel>> getBannerData(String bannerPageUrl) async {
     var response = await http.Client().get(
       Uri.parse(bannerPageUrl),
@@ -43,61 +14,42 @@ class KataloglarClient {
     if (response.statusCode == 200) {
       var document = parse(response.body);
       List<BannerModel> banners = [];
+
       try {
         for (var element in document
-                .getElementsByClassName("page-body")[0]
-                .children[0] // leatky-grid
-                .children[0]
-                .children // row
-            ) {
-          if (!(element.className.contains("hidden-xs") ||
-              element.className.contains("hidden-sm") ||
-              element.className.contains("visible-xs") ||
-              element.className.contains("hidden-sm"))) {
-            if (!element.children[1].className.contains("old")) {
-              // element.children[1] =  div class="grid-item box blue "
-              var gridItem = element.children[1];
-              String imgAttributes =
-                  gridItem.getElementsByTagName("img")[0].attributes.toString();
+            .getElementsByClassName("s1a29zcm-10 dbqLIu")[0]
+            .children) {
+          String brochurePageUrl =
+              "https://www.cimri.com${element.getElementsByTagName("a")[0].attributes["href"]}";
 
-              String brochurePageUrl =
-                  "https://www.kataloglar.com.tr${element.getElementsByTagName("a")[0].attributes["href"]}";
+          String imgUrl = element.children[0]
+              .getElementsByTagName("img")[0]
+              .attributes["src"]
+              .toString();
 
-              String imgUrl = "";
+          String date = element.children[0]
+              .getElementsByClassName("s1ra91yk-7 fUPBCX")[0]
+              .innerHtml
+              .toString();
 
-              if (imgAttributes.contains("data-src")) {
-                imgUrl = gridItem
-                    .getElementsByTagName("img")[0]
-                    .attributes["data-src"]
-                    .toString();
-              } else {
-                imgUrl = gridItem
-                    .getElementsByTagName("img")[0]
-                    .attributes["src"]
-                    .toString();
-              }
+          String bannerName = element.children[0]
+              .getElementsByClassName("s1ra91yk-8 jTsxrW")[0]
+              .innerHtml
+              .toString();
 
-              String fullDateString =
-                  gridItem.children[0].attributes["title"] ?? "";
-              int indexOfFirstDot = fullDateString.indexOf(".");
-              String date =
-                  "${toRevolveDate(fullDateString.substring(indexOfFirstDot - 2, indexOfFirstDot + 8))} ve Sonrasında";
-
-              banners.add(
-                BannerModel(
-                  "Yeni ve Güncel",
-                  date,
-                  imgUrl,
-                  bannerUrl: brochurePageUrl,
-                ),
-              );
-            }
-          }
+          banners.add(
+            BannerModel(
+              bannerName,
+              date,
+              imgUrl,
+              bannerUrl: brochurePageUrl,
+            ),
+          );
         }
       } catch (e) {
-        print(e);
+        // print("${e}kataloglar client get banner data func");
       }
-
+      banners = banners.reversed.toList();
       return banners;
     } else {
       return [];
@@ -105,28 +57,29 @@ class KataloglarClient {
   }
 
   Future<List<String>> getBrochurePageImageUrls(String url) async {
-    List<String> pageUrls = await _getPageUrls(url);
+    var response = await http.Client().get(
+      Uri.parse(url),
+    );
+    if (response.statusCode == 200) {
+      List<String> brochurePageImgUrls = [];
+      var document = parse(response.body);
 
-    List<String> brochurePageImgUrls = [];
-
-    for (var pageUrl in pageUrls) {
-      var response = await http.Client().get(
-        Uri.parse(pageUrl),
-      );
-      if (response.statusCode == 200) {
-        var document = parse(response.body);
-
-        // img url
-        brochurePageImgUrls.add(
-          document
-              .getElementsByClassName("letaky-grid-preview")[0]
-              .children[0]
-              .children[0]
-              .attributes["data-src"]
-              .toString(),
-        );
+      try {
+        for (var element in document
+            .getElementsByClassName("s1e6b0v8-3 iFVIwI")[0]
+            .children) {
+          brochurePageImgUrls.add(element
+              .getElementsByTagName("img")[0]
+              .attributes["src"]
+              .toString());
+        }
+      } catch (e) {
+        debugPrint(e.toString());
       }
+
+      return brochurePageImgUrls;
+    } else {
+      return [];
     }
-    return brochurePageImgUrls;
   }
 }

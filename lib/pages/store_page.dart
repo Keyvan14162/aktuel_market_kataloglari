@@ -54,6 +54,7 @@ class _StorePageState extends State<StorePage> with TickerProviderStateMixin {
 
   Widget _tabBarView() {
     List<Widget> bannerGridViewsList = [];
+
     for (var store in widget.stores) {
       bannerGridViewsList.add(
         BannerGridView(store: store),

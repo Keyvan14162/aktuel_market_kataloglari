@@ -1,6 +1,5 @@
 import 'package:aktuel_urunler_bim_a101_sok/constants/constants.dart';
 import 'package:aktuel_urunler_bim_a101_sok/constants/enums.dart';
-import 'package:aktuel_urunler_bim_a101_sok/data/a101_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/bim_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/data/kataloglar_client.dart';
 import 'package:aktuel_urunler_bim_a101_sok/models/banner_model.dart';
@@ -94,6 +93,7 @@ class StoreLoadingPage extends StatelessWidget {
                 ),
               );
           break;
+
         case StoreCode.sok:
           await KataloglarClient()
               .getBannerData(Constants.sokBannerPageUrl)
@@ -134,16 +134,17 @@ class StoreLoadingPage extends StatelessWidget {
                 ),
               );
           break;
-        case StoreCode.flo:
+
+        case StoreCode.migros:
           await KataloglarClient()
-              .getBannerData(Constants.floBannerPageUrl)
+              .getBannerData(Constants.migrosBannerPageUrl)
               .then(
                 (List<BannerModel> bannerModelsList) => expansionPanelList.add(
                   CustomExpansionPanel(
                     bannerModelsList: bannerModelsList,
-                    logoPath: Constants.floLogoPath,
-                    headerText: "Flo Aktüel Katalogları",
-                    color: Constants.floColor,
+                    logoPath: Constants.migrosLogoPath,
+                    headerText: "Migros Aktüel Katalogları",
+                    color: Constants.migrosColor,
                     storeCode: storeCode,
                   ),
                 ),
@@ -154,49 +155,11 @@ class StoreLoadingPage extends StatelessWidget {
                 ),
               );
           break;
-        case StoreCode.lc:
-          await KataloglarClient()
-              .getBannerData(Constants.lcBannerPageUrl)
-              .then(
-                (List<BannerModel> bannerModelsList) => expansionPanelList.add(
-                  CustomExpansionPanel(
-                    bannerModelsList: bannerModelsList,
-                    logoPath: Constants.lcLogoPath,
-                    headerText: "LcWaikiki Aktüel Katalogları",
-                    color: Constants.lcColor,
-                    storeCode: storeCode,
-                  ),
-                ),
-              )
-              .onError(
-                (error, stackTrace) => debugPrint(
-                  error.toString(),
-                ),
-              );
-          break;
-        case StoreCode.defacto:
-          await KataloglarClient()
-              .getBannerData(Constants.defactoBannerPageUrl)
-              .then(
-                (List<BannerModel> bannerModelsList) => expansionPanelList.add(
-                  CustomExpansionPanel(
-                    bannerModelsList: bannerModelsList,
-                    logoPath: Constants.defactoLogoPath,
-                    headerText: "Defacto Aktüel Katalogları",
-                    color: Constants.defactoColor,
-                    storeCode: storeCode,
-                  ),
-                ),
-              )
-              .onError(
-                (error, stackTrace) => debugPrint(
-                  error.toString(),
-                ),
-              );
-          break;
+
         default:
       }
     }
+
     return expansionPanelList;
   }
 }
